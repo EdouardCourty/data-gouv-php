@@ -7,6 +7,22 @@ on:
     branches: [ main ]
 
 jobs:
+  lint-yaml:
+    name: Lint YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .github/workflows/
+          config_data: |
+            extends: default
+            rules:
+              line-length:
+                max: 160
+              truthy:
+                allowed-values: ['true', 'false']
+
   ci:
     name: CI
     runs-on: ubuntu-latest
