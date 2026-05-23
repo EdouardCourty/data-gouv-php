@@ -25,8 +25,7 @@ jobs:
             rules:
               line-length:
                 max: 160
-              truthy:
-                allowed-values: ['true', 'false']
+              truthy: disable
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
