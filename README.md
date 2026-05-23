@@ -1,6 +1,6 @@
 # data-gouv-client
 
-[![CI](https://github.com/EdouardCourty/data-gouv-php/actions/workflows/ci.yml/badge.svg)](https://github.com/EdouardCourty/data-gouv-php/actions/workflows/ci.yml)
+[![CI](https://github.com/EdouardCourty/data-gouv-client/actions/workflows/ci.yml/badge.svg)](https://github.com/EdouardCourty/data-gouv-client/actions/workflows/ci.yml)
 
 A typed PHP 8.4 client for the [data.gouv.fr](https://www.data.gouv.fr) API, auto-generated from the official Swagger specification.
 
@@ -144,7 +144,7 @@ DATA_GOUV_API_KEY=your-key php examples/authenticated-user.php
 ### Setup
 
 ```bash
-git clone https://github.com/EdouardCourty/data-gouv-php
+git clone https://github.com/EdouardCourty/data-gouv-client
 cd data-gouv-client
 composer install
 ```

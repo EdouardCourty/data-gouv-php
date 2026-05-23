@@ -4,6 +4,7 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,10 +14,13 @@ jobs:
     name: Bump minor version and release
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true
-      && startsWith(github.event.pull_request.head.ref, 'chore/spec-update-')
-      && github.event.pull_request.user.login == 'github-actions[bot]'
-      && github.event.pull_request.head.repo.full_name == github.repository
+      github.event_name == 'workflow_dispatch'
+      || (
+        github.event.pull_request.merged == true
+        && startsWith(github.event.pull_request.head.ref, 'chore/spec-update-')
+        && github.event.pull_request.user.login == 'github-actions[bot]'
+        && github.event.pull_request.head.repo.full_name == github.repository
+      )
 
     steps:
       - name: Checkout code
