@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestItem::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestItem::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestItem::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\HarvestItem();
@@ -51,7 +45,7 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setArgs($values);
         }
         if (\array_key_exists('created', $data)) {
-            $object->setCreated(new \DateTime($data['created']));
+            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
         }
         if (\array_key_exists('dataservice', $data)) {
             $object->setDataservice($data['dataservice']);
@@ -60,8 +54,9 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setDataset($data['dataset']);
         }
         if (\array_key_exists('ended', $data) && $data['ended'] !== null) {
-            $object->setEnded(new \DateTime($data['ended']));
-        } elseif (\array_key_exists('ended', $data) && $data['ended'] === null) {
+            $object->setEnded(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['ended']));
+        }
+        elseif (\array_key_exists('ended', $data) && $data['ended'] === null) {
             $object->setEnded(null);
         }
         if (\array_key_exists('errors', $data)) {
@@ -86,21 +81,21 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('remote_url', $data) && $data['remote_url'] !== null) {
             $object->setRemoteUrl($data['remote_url']);
-        } elseif (\array_key_exists('remote_url', $data) && $data['remote_url'] === null) {
+        }
+        elseif (\array_key_exists('remote_url', $data) && $data['remote_url'] === null) {
             $object->setRemoteUrl(null);
         }
         if (\array_key_exists('started', $data) && $data['started'] !== null) {
-            $object->setStarted(new \DateTime($data['started']));
-        } elseif (\array_key_exists('started', $data) && $data['started'] === null) {
+            $object->setStarted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['started']));
+        }
+        elseif (\array_key_exists('started', $data) && $data['started'] === null) {
             $object->setStarted(null);
         }
         if (\array_key_exists('status', $data)) {
             $object->setStatus($data['status']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -146,10 +141,8 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $dataArray['started'] = $data->getStarted()?->format('Y-m-d\TH:i:sP');
         }
         $dataArray['status'] = $data->getStatus();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\HarvestItem::class => false];

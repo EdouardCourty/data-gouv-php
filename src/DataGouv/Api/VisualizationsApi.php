@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "visualizations" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "visualizations" tag.
  */
 final class VisualizationsApi
 {
@@ -25,88 +23,87 @@ final class VisualizationsApi
 
     /**
      * @param array $queryParameters {
-     *
-     * @var int    $page The page to display
-     * @var int    $page_size The page size
-     * @var string $sort The field (and direction) on which sorting apply
-     * @var string $owner
-     * @var string $organization
-     * @var bool   $private
-     *             }
-     *
+     *     @var int $page The page to display
+     *     @var int $page_size The page size
+     *     @var string $sort The field (and direction) on which sorting apply
+     *     @var string $owner
+     *     @var string $organization
+     *     @var bool $private
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listVisualizations(array $queryParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ChartPage
+        public function listVisualizations(array $queryParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ChartPage
     {
         try {
-            return $this->client->listVisualizations($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listVisualizations($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\CreateVisualizationBadRequestException
+     *
      */
-    public function createVisualization(\Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
+        public function createVisualization(\Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
     {
         try {
-            return $this->client->createVisualization($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createVisualization($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param string $visualization The visualization ID or slug
+     *
      */
-    public function deleteVisualization(string $visualization): null
+        public function deleteVisualization(string $visualization): null
     {
         try {
-            return $this->client->deleteVisualization($visualization, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->deleteVisualization($visualization, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
-     * @param string $visualization    The visualization ID or slug
-     * @param array  $headerParameters {
+     * @param string $visualization The visualization ID or slug
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getVisualization(string $visualization, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
+        public function getVisualization(string $visualization, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
     {
         try {
-            return $this->client->getVisualization($visualization, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getVisualization($visualization, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
-     * @param string $visualization    The visualization ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     * @param string $visualization The visualization ID or slug
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateVisualizationBadRequestException
+     *
      */
-    public function updateVisualization(string $visualization, \Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
+        public function updateVisualization(string $visualization, \Ecourty\DataGouv\DataGouv\Client\Model\ChartWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ChartRead
     {
         try {
-            return $this->client->updateVisualization($visualization, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->updateVisualization($visualization, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

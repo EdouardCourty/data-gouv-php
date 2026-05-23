@@ -1,44 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class FollowDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
      * Returns the number of followers left after the operation
+     * @param string $id
      */
     public function __construct(string $id)
     {
         $this->id = $id;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{id}'], [$this->id], '/datasets/{id}/followers/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null
      */
@@ -50,7 +44,6 @@ class FollowDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Bas
             return null;
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

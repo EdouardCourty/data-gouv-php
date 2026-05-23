@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "harvest" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "harvest" tag.
  */
 final class HarvestApi
 {
@@ -25,232 +23,240 @@ final class HarvestApi
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function harvestBackends(array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestBackend
+        public function harvestBackends(array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestBackend
     {
         try {
-            return $this->client->harvestBackends($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->harvestBackends($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $ident
+     * @param array $queryParameters {
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     * }
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function getHarvestJob(string $ident, array $queryParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJob
+    {
+        try {
+            return $this->client->getHarvestJob($ident, $queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function previewHarvestSourceConfig(\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPreview
+    {
+        try {
+            return $this->client->previewHarvestSourceConfig($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function deleteHarvestSource(string $source, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->deleteHarvestSource($source, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function getHarvestSource(string $source, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->getHarvestSource($source, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function updateHarvestSource(string $source, \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->updateHarvestSource($source, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $queryParameters {
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     * }
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function listHarvestJobs(string $source, array $queryParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPage
+    {
+        try {
+            return $this->client->listHarvestJobs($source, $queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function previewHarvestSource(string $source, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPreview
+    {
+        try {
+            return $this->client->previewHarvestSource($source, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function runHarvestSource(string $source, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->runHarvestSource($source, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function unscheduleHarvestSource(string $source, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->unscheduleHarvestSource($source, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param string $payload A cron expression
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function scheduleHarvestSource(string $source, string $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->scheduleHarvestSource($source, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $source
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSourceValidation $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function validateHarvestSource(string $source, \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSourceValidation $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
+    {
+        try {
+            return $this->client->validateHarvestSource($source, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $queryParameters {
-     *
-     * @var int $page The page to fetch
-     * @var int $page_size The page size to fetch
-     *          }
-     *
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     *     @var string $owner The organization or user ID to filter on
+     *     @var bool $deleted Include sources flaggued as deleted
+     *     @var string $q The search query
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getHarvestJob(string $ident, array $queryParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJob
+        public function listHarvestSources(array $queryParameters = [], array $headerParameters = []): null|array
     {
         try {
-            return $this->client->getHarvestJob($ident, $queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listHarvestSources($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function previewHarvestSourceConfig(\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPreview
+        public function createHarvestSource(\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
     {
         try {
-            return $this->client->previewHarvestSourceConfig($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function deleteHarvestSource(string $source, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->deleteHarvestSource($source, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function getHarvestSource(string $source, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->getHarvestSource($source, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function updateHarvestSource(string $source, \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->updateHarvestSource($source, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $queryParameters {
-     *
-     * @var int $page The page to fetch
-     * @var int $page_size The page size to fetch
-     *          }
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function listHarvestJobs(string $source, array $queryParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPage
-    {
-        try {
-            return $this->client->listHarvestJobs($source, $queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function previewHarvestSource(string $source, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPreview
-    {
-        try {
-            return $this->client->previewHarvestSource($source, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function runHarvestSource(string $source, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->runHarvestSource($source, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function unscheduleHarvestSource(string $source, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->unscheduleHarvestSource($source, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param string $payload          A cron expression
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function scheduleHarvestSource(string $source, string $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->scheduleHarvestSource($source, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function validateHarvestSource(string $source, \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSourceValidation $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->validateHarvestSource($source, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $queryParameters {
-     *
-     * @var int    $page The page to fetch
-     * @var int    $page_size The page size to fetch
-     * @var string $owner The organization or user ID to filter on
-     * @var bool   $deleted Include sources flaggued as deleted
-     * @var string $q The search query
-     *             }
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function listHarvestSources(array $queryParameters = [], array $headerParameters = []): ?array
-    {
-        try {
-            return $this->client->listHarvestSources($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function createHarvestSource(\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
-    {
-        try {
-            return $this->client->createHarvestSource($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createHarvestSource($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

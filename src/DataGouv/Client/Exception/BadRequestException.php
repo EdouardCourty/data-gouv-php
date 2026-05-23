@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Exception;
 
 class BadRequestException extends \RuntimeException implements ClientException

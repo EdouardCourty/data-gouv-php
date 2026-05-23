@@ -1,20 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UpdateReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $reuse;
-
     /**
-     * @param string $reuse            The reuse ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param string $reuse The reuse ID or slug
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $reuse, \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite $payload, array $headerParameters = [])
     {
@@ -22,27 +18,23 @@ class UpdateReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
         $this->body = $payload;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'PUT';
     }
-
     public function getUri(): string
     {
         return str_replace(['{reuse}'], [$this->reuse], '/reuses/{reuse}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getSerializedBody($serializer);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -50,10 +42,8 @@ class UpdateReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -80,7 +70,6 @@ class UpdateReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateReuseGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

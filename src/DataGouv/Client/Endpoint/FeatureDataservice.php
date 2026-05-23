@@ -1,47 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class FeatureDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataservice;
-
     /**
-     * @param string $dataservice      The dataservice ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param string $dataservice The dataservice ID or slug
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $dataservice, array $headerParameters = [])
     {
         $this->dataservice = $dataservice;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataservice}'], [$this->dataservice], '/dataservices/{dataservice}/featured/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -49,12 +40,11 @@ class FeatureDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clien
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\DataserviceRead
      */
@@ -66,7 +56,6 @@ class FeatureDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clien
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\DataserviceRead', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

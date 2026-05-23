@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class UserNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\User::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\User::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\User::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\User();
@@ -48,22 +42,26 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         }
         if (\array_key_exists('about', $data) && $data['about'] !== null) {
             $object->setAbout($data['about']);
-        } elseif (\array_key_exists('about', $data) && $data['about'] === null) {
+        }
+        elseif (\array_key_exists('about', $data) && $data['about'] === null) {
             $object->setAbout(null);
         }
         if (\array_key_exists('active', $data) && $data['active'] !== null) {
             $object->setActive($data['active']);
-        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
+        }
+        elseif (\array_key_exists('active', $data) && $data['active'] === null) {
             $object->setActive(null);
         }
         if (\array_key_exists('avatar', $data) && $data['avatar'] !== null) {
             $object->setAvatar($data['avatar']);
-        } elseif (\array_key_exists('avatar', $data) && $data['avatar'] === null) {
+        }
+        elseif (\array_key_exists('avatar', $data) && $data['avatar'] === null) {
             $object->setAvatar(null);
         }
         if (\array_key_exists('avatar_thumbnail', $data) && $data['avatar_thumbnail'] !== null) {
             $object->setAvatarThumbnail($data['avatar_thumbnail']);
-        } elseif (\array_key_exists('avatar_thumbnail', $data) && $data['avatar_thumbnail'] === null) {
+        }
+        elseif (\array_key_exists('avatar_thumbnail', $data) && $data['avatar_thumbnail'] === null) {
             $object->setAvatarThumbnail(null);
         }
         if (\array_key_exists('email', $data)) {
@@ -74,7 +72,8 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         }
         if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        }
+        elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
         if (\array_key_exists('last_login_at', $data)) {
@@ -95,7 +94,8 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         }
         if (\array_key_exists('page', $data) && $data['page'] !== null) {
             $object->setPage($data['page']);
-        } elseif (\array_key_exists('page', $data) && $data['page'] === null) {
+        }
+        elseif (\array_key_exists('page', $data) && $data['page'] === null) {
             $object->setPage(null);
         }
         if (\array_key_exists('password_rotation_demanded', $data)) {
@@ -112,27 +112,28 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             $object->setRoles($values_1);
         }
         if (\array_key_exists('since', $data)) {
-            $object->setSince(new \DateTime($data['since']));
+            $object->setSince(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['since']));
         }
         if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);
-        } elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
+        }
+        elseif (\array_key_exists('slug', $data) && $data['slug'] === null) {
             $object->setSlug(null);
         }
         if (\array_key_exists('uri', $data) && $data['uri'] !== null) {
             $object->setUri($data['uri']);
-        } elseif (\array_key_exists('uri', $data) && $data['uri'] === null) {
+        }
+        elseif (\array_key_exists('uri', $data) && $data['uri'] === null) {
             $object->setUri(null);
         }
         if (\array_key_exists('website', $data) && $data['website'] !== null) {
             $object->setWebsite($data['website']);
-        } elseif (\array_key_exists('website', $data) && $data['website'] === null) {
+        }
+        elseif (\array_key_exists('website', $data) && $data['website'] === null) {
             $object->setWebsite(null);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -168,10 +169,8 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         if ($data->isInitialized('website')) {
             $dataArray['website'] = $data->getWebsite();
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\User::class => false];

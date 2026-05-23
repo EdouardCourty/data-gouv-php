@@ -1,39 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class RevokeApiToken extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $api_token;
-
+    /**
+     * @param string $apiToken
+     */
     public function __construct(string $apiToken)
     {
         $this->api_token = $apiToken;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'DELETE';
     }
-
     public function getUri(): string
     {
         return str_replace(['{api_token}'], [$this->api_token], '/me/api_tokens/{api_token}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -56,7 +51,6 @@ class RevokeApiToken extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Ba
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\RevokeApiTokenGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

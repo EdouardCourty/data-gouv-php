@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchema::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchema::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchema::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchema();
@@ -45,32 +39,38 @@ class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterf
         }
         if (\array_key_exists('consolidation_dataset_id', $data) && $data['consolidation_dataset_id'] !== null) {
             $object->setConsolidationDatasetId($data['consolidation_dataset_id']);
-        } elseif (\array_key_exists('consolidation_dataset_id', $data) && $data['consolidation_dataset_id'] === null) {
+        }
+        elseif (\array_key_exists('consolidation_dataset_id', $data) && $data['consolidation_dataset_id'] === null) {
             $object->setConsolidationDatasetId(null);
         }
         if (\array_key_exists('contact', $data) && $data['contact'] !== null) {
             $object->setContact($data['contact']);
-        } elseif (\array_key_exists('contact', $data) && $data['contact'] === null) {
+        }
+        elseif (\array_key_exists('contact', $data) && $data['contact'] === null) {
             $object->setContact(null);
         }
         if (\array_key_exists('datapackage_description', $data) && $data['datapackage_description'] !== null) {
             $object->setDatapackageDescription($data['datapackage_description']);
-        } elseif (\array_key_exists('datapackage_description', $data) && $data['datapackage_description'] === null) {
+        }
+        elseif (\array_key_exists('datapackage_description', $data) && $data['datapackage_description'] === null) {
             $object->setDatapackageDescription(null);
         }
         if (\array_key_exists('datapackage_name', $data) && $data['datapackage_name'] !== null) {
             $object->setDatapackageName($data['datapackage_name']);
-        } elseif (\array_key_exists('datapackage_name', $data) && $data['datapackage_name'] === null) {
+        }
+        elseif (\array_key_exists('datapackage_name', $data) && $data['datapackage_name'] === null) {
             $object->setDatapackageName(null);
         }
         if (\array_key_exists('datapackage_title', $data) && $data['datapackage_title'] !== null) {
             $object->setDatapackageTitle($data['datapackage_title']);
-        } elseif (\array_key_exists('datapackage_title', $data) && $data['datapackage_title'] === null) {
+        }
+        elseif (\array_key_exists('datapackage_title', $data) && $data['datapackage_title'] === null) {
             $object->setDatapackageTitle(null);
         }
         if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        }
+        elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
         if (\array_key_exists('examples', $data)) {
@@ -82,17 +82,20 @@ class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterf
         }
         if (\array_key_exists('external_doc', $data) && $data['external_doc'] !== null) {
             $object->setExternalDoc($data['external_doc']);
-        } elseif (\array_key_exists('external_doc', $data) && $data['external_doc'] === null) {
+        }
+        elseif (\array_key_exists('external_doc', $data) && $data['external_doc'] === null) {
             $object->setExternalDoc(null);
         }
         if (\array_key_exists('external_tool', $data) && $data['external_tool'] !== null) {
             $object->setExternalTool($data['external_tool']);
-        } elseif (\array_key_exists('external_tool', $data) && $data['external_tool'] === null) {
+        }
+        elseif (\array_key_exists('external_tool', $data) && $data['external_tool'] === null) {
             $object->setExternalTool(null);
         }
         if (\array_key_exists('homepage', $data) && $data['homepage'] !== null) {
             $object->setHomepage($data['homepage']);
-        } elseif (\array_key_exists('homepage', $data) && $data['homepage'] === null) {
+        }
+        elseif (\array_key_exists('homepage', $data) && $data['homepage'] === null) {
             $object->setHomepage(null);
         }
         if (\array_key_exists('labels', $data)) {
@@ -104,22 +107,26 @@ class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterf
         }
         if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+        }
+        elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
         if (\array_key_exists('schema_type', $data) && $data['schema_type'] !== null) {
             $object->setSchemaType($data['schema_type']);
-        } elseif (\array_key_exists('schema_type', $data) && $data['schema_type'] === null) {
+        }
+        elseif (\array_key_exists('schema_type', $data) && $data['schema_type'] === null) {
             $object->setSchemaType(null);
         }
         if (\array_key_exists('schema_url', $data) && $data['schema_url'] !== null) {
             $object->setSchemaUrl($data['schema_url']);
-        } elseif (\array_key_exists('schema_url', $data) && $data['schema_url'] === null) {
+        }
+        elseif (\array_key_exists('schema_url', $data) && $data['schema_url'] === null) {
             $object->setSchemaUrl(null);
         }
         if (\array_key_exists('title', $data) && $data['title'] !== null) {
             $object->setTitle($data['title']);
-        } elseif (\array_key_exists('title', $data) && $data['title'] === null) {
+        }
+        elseif (\array_key_exists('title', $data) && $data['title'] === null) {
             $object->setTitle(null);
         }
         if (\array_key_exists('versions', $data)) {
@@ -129,10 +136,8 @@ class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterf
             }
             $object->setVersions($values_2);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -196,10 +201,8 @@ class CatalogSchemaNormalizer implements DenormalizerInterface, NormalizerInterf
             }
             $dataArray['versions'] = $values_2;
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchema::class => false];

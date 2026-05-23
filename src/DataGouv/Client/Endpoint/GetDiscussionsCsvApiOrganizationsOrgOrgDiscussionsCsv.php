@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class GetDiscussionsCsvApiOrganizationsOrgOrgDiscussionsCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $org;
-
     /**
      * @param string $org The organization ID or slug
      */
@@ -16,27 +12,23 @@ class GetDiscussionsCsvApiOrganizationsOrgOrgDiscussionsCsv extends \Ecourty\Dat
     {
         $this->org = $org;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{org}'], [$this->org], '/organizations/{org}/discussions.csv');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -56,7 +48,6 @@ class GetDiscussionsCsvApiOrganizationsOrgOrgDiscussionsCsv extends \Ecourty\Dat
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\GetDiscussionsCsvApiOrganizationsOrgOrgDiscussionsCsvGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

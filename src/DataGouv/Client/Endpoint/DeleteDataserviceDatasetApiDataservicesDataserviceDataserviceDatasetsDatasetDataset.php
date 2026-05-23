@@ -1,44 +1,37 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class DeleteDataserviceDatasetApiDataservicesDataserviceDataserviceDatasetsDatasetDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataservice;
     protected $dataset;
-
     /**
      * @param string $dataservice The dataservice ID or slug
+     * @param string $dataset
      */
     public function __construct(string $dataservice, string $dataset)
     {
         $this->dataservice = $dataservice;
         $this->dataset = $dataset;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'DELETE';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataservice}', '{dataset}'], [$this->dataservice, $this->dataset], '/dataservices/{dataservice}/datasets/{dataset}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -54,7 +47,6 @@ class DeleteDataserviceDatasetApiDataservicesDataserviceDataserviceDatasetsDatas
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDataserviceDatasetApiDataservicesDataserviceDataserviceDatasetsDatasetDatasetNotFoundException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

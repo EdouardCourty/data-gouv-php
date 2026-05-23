@@ -1,54 +1,43 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class Activity extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     /**
      * @param array $queryParameters {
-     *
-     * @var int    $page The page to fetch
-     * @var int    $page_size The page size to fetch
-     * @var string $user Filter activities for that particular user
-     * @var string $organization Filter activities for that particular organization
-     * @var string $related_to Filter activities for that particular object id (ex : reuse, dataset, etc.)
-     *             }
-     *
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     *     @var string $user Filter activities for that particular user
+     *     @var string $organization Filter activities for that particular organization
+     *     @var string $related_to Filter activities for that particular object id (ex : reuse, dataset, etc.)
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/activity/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -60,10 +49,8 @@ class Activity extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
         $optionsResolver->addAllowedTypes('user', ['string']);
         $optionsResolver->addAllowedTypes('organization', ['string']);
         $optionsResolver->addAllowedTypes('related_to', ['string']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -71,12 +58,11 @@ class Activity extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\ActivityPage
      */
@@ -88,7 +74,6 @@ class Activity extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\ActivityPage', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite();
@@ -44,7 +38,7 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('availability', $data) && \is_int($data['availability'])) {
-            $data['availability'] = (float) $data['availability'];
+            $data['availability'] = (double) $data['availability'];
         }
         if (\array_key_exists('private', $data) && \is_int($data['private'])) {
             $data['private'] = (bool) $data['private'];
@@ -58,52 +52,62 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
         }
         if (\array_key_exists('access_type', $data) && $data['access_type'] !== null) {
             $object->setAccessType($data['access_type']);
-        } elseif (\array_key_exists('access_type', $data) && $data['access_type'] === null) {
+        }
+        elseif (\array_key_exists('access_type', $data) && $data['access_type'] === null) {
             $object->setAccessType(null);
         }
         if (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] !== null) {
             $object->setAccessTypeReason($data['access_type_reason']);
-        } elseif (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] === null) {
+        }
+        elseif (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] === null) {
             $object->setAccessTypeReason(null);
         }
         if (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] !== null) {
             $object->setAccessTypeReasonCategory($data['access_type_reason_category']);
-        } elseif (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] === null) {
+        }
+        elseif (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] === null) {
             $object->setAccessTypeReasonCategory(null);
         }
         if (\array_key_exists('acronym', $data) && $data['acronym'] !== null) {
             $object->setAcronym($data['acronym']);
-        } elseif (\array_key_exists('acronym', $data) && $data['acronym'] === null) {
+        }
+        elseif (\array_key_exists('acronym', $data) && $data['acronym'] === null) {
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived_at', $data) && $data['archived_at'] !== null) {
-            $object->setArchivedAt(new \DateTime($data['archived_at']));
-        } elseif (\array_key_exists('archived_at', $data) && $data['archived_at'] === null) {
+            $object->setArchivedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived_at']));
+        }
+        elseif (\array_key_exists('archived_at', $data) && $data['archived_at'] === null) {
             $object->setArchivedAt(null);
         }
         if (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] !== null) {
             $object->setAuthorizationRequestUrl($data['authorization_request_url']);
-        } elseif (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] === null) {
+        }
+        elseif (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] === null) {
             $object->setAuthorizationRequestUrl(null);
         }
         if (\array_key_exists('availability', $data) && $data['availability'] !== null) {
             $object->setAvailability($data['availability']);
-        } elseif (\array_key_exists('availability', $data) && $data['availability'] === null) {
+        }
+        elseif (\array_key_exists('availability', $data) && $data['availability'] === null) {
             $object->setAvailability(null);
         }
         if (\array_key_exists('availability_url', $data) && $data['availability_url'] !== null) {
             $object->setAvailabilityUrl($data['availability_url']);
-        } elseif (\array_key_exists('availability_url', $data) && $data['availability_url'] === null) {
+        }
+        elseif (\array_key_exists('availability_url', $data) && $data['availability_url'] === null) {
             $object->setAvailabilityUrl(null);
         }
         if (\array_key_exists('base_api_url', $data) && $data['base_api_url'] !== null) {
             $object->setBaseApiUrl($data['base_api_url']);
-        } elseif (\array_key_exists('base_api_url', $data) && $data['base_api_url'] === null) {
+        }
+        elseif (\array_key_exists('base_api_url', $data) && $data['base_api_url'] === null) {
             $object->setBaseApiUrl(null);
         }
         if (\array_key_exists('business_documentation_url', $data) && $data['business_documentation_url'] !== null) {
             $object->setBusinessDocumentationUrl($data['business_documentation_url']);
-        } elseif (\array_key_exists('business_documentation_url', $data) && $data['business_documentation_url'] === null) {
+        }
+        elseif (\array_key_exists('business_documentation_url', $data) && $data['business_documentation_url'] === null) {
             $object->setBusinessDocumentationUrl(null);
         }
         if (\array_key_exists('contact_points', $data)) {
@@ -121,13 +125,15 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setDatasets($values_2);
         }
         if (\array_key_exists('deleted_at', $data) && $data['deleted_at'] !== null) {
-            $object->setDeletedAt(new \DateTime($data['deleted_at']));
-        } elseif (\array_key_exists('deleted_at', $data) && $data['deleted_at'] === null) {
+            $object->setDeletedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted_at']));
+        }
+        elseif (\array_key_exists('deleted_at', $data) && $data['deleted_at'] === null) {
             $object->setDeletedAt(null);
         }
         if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        }
+        elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
         if (\array_key_exists('extras', $data)) {
@@ -135,42 +141,50 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
         }
         if (\array_key_exists('format', $data) && $data['format'] !== null) {
             $object->setFormat($data['format']);
-        } elseif (\array_key_exists('format', $data) && $data['format'] === null) {
+        }
+        elseif (\array_key_exists('format', $data) && $data['format'] === null) {
             $object->setFormat(null);
         }
         if (\array_key_exists('license', $data) && $data['license'] !== null) {
             $object->setLicense($data['license']);
-        } elseif (\array_key_exists('license', $data) && $data['license'] === null) {
+        }
+        elseif (\array_key_exists('license', $data) && $data['license'] === null) {
             $object->setLicense(null);
         }
         if (\array_key_exists('machine_documentation_url', $data) && $data['machine_documentation_url'] !== null) {
             $object->setMachineDocumentationUrl($data['machine_documentation_url']);
-        } elseif (\array_key_exists('machine_documentation_url', $data) && $data['machine_documentation_url'] === null) {
+        }
+        elseif (\array_key_exists('machine_documentation_url', $data) && $data['machine_documentation_url'] === null) {
             $object->setMachineDocumentationUrl(null);
         }
         if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        }
+        elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
         if (\array_key_exists('owner', $data) && $data['owner'] !== null) {
             $object->setOwner($data['owner']);
-        } elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
+        }
+        elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
             $object->setOwner(null);
         }
         if (\array_key_exists('private', $data) && $data['private'] !== null) {
             $object->setPrivate($data['private']);
-        } elseif (\array_key_exists('private', $data) && $data['private'] === null) {
+        }
+        elseif (\array_key_exists('private', $data) && $data['private'] === null) {
             $object->setPrivate(null);
         }
         if (\array_key_exists('rate_limiting', $data) && $data['rate_limiting'] !== null) {
             $object->setRateLimiting($data['rate_limiting']);
-        } elseif (\array_key_exists('rate_limiting', $data) && $data['rate_limiting'] === null) {
+        }
+        elseif (\array_key_exists('rate_limiting', $data) && $data['rate_limiting'] === null) {
             $object->setRateLimiting(null);
         }
         if (\array_key_exists('rate_limiting_url', $data) && $data['rate_limiting_url'] !== null) {
             $object->setRateLimitingUrl($data['rate_limiting_url']);
-        } elseif (\array_key_exists('rate_limiting_url', $data) && $data['rate_limiting_url'] === null) {
+        }
+        elseif (\array_key_exists('rate_limiting_url', $data) && $data['rate_limiting_url'] === null) {
             $object->setRateLimitingUrl(null);
         }
         if (\array_key_exists('tags', $data)) {
@@ -182,16 +196,15 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
         }
         if (\array_key_exists('technical_documentation_url', $data) && $data['technical_documentation_url'] !== null) {
             $object->setTechnicalDocumentationUrl($data['technical_documentation_url']);
-        } elseif (\array_key_exists('technical_documentation_url', $data) && $data['technical_documentation_url'] === null) {
+        }
+        elseif (\array_key_exists('technical_documentation_url', $data) && $data['technical_documentation_url'] === null) {
             $object->setTechnicalDocumentationUrl(null);
         }
         if (\array_key_exists('title', $data)) {
             $object->setTitle($data['title']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -290,10 +303,8 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
             $dataArray['technical_documentation_url'] = $data->getTechnicalDocumentationUrl();
         }
         $dataArray['title'] = $data->getTitle();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite::class => false];

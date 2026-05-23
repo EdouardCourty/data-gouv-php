@@ -1,35 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class GetSiteTagsCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
     use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/site/tags.csv';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null
      */
@@ -41,7 +35,6 @@ class GetSiteTagsCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Ba
             return null;
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

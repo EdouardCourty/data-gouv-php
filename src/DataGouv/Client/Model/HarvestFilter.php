@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class HarvestFilter
@@ -10,10 +8,9 @@ class HarvestFilter
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * The filter details
@@ -39,80 +36,92 @@ class HarvestFilter
      * @var string|null
      */
     protected $type;
-
     /**
      * The filter details
+     *
+     * @return string|null
      */
     public function getDescription(): ?string
     {
         return $this->description;
     }
-
     /**
      * The filter details
+     *
+     * @param string|null $description
+     *
+     * @return self
      */
     public function setDescription(?string $description): self
     {
         $this->initialized['description'] = true;
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * The filter key
+     *
+     * @return string|null
      */
     public function getKey(): ?string
     {
         return $this->key;
     }
-
     /**
      * The filter key
+     *
+     * @param string|null $key
+     *
+     * @return self
      */
     public function setKey(?string $key): self
     {
         $this->initialized['key'] = true;
         $this->key = $key;
-
         return $this;
     }
-
     /**
      * A localized human-readable label
+     *
+     * @return string|null
      */
     public function getLabel(): ?string
     {
         return $this->label;
     }
-
     /**
      * A localized human-readable label
+     *
+     * @param string|null $label
+     *
+     * @return self
      */
     public function setLabel(?string $label): self
     {
         $this->initialized['label'] = true;
         $this->label = $label;
-
         return $this;
     }
-
     /**
      * The filter expected type
+     *
+     * @return string|null
      */
     public function getType(): ?string
     {
         return $this->type;
     }
-
     /**
      * The filter expected type
+     *
+     * @param string|null $type
+     *
+     * @return self
      */
     public function setType(?string $type): self
     {
         $this->initialized['type'] = true;
         $this->type = $type;
-
         return $this;
     }
 }

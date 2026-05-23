@@ -8,6 +8,7 @@ final class MethodInfo
 {
     public function __construct(
         public readonly string $name,
+        /** @var list<string> */
         public readonly array $tags,
         public readonly string $signature,
         public readonly string $callArgs,

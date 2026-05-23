@@ -14,9 +14,9 @@ final class ClientReflector
      *
      * @return array<string, MethodInfo> methodName  => MethodInfo
      */
-    public function reflect(string $clientClass, array $operationTags): array
+    public function reflect(string $clientClass, array $operationTags, string $janeNamespace): array
     {
-        $reflection = new \ReflectionClass($clientClass);
+        $reflection = new \ReflectionClass($clientClass); // @phpstan-ignore argument.type
         $methods = [];
 
         foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
@@ -25,7 +25,7 @@ final class ClientReflector
             }
 
             $opId = $this->camelToSnake($method->getName());
-            $tags = $operationTags[$opId] ?? null;
+            $tags = $operationTags[$opId] ?? $operationTags[$method->getName()] ?? null;
 
             if ($tags === null) {
                 continue;
@@ -39,7 +39,7 @@ final class ClientReflector
                 signature: $signature,
                 callArgs: $callArgs,
                 docblock: $this->extractDocblock($method),
-                returnType: $this->extractReturnType($method),
+                returnType: $this->extractReturnType($method, $janeNamespace),
             );
         }
 
@@ -48,7 +48,7 @@ final class ClientReflector
 
     private function camelToSnake(string $input): string
     {
-        return strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($input)));
+        return strtolower((string) preg_replace('/[A-Z]/', '_$0', lcfirst($input)));
     }
 
     /**
@@ -95,7 +95,7 @@ final class ClientReflector
             \is_bool($value) => $value ? 'true' : 'false',
             \is_string($value) => "'" . addcslashes($value, "'\\") . "'",
             $value === null => 'null',
-            default => (string) $value,
+            default => (string) $value, // @phpstan-ignore cast.string
         };
     }
 
@@ -116,7 +116,7 @@ final class ClientReflector
         return implode("\n", $filtered);
     }
 
-    private function extractReturnType(\ReflectionMethod $method): string
+    private function extractReturnType(\ReflectionMethod $method, string $janeNamespace): string
     {
         $doc = $method->getDocComment();
         if ($doc === false) {
@@ -129,7 +129,7 @@ final class ClientReflector
                 $type = preg_replace('/\\\\[\w\\\\]+\[\]/', 'array', $type);
             }
 
-            return $type;
+            return $this->qualifyType((string) $type, $janeNamespace);
         }
 
         if (preg_match('/@return\s+(\S+)/', $doc, $m)) {
@@ -137,5 +137,47 @@ final class ClientReflector
         }
 
         return 'mixed';
+    }
+
+    /**
+     * Fully-qualifies a type extracted from a Jane docblock.
+     *
+     * Jane's docblocks reference model classes as relative names like `Model\Foo`
+     * or `Model\Foo|null`. These are relative to the Jane client's namespace
+     * (e.g. `Ecourty\DataGouv\DataGouv\Client`). When copied into sub-client files
+     * that live in a different namespace (e.g. `Ecourty\DataGouv\DataGouv\Api`),
+     * the relative name resolves to the wrong class. This method prefixes each
+     * relative segment with the full Jane namespace so the type is unambiguous.
+     */
+    private function qualifyType(string $type, string $janeNamespace): string
+    {
+        // Handle union types (e.g. "Model\Foo|null")
+        $parts = explode('|', $type);
+        $qualified = [];
+
+        foreach ($parts as $part) {
+            $part = trim($part);
+            if ($part === '' || $part === 'null' || $part === 'mixed' || $part === 'array') {
+                $qualified[] = $part;
+                continue;
+            }
+
+            // Already fully-qualified (starts with \) — leave as-is.
+            if (str_starts_with($part, '\\')) {
+                $qualified[] = $part;
+                continue;
+            }
+
+            // Built-in or scalar types — leave as-is.
+            if (\in_array($part, ['string', 'int', 'float', 'bool', 'object', 'void', 'never', 'resource'], true)) {
+                $qualified[] = $part;
+                continue;
+            }
+
+            // Relative class name — prefix with the Jane namespace.
+            $qualified[] = '\\' . rtrim($janeNamespace, '\\') . '\\' . $part;
+        }
+
+        return implode('|', $qualified);
     }
 }

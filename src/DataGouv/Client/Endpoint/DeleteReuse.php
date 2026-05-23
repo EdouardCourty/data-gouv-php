@@ -1,47 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class DeleteReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $reuse;
-
     /**
-     * @param string $reuse           The reuse ID or slug
-     * @param array  $queryParameters {
-     *
-     * @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
-     *           }
+     * @param string $reuse The reuse ID or slug
+     * @param array $queryParameters {
+     *     @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
+     * }
      */
     public function __construct(string $reuse, array $queryParameters = [])
     {
         $this->reuse = $reuse;
         $this->queryParameters = $queryParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'DELETE';
     }
-
     public function getUri(): string
     {
         return str_replace(['{reuse}'], [$this->reuse], '/reuses/{reuse}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -49,10 +40,8 @@ class DeleteReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults(['send_legal_notice' => false]);
         $optionsResolver->addAllowedTypes('send_legal_notice', ['bool']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -75,7 +64,6 @@ class DeleteReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteReuseGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

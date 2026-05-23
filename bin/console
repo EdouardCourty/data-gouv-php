@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Ecourty\DataGouv\Generator\Command\AddApiCommand;
+use Ecourty\DataGouv\Generator\Command\GenerateCommand;
+use Symfony\Component\Console\Application;
+
+$app = new Application('data-gouv-client', '1.0.0');
+$app->addCommand(new GenerateCommand());
+$app->addCommand(new AddApiCommand());
+$app->setDefaultCommand('list');
+$app->run();

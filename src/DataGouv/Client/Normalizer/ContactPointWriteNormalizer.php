@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ContactPointWriteNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite();
@@ -45,12 +39,14 @@ class ContactPointWriteNormalizer implements DenormalizerInterface, NormalizerIn
         }
         if (\array_key_exists('contact_form', $data) && $data['contact_form'] !== null) {
             $object->setContactForm($data['contact_form']);
-        } elseif (\array_key_exists('contact_form', $data) && $data['contact_form'] === null) {
+        }
+        elseif (\array_key_exists('contact_form', $data) && $data['contact_form'] === null) {
             $object->setContactForm(null);
         }
         if (\array_key_exists('email', $data) && $data['email'] !== null) {
             $object->setEmail($data['email']);
-        } elseif (\array_key_exists('email', $data) && $data['email'] === null) {
+        }
+        elseif (\array_key_exists('email', $data) && $data['email'] === null) {
             $object->setEmail(null);
         }
         if (\array_key_exists('name', $data)) {
@@ -58,21 +54,21 @@ class ContactPointWriteNormalizer implements DenormalizerInterface, NormalizerIn
         }
         if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        }
+        elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
         if (\array_key_exists('owner', $data) && $data['owner'] !== null) {
             $object->setOwner($data['owner']);
-        } elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
+        }
+        elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
             $object->setOwner(null);
         }
         if (\array_key_exists('role', $data)) {
             $object->setRole($data['role']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -90,10 +86,8 @@ class ContactPointWriteNormalizer implements DenormalizerInterface, NormalizerIn
             $dataArray['owner'] = $data->getOwner();
         }
         $dataArray['role'] = $data->getRole();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite::class => false];

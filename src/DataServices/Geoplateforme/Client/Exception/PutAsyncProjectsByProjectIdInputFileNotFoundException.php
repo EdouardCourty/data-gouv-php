@@ -1,0 +1,20 @@
+<?php
+
+namespace Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception;
+
+class PutAsyncProjectsByProjectIdInputFileNotFoundException extends NotFoundException
+{
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(?\Psr\Http\Message\ResponseInterface $response = null)
+    {
+        parent::__construct('Projet introuvable');
+        $this->response = $response;
+    }
+    public function getResponse(): ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
+    }
+}

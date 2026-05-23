@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class CatalogSchema
@@ -10,10 +8,9 @@ class CatalogSchema
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * @var string|null
@@ -89,103 +86,126 @@ class CatalogSchema
      * @var list<CatalogSchemaVersion>
      */
     protected $versions;
-
+    /**
+     * @return string|null
+     */
     public function getConsolidationDatasetId(): ?string
     {
         return $this->consolidationDatasetId;
     }
-
+    /**
+     * @param string|null $consolidationDatasetId
+     *
+     * @return self
+     */
     public function setConsolidationDatasetId(?string $consolidationDatasetId): self
     {
         $this->initialized['consolidationDatasetId'] = true;
         $this->consolidationDatasetId = $consolidationDatasetId;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getContact(): ?string
     {
         return $this->contact;
     }
-
+    /**
+     * @param string|null $contact
+     *
+     * @return self
+     */
     public function setContact(?string $contact): self
     {
         $this->initialized['contact'] = true;
         $this->contact = $contact;
-
         return $this;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @return string|null
      */
     public function getDatapackageDescription(): ?string
     {
         return $this->datapackageDescription;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @param string|null $datapackageDescription
+     *
+     * @return self
      */
     public function setDatapackageDescription(?string $datapackageDescription): self
     {
         $this->initialized['datapackageDescription'] = true;
         $this->datapackageDescription = $datapackageDescription;
-
         return $this;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @return string|null
      */
     public function getDatapackageName(): ?string
     {
         return $this->datapackageName;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @param string|null $datapackageName
+     *
+     * @return self
      */
     public function setDatapackageName(?string $datapackageName): self
     {
         $this->initialized['datapackageName'] = true;
         $this->datapackageName = $datapackageName;
-
         return $this;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @return string|null
      */
     public function getDatapackageTitle(): ?string
     {
         return $this->datapackageTitle;
     }
-
     /**
      * Only present if the schema is inside a datapackage
+     *
+     * @param string|null $datapackageTitle
+     *
+     * @return self
      */
     public function setDatapackageTitle(?string $datapackageTitle): self
     {
         $this->initialized['datapackageTitle'] = true;
         $this->datapackageTitle = $datapackageTitle;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
-
+    /**
+     * @param string|null $description
+     *
+     * @return self
+     */
     public function setDescription(?string $description): self
     {
         $this->initialized['description'] = true;
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * @return list<CatalogSchemaExample>
      */
@@ -193,63 +213,75 @@ class CatalogSchema
     {
         return $this->examples;
     }
-
     /**
      * @param list<CatalogSchemaExample> $examples
+     *
+     * @return self
      */
     public function setExamples(array $examples): self
     {
         $this->initialized['examples'] = true;
         $this->examples = $examples;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getExternalDoc(): ?string
     {
         return $this->externalDoc;
     }
-
+    /**
+     * @param string|null $externalDoc
+     *
+     * @return self
+     */
     public function setExternalDoc(?string $externalDoc): self
     {
         $this->initialized['externalDoc'] = true;
         $this->externalDoc = $externalDoc;
-
         return $this;
     }
-
     /**
      * Link to tools to create a file with this schema
+     *
+     * @return string|null
      */
     public function getExternalTool(): ?string
     {
         return $this->externalTool;
     }
-
     /**
      * Link to tools to create a file with this schema
+     *
+     * @param string|null $externalTool
+     *
+     * @return self
      */
     public function setExternalTool(?string $externalTool): self
     {
         $this->initialized['externalTool'] = true;
         $this->externalTool = $externalTool;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getHomepage(): ?string
     {
         return $this->homepage;
     }
-
+    /**
+     * @param string|null $homepage
+     *
+     * @return self
+     */
     public function setHomepage(?string $homepage): self
     {
         $this->initialized['homepage'] = true;
         $this->homepage = $homepage;
-
         return $this;
     }
-
     /**
      * @return list<string>
      */
@@ -257,76 +289,93 @@ class CatalogSchema
     {
         return $this->labels;
     }
-
     /**
      * @param list<string> $labels
+     *
+     * @return self
      */
     public function setLabels(array $labels): self
     {
         $this->initialized['labels'] = true;
         $this->labels = $labels;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
-
+    /**
+     * @param string|null $name
+     *
+     * @return self
+     */
     public function setName(?string $name): self
     {
         $this->initialized['name'] = true;
         $this->name = $name;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getSchemaType(): ?string
     {
         return $this->schemaType;
     }
-
+    /**
+     * @param string|null $schemaType
+     *
+     * @return self
+     */
     public function setSchemaType(?string $schemaType): self
     {
         $this->initialized['schemaType'] = true;
         $this->schemaType = $schemaType;
-
         return $this;
     }
-
     /**
      * Often the link to the latest version
+     *
+     * @return string|null
      */
     public function getSchemaUrl(): ?string
     {
         return $this->schemaUrl;
     }
-
     /**
      * Often the link to the latest version
+     *
+     * @param string|null $schemaUrl
+     *
+     * @return self
      */
     public function setSchemaUrl(?string $schemaUrl): self
     {
         $this->initialized['schemaUrl'] = true;
         $this->schemaUrl = $schemaUrl;
-
         return $this;
     }
-
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
-
+    /**
+     * @param string|null $title
+     *
+     * @return self
+     */
     public function setTitle(?string $title): self
     {
         $this->initialized['title'] = true;
         $this->title = $title;
-
         return $this;
     }
-
     /**
      * @return list<CatalogSchemaVersion>
      */
@@ -334,15 +383,15 @@ class CatalogSchema
     {
         return $this->versions;
     }
-
     /**
      * @param list<CatalogSchemaVersion> $versions
+     *
+     * @return self
      */
     public function setVersions(array $versions): self
     {
         $this->initialized['versions'] = true;
         $this->versions = $versions;
-
         return $this;
     }
 }

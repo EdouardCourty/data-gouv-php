@@ -1,22 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UploadDatasetResource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $rid;
     protected $dataset;
-
     /**
-     * @param string $rid              The resource unique identifier
-     * @param string $dataset          The dataset ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param string $rid The resource unique identifier
+     * @param string $dataset The dataset ID or slug
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $rid, string $dataset, array $headerParameters = [])
     {
@@ -24,27 +19,23 @@ class UploadDatasetResource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
         $this->dataset = $dataset;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{rid}', '{dataset}'], [$this->rid, $this->dataset], '/datasets/{dataset}/resources/{rid}/upload/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -52,10 +43,8 @@ class UploadDatasetResource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -78,7 +67,6 @@ class UploadDatasetResource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\UploadDatasetResourceUnsupportedMediaTypeException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

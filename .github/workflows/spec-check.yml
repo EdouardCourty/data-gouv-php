@@ -29,7 +29,7 @@ jobs:
       - name: Check for drift
         id: diff
         run: |
-          git diff --quiet src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+          git diff --quiet src/DataGouv src/DataServices \
             && echo "changed=false" >> $GITHUB_OUTPUT \
             || echo "changed=true" >> $GITHUB_OUTPUT
 
@@ -38,11 +38,11 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: regenerate client from updated data.gouv.fr spec"
+          commit-message: "chore: regenerate clients from updated API specs"
           branch: "chore/spec-update-${{ github.run_id }}"
-          title: "chore: data.gouv.fr API spec has changed — regenerated client"
+          title: "chore: API specs have changed — regenerated clients"
           body: |
-            The data.gouv.fr Swagger spec has changed since the last generation.
+            One or more API specs have changed since the last generation.
 
             This PR was automatically created by the daily spec auto-update workflow.
             Please review the diff carefully and merge if the changes look correct.

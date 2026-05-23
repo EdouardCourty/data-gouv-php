@@ -1,51 +1,40 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class SuggestOrganizations extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The string to autocomplete/suggest
-     * @var int    $size The amount of suggestion to fetch
-     *             }
-     *
+     *     @var string $q The string to autocomplete/suggest
+     *     @var int $size The amount of suggestion to fetch
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/organizations/suggest/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -54,10 +43,8 @@ class SuggestOrganizations extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cli
         $optionsResolver->setDefaults(['size' => 10]);
         $optionsResolver->addAllowedTypes('q', ['string']);
         $optionsResolver->addAllowedTypes('size', ['int']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -65,12 +52,11 @@ class SuggestOrganizations extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cli
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\OrganizationSuggestion[]
      */
@@ -82,7 +68,6 @@ class SuggestOrganizations extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cli
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\OrganizationSuggestion[]', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

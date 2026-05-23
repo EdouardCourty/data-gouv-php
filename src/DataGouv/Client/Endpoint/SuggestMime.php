@@ -1,45 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class SuggestMime extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The string to autocomplete/suggest
-     * @var int    $size The amount of suggestion to fetch
-     *             }
+     *     @var string $q The string to autocomplete/suggest
+     *     @var int $size The amount of suggestion to fetch
+     * }
      */
     public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/datasets/suggest/mime/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -48,12 +39,11 @@ class SuggestMime extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
         $optionsResolver->setDefaults(['size' => 10]);
         $optionsResolver->addAllowedTypes('q', ['string']);
         $optionsResolver->addAllowedTypes('size', ['int']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null
      */
@@ -65,7 +55,6 @@ class SuggestMime extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseE
             return null;
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

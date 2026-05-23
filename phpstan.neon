@@ -6,4 +6,5 @@ parameters:
 	excludePaths:
 		- src/DataGouv/Client
 		- src/DataGouv/Api
-		- src/Generator
+		- src/DataServices/*/Client/**
+		- src/DataServices/*/Api/**

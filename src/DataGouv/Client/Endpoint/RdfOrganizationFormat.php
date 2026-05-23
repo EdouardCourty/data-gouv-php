@@ -1,46 +1,42 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class RdfOrganizationFormat extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $org;
     protected $_format;
-
     /**
-     * @param string $org             The organization ID or slug
-     * @param array  $queryParameters {
-     *
-     * @var string $q The search query
-     * @var string $sort The field (and direction) on which sorting apply
-     * @var int    $page The page to display
-     * @var array  $tag
-     * @var string $license
-     * @var bool   $featured If set to true, it will filter on featured datasets only. If set to false, it will exclude featured datasets.
-     * @var string $geozone
-     * @var string $granularity
-     * @var string $temporal_coverage
-     * @var string $access_type
-     * @var string $organization
-     * @var string $badge
-     * @var string $organization_badge
-     * @var string $owner
-     * @var string $followed_by (beta, subject to change/be removed)
-     * @var string $format
-     * @var string $schema
-     * @var string $schema_version
-     * @var string $topic
-     * @var string $credit
-     * @var string $dataservice
-     * @var string $reuse
-     * @var bool   $archived If set to true, it will filter on archived datasets only. If set to false, it will exclude archived datasets. User must be authenticated and results are limited to user visibility
-     * @var bool   $deleted If set to true, it will filter on deleted datasets only. If set to false, it will exclude deleted datasets. User must be authenticated and results are limited to user visibility
-     * @var bool   $private If set to true, it will filter on private datasets only. If set to false, it will exclude private datasets. User must be authenticated and results are limited to user visibility
-     * @var int    $page_size The page size
-     *             }
+     * @param string $org The organization ID or slug
+     * @param string $format
+     * @param array $queryParameters {
+     *     @var string $q The search query
+     *     @var string $sort The field (and direction) on which sorting apply
+     *     @var int $page The page to display
+     *     @var array $tag
+     *     @var string $license
+     *     @var bool $featured If set to true, it will filter on featured datasets only. If set to false, it will exclude featured datasets.
+     *     @var string $geozone
+     *     @var string $granularity
+     *     @var string $temporal_coverage
+     *     @var string $access_type
+     *     @var string $organization
+     *     @var string $badge
+     *     @var string $organization_badge
+     *     @var string $owner
+     *     @var string $followed_by (beta, subject to change/be removed)
+     *     @var string $format
+     *     @var string $schema
+     *     @var string $schema_version
+     *     @var string $topic
+     *     @var string $credit
+     *     @var string $dataservice
+     *     @var string $reuse
+     *     @var bool $archived If set to true, it will filter on archived datasets only. If set to false, it will exclude archived datasets. User must be authenticated and results are limited to user visibility
+     *     @var bool $deleted If set to true, it will filter on deleted datasets only. If set to false, it will exclude deleted datasets. User must be authenticated and results are limited to user visibility
+     *     @var bool $private If set to true, it will filter on private datasets only. If set to false, it will exclude private datasets. User must be authenticated and results are limited to user visibility
+     *     @var int $page_size The page size
+     * }
      */
     public function __construct(string $org, string $format, array $queryParameters = [])
     {
@@ -48,27 +44,23 @@ class RdfOrganizationFormat extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
         $this->_format = $format;
         $this->queryParameters = $queryParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{org}', '{_format}'], [$this->org, $this->_format], '/organizations/{org}/catalog.{_format}');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -101,10 +93,8 @@ class RdfOrganizationFormat extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
         $optionsResolver->addAllowedTypes('deleted', ['bool']);
         $optionsResolver->addAllowedTypes('private', ['bool']);
         $optionsResolver->addAllowedTypes('page_size', ['int']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -124,7 +114,6 @@ class RdfOrganizationFormat extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Cl
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\RdfOrganizationFormatGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

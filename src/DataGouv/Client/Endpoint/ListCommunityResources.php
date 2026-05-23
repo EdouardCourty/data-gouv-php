@@ -1,55 +1,44 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class ListCommunityResources extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     /**
      * @param array $queryParameters {
-     *
-     * @var string $sort The sorting attribute
-     * @var int    $page The page to fetch
-     * @var int    $page_size The page size to fetch
-     * @var string $organization Filter activities for that particular organization
-     * @var string $dataset Filter activities for that particular dataset
-     * @var string $owner Filter activities for that particular user
-     *             }
-     *
+     *     @var string $sort The sorting attribute
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     *     @var string $organization Filter activities for that particular organization
+     *     @var string $dataset Filter activities for that particular dataset
+     *     @var string $owner Filter activities for that particular user
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/datasets/community_resources/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -62,10 +51,8 @@ class ListCommunityResources extends \Ecourty\DataGouv\DataGouv\Client\Runtime\C
         $optionsResolver->addAllowedTypes('organization', ['string']);
         $optionsResolver->addAllowedTypes('dataset', ['string']);
         $optionsResolver->addAllowedTypes('owner', ['string']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -73,12 +60,11 @@ class ListCommunityResources extends \Ecourty\DataGouv\DataGouv\Client\Runtime\C
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\CommunityResourcePage
      */
@@ -90,7 +76,6 @@ class ListCommunityResources extends \Ecourty\DataGouv\DataGouv\Client\Runtime\C
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\CommunityResourcePage', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

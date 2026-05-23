@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "contacts" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "contacts" tag.
  */
 final class ContactsApi
 {
@@ -24,80 +22,83 @@ final class ContactsApi
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\CreateContactPointBadRequestException
+     *
      */
-    public function createContactPoint(\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
+        public function createContactPoint(\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
     {
         try {
-            return $this->client->createContactPoint($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createContactPoint($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function contactPointRoles(array $headerParameters = []): ?array
+        public function contactPointRoles(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->contactPointRoles($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->contactPointRoles($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $contactPoint
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteContactPointNotFoundException
+     *
      */
-    public function deleteContactPoint(string $contactPoint): null
+        public function deleteContactPoint(string $contactPoint): null
     {
         try {
-            return $this->client->deleteContactPoint($contactPoint, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->deleteContactPoint($contactPoint, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $contactPoint
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\GetContactPointNotFoundException
+     *
      */
-    public function getContactPoint(string $contactPoint, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
+        public function getContactPoint(string $contactPoint, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
     {
         try {
-            return $this->client->getContactPoint($contactPoint, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getContactPoint($contactPoint, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $contactPoint
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateContactPointBadRequestException
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateContactPointNotFoundException
+     *
      */
-    public function updateContactPoint(string $contactPoint, \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
+        public function updateContactPoint(string $contactPoint, \Ecourty\DataGouv\DataGouv\Client\Model\ContactPointWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ContactPointRead
     {
         try {
-            return $this->client->updateContactPoint($contactPoint, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->updateContactPoint($contactPoint, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

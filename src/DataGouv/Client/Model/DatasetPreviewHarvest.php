@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class DatasetPreviewHarvest
@@ -10,10 +8,9 @@ class DatasetPreviewHarvest
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * The reason the dataset has been archived
@@ -93,251 +90,290 @@ class DatasetPreviewHarvest
      * @var string|null
      */
     protected $uri;
-
     /**
      * The reason the dataset has been archived
+     *
+     * @return string|null
      */
     public function getArchived(): ?string
     {
         return $this->archived;
     }
-
     /**
      * The reason the dataset has been archived
+     *
+     * @param string|null $archived
+     *
+     * @return self
      */
     public function setArchived(?string $archived): self
     {
         $this->initialized['archived'] = true;
         $this->archived = $archived;
-
         return $this;
     }
-
     /**
      * The archive date
+     *
+     * @return \DateTime|null
      */
     public function getArchivedAt(): ?\DateTime
     {
         return $this->archivedAt;
     }
-
     /**
      * The archive date
+     *
+     * @param \DateTime|null $archivedAt
+     *
+     * @return self
      */
     public function setArchivedAt(?\DateTime $archivedAt): self
     {
         $this->initialized['archivedAt'] = true;
         $this->archivedAt = $archivedAt;
-
         return $this;
     }
-
     /**
      * Harvest backend used
+     *
+     * @return string|null
      */
     public function getBackend(): ?string
     {
         return $this->backend;
     }
-
     /**
      * Harvest backend used
+     *
+     * @param string|null $backend
+     *
+     * @return self
      */
     public function setBackend(?string $backend): self
     {
         $this->initialized['backend'] = true;
         $this->backend = $backend;
-
         return $this;
     }
-
     /**
      * The dataset harvested creation date
+     *
+     * @return \DateTime|null
      */
     public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
-
     /**
      * The dataset harvested creation date
+     *
+     * @param \DateTime|null $createdAt
+     *
+     * @return self
      */
     public function setCreatedAt(?\DateTime $createdAt): self
     {
         $this->initialized['createdAt'] = true;
         $this->createdAt = $createdAt;
-
         return $this;
     }
-
     /**
      * The dct:identifier property from the harvested dataset
+     *
+     * @return string|null
      */
     public function getDctIdentifier(): ?string
     {
         return $this->dctIdentifier;
     }
-
     /**
      * The dct:identifier property from the harvested dataset
+     *
+     * @param string|null $dctIdentifier
+     *
+     * @return self
      */
     public function setDctIdentifier(?string $dctIdentifier): self
     {
         $this->initialized['dctIdentifier'] = true;
         $this->dctIdentifier = $dctIdentifier;
-
         return $this;
     }
-
     /**
      * The harvested domain
+     *
+     * @return string|null
      */
     public function getDomain(): ?string
     {
         return $this->domain;
     }
-
     /**
      * The harvested domain
+     *
+     * @param string|null $domain
+     *
+     * @return self
      */
     public function setDomain(?string $domain): self
     {
         $this->initialized['domain'] = true;
         $this->domain = $domain;
-
         return $this;
     }
-
     /**
      * The dataset harvested release date
+     *
+     * @return \DateTime|null
      */
     public function getIssuedAt(): ?\DateTime
     {
         return $this->issuedAt;
     }
-
     /**
      * The dataset harvested release date
+     *
+     * @param \DateTime|null $issuedAt
+     *
+     * @return self
      */
     public function setIssuedAt(?\DateTime $issuedAt): self
     {
         $this->initialized['issuedAt'] = true;
         $this->issuedAt = $issuedAt;
-
         return $this;
     }
-
     /**
      * The last harvest date
+     *
+     * @return \DateTime|null
      */
     public function getLastUpdate(): ?\DateTime
     {
         return $this->lastUpdate;
     }
-
     /**
      * The last harvest date
+     *
+     * @param \DateTime|null $lastUpdate
+     *
+     * @return self
      */
     public function setLastUpdate(?\DateTime $lastUpdate): self
     {
         $this->initialized['lastUpdate'] = true;
         $this->lastUpdate = $lastUpdate;
-
         return $this;
     }
-
     /**
      * The dataset harvest last modification date
+     *
+     * @return \DateTime|null
      */
     public function getModifiedAt(): ?\DateTime
     {
         return $this->modifiedAt;
     }
-
     /**
      * The dataset harvest last modification date
+     *
+     * @param \DateTime|null $modifiedAt
+     *
+     * @return self
      */
     public function setModifiedAt(?\DateTime $modifiedAt): self
     {
         $this->initialized['modifiedAt'] = true;
         $this->modifiedAt = $modifiedAt;
-
         return $this;
     }
-
     /**
      * The dataset remote id on the source portal
+     *
+     * @return string|null
      */
     public function getRemoteId(): ?string
     {
         return $this->remoteId;
     }
-
     /**
      * The dataset remote id on the source portal
+     *
+     * @param string|null $remoteId
+     *
+     * @return self
      */
     public function setRemoteId(?string $remoteId): self
     {
         $this->initialized['remoteId'] = true;
         $this->remoteId = $remoteId;
-
         return $this;
     }
-
     /**
      * The dataset remote url
+     *
+     * @return string|null
      */
     public function getRemoteUrl(): ?string
     {
         return $this->remoteUrl;
     }
-
     /**
      * The dataset remote url
+     *
+     * @param string|null $remoteUrl
+     *
+     * @return self
      */
     public function setRemoteUrl(?string $remoteUrl): self
     {
         $this->initialized['remoteUrl'] = true;
         $this->remoteUrl = $remoteUrl;
-
         return $this;
     }
-
     /**
      * The harvester id
+     *
+     * @return string|null
      */
     public function getSourceId(): ?string
     {
         return $this->sourceId;
     }
-
     /**
      * The harvester id
+     *
+     * @param string|null $sourceId
+     *
+     * @return self
      */
     public function setSourceId(?string $sourceId): self
     {
         $this->initialized['sourceId'] = true;
         $this->sourceId = $sourceId;
-
         return $this;
     }
-
     /**
      * The dataset harveted uri
+     *
+     * @return string|null
      */
     public function getUri(): ?string
     {
         return $this->uri;
     }
-
     /**
      * The dataset harveted uri
+     *
+     * @param string|null $uri
+     *
+     * @return self
      */
     public function setUri(?string $uri): self
     {
         $this->initialized['uri'] = true;
         $this->uri = $uri;
-
         return $this;
     }
 }

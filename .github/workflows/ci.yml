@@ -56,9 +56,13 @@ jobs:
 
       - name: Assert generated code is up-to-date
         run: |
-          if ! git diff --quiet src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php; then
+          if ! git diff --quiet \
+            src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+            src/DataServices; then
             echo "❌ Generated code is out of date. Run 'composer generate' locally and commit the result."
-            git diff --stat src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php
+            git diff --stat \
+              src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+              src/DataServices
             exit 1
           fi
           echo "✅ Generated code is up-to-date."

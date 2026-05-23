@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "proconnect" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "proconnect" tag.
  */
 final class ProconnectApi
 {
@@ -23,38 +21,50 @@ final class ProconnectApi
     {
     }
 
-    public function getProconnectAuthApi(): null
+    /**
+     *
+     */
+        public function getProconnectAuthApi(): null
     {
         try {
-            return $this->client->getProconnectAuthApi(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getProconnectAuthApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
-    public function getProconnectLoginApi(): null
+    /**
+     *
+     */
+        public function getProconnectLoginApi(): null
     {
         try {
-            return $this->client->getProconnectLoginApi(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getProconnectLoginApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
-    public function getProconnectLogoutApi(): null
+    /**
+     *
+     */
+        public function getProconnectLogoutApi(): null
     {
         try {
-            return $this->client->getProconnectLogoutApi(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getProconnectLogoutApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
-    public function getProconnectLogoutOAuthApi(): null
+    /**
+     *
+     */
+        public function getProconnectLogoutOAuthApi(): null
     {
         try {
-            return $this->client->getProconnectLogoutOAuthApi(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getProconnectLogoutOAuthApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

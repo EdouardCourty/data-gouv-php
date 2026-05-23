@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class PostWriteNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite();
@@ -52,22 +46,26 @@ class PostWriteNormalizer implements DenormalizerInterface, NormalizerInterface,
         }
         if (\array_key_exists('body_type', $data) && $data['body_type'] !== null) {
             $object->setBodyType($data['body_type']);
-        } elseif (\array_key_exists('body_type', $data) && $data['body_type'] === null) {
+        }
+        elseif (\array_key_exists('body_type', $data) && $data['body_type'] === null) {
             $object->setBodyType(null);
         }
         if (\array_key_exists('content', $data) && $data['content'] !== null) {
             $object->setContent($data['content']);
-        } elseif (\array_key_exists('content', $data) && $data['content'] === null) {
+        }
+        elseif (\array_key_exists('content', $data) && $data['content'] === null) {
             $object->setContent(null);
         }
         if (\array_key_exists('credit_to', $data) && $data['credit_to'] !== null) {
             $object->setCreditTo($data['credit_to']);
-        } elseif (\array_key_exists('credit_to', $data) && $data['credit_to'] === null) {
+        }
+        elseif (\array_key_exists('credit_to', $data) && $data['credit_to'] === null) {
             $object->setCreditTo(null);
         }
         if (\array_key_exists('credit_url', $data) && $data['credit_url'] !== null) {
             $object->setCreditUrl($data['credit_url']);
-        } elseif (\array_key_exists('credit_url', $data) && $data['credit_url'] === null) {
+        }
+        elseif (\array_key_exists('credit_url', $data) && $data['credit_url'] === null) {
             $object->setCreditUrl(null);
         }
         if (\array_key_exists('datasets', $data)) {
@@ -79,17 +77,20 @@ class PostWriteNormalizer implements DenormalizerInterface, NormalizerInterface,
         }
         if (\array_key_exists('headline', $data) && $data['headline'] !== null) {
             $object->setHeadline($data['headline']);
-        } elseif (\array_key_exists('headline', $data) && $data['headline'] === null) {
+        }
+        elseif (\array_key_exists('headline', $data) && $data['headline'] === null) {
             $object->setHeadline(null);
         }
         if (\array_key_exists('image_url', $data) && $data['image_url'] !== null) {
             $object->setImageUrl($data['image_url']);
-        } elseif (\array_key_exists('image_url', $data) && $data['image_url'] === null) {
+        }
+        elseif (\array_key_exists('image_url', $data) && $data['image_url'] === null) {
             $object->setImageUrl(null);
         }
         if (\array_key_exists('kind', $data) && $data['kind'] !== null) {
             $object->setKind($data['kind']);
-        } elseif (\array_key_exists('kind', $data) && $data['kind'] === null) {
+        }
+        elseif (\array_key_exists('kind', $data) && $data['kind'] === null) {
             $object->setKind(null);
         }
         if (\array_key_exists('name', $data)) {
@@ -109,10 +110,8 @@ class PostWriteNormalizer implements DenormalizerInterface, NormalizerInterface,
             }
             $object->setTags($values_3);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -166,10 +165,8 @@ class PostWriteNormalizer implements DenormalizerInterface, NormalizerInterface,
             }
             $dataArray['tags'] = $values_3;
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\PostWrite::class => false];
