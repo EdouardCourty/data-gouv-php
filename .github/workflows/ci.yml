@@ -7,18 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  tests:
-    name: PHP ${{ matrix.php }} - Symfony ${{ matrix.symfony }}
+  ci:
+    name: CI
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php: [ '8.3', '8.4', '8.5' ]
-        symfony: ['7.4.*', '8.0.*' ]
-        exclude:
-          - php: '8.3'
-            symfony: '8.0.*'
 
     steps:
       - name: Checkout code
@@ -27,8 +18,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
-          extensions: pdo, sqlite, pdo_sqlite
+          php-version: '8.4'
           coverage: none
 
       - name: Get Composer cache directory
@@ -43,18 +33,28 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Regenerate client from spec
+        run: composer generate
+
+      - name: Assert generated code is up-to-date
         run: |
-          composer require "symfony/config:${{ matrix.symfony }}" \
-            "symfony/dependency-injection:${{ matrix.symfony }}" \
-            "symfony/phpunit-bridge:${{ matrix.symfony }}" \
-            --no-update --no-interaction
-          composer update --prefer-dist --no-interaction --no-progress
+          if ! git diff --quiet src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php; then
+            echo "❌ Generated code is out of date. Run 'composer generate' locally and commit the result."
+            git diff --stat src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php
+            exit 1
+          fi
+          echo "✅ Generated code is up-to-date."
 
       - name: Run PHPStan
         run: composer phpstan
 
-      - name: Run PHP CS Fixer
+      - name: Run PHP CS Fixer check
         run: composer cs-check
 
-      - name: Run PHPUnit tests
-        run: composer test
+      - name: Run unit tests
+        run: composer test-unit
+
+      - name: Run integration tests
+        run: composer test-integration

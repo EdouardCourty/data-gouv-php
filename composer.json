@@ -1,28 +1,29 @@
 {
-    "name": "ecourty/template-bundle",
-    "description": "A template bundle.",
+    "name": "ecourty/data-gouv-php",
+    "description": "A PHP client library for the data.gouv.fr API.",
     "type": "library",
-    "keywords": [],
+    "keywords": ["data.gouv.fr", "api", "client", "php"],
     "require": {
-        "php": ">=8.3",
-        "symfony/dependency-injection": "^7.0",
-        "symfony/config": "^7.0"
+        "php": ">=8.4",
+        "jane-php/open-api-runtime": "^7.0",
+        "php-http/client-common": "^2.7",
+        "symfony/http-client": "^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.0",
-        "phpstan/phpstan": "^2.1",
         "friendsofphp/php-cs-fixer": "^3.71",
-        "symfony/var-dumper": "^7.2"
+        "jane-php/open-api-2": "^7.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ecourty\\": "src/"
+            "Ecourty\\DataGouv\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ecourty\\Tests\\": "tests/"
+            "Ecourty\\DataGouv\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -33,6 +34,17 @@
         }
     ],
     "scripts": {
+        "generate:patch-spec": "php bin/patch-spec.php",
+        "generate:client": "php vendor/bin/jane-openapi generate",
+        "generate:patch-generated": "php bin/patch-generated.php",
+        "generate:facade": "php bin/generate-facade.php",
+        "generate": [
+            "@generate:patch-spec",
+            "@generate:client",
+            "@generate:patch-generated",
+            "@generate:facade",
+            "@cs-fix"
+        ],
         "test": "phpunit tests",
         "test-unit": "phpunit tests/Unit/",
         "test-functional": "phpunit tests/Functional/",
@@ -48,7 +60,10 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

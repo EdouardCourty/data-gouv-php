@@ -1,0 +1,49 @@
+name: Spec Auto-Update
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    name: Regenerate from spec and open PR if changed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Regenerate from spec
+        run: composer generate
+
+      - name: Check for drift
+        id: diff
+        run: |
+          git diff --quiet src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+            && echo "changed=false" >> $GITHUB_OUTPUT \
+            || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request if spec changed
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: regenerate client from updated data.gouv.fr spec"
+          branch: "chore/spec-update-${{ github.run_id }}"
+          title: "chore: data.gouv.fr API spec has changed — regenerated client"
+          body: |
+            The data.gouv.fr Swagger spec has changed since the last generation.
+
+            This PR was automatically created by the daily spec auto-update workflow.
+            Please review the diff carefully and merge if the changes look correct.
+          labels: "automated,spec-update"
