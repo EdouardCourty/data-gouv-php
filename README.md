@@ -1,4 +1,4 @@
-# data-gouv-php
+# data-gouv-client
 
 [![CI](https://github.com/EdouardCourty/data-gouv-php/actions/workflows/ci.yml/badge.svg)](https://github.com/EdouardCourty/data-gouv-php/actions/workflows/ci.yml)
 
@@ -27,7 +27,7 @@ A typed PHP 8.4 client for the [data.gouv.fr](https://www.data.gouv.fr) API, aut
 ## Installation
 
 ```bash
-composer require ecourty/data-gouv-php
+composer require ecourty/data-gouv-client
 ```
 
 ---
@@ -145,7 +145,7 @@ DATA_GOUV_API_KEY=your-key php examples/authenticated-user.php
 
 ```bash
 git clone https://github.com/EdouardCourty/data-gouv-php
-cd data-gouv-php
+cd data-gouv-client
 composer install
 ```
 

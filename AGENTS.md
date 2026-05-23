@@ -63,7 +63,7 @@ $client = new DataGouvClient(httpClient: $mockHttpClient);
 ## Project breakdown
 
 ```
-ecourty/data-gouv-php
+ecourty/data-gouv-client
 ├── bin/
 │   └── generate-facade.php       # Phase 2 generator
 ├── src/
