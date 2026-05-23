@@ -10,6 +10,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config
     ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
+    ->setUnsupportedPhpVersionAllowed(true)
     ->setFinder($finder)
     ->setUsingCache(false)
     ->setRiskyAllowed(true)

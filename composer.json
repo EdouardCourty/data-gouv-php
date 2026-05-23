@@ -1,19 +1,19 @@
 {
-    "name": "ecourty/data-gouv-php",
+    "name": "ecourty/data-gouv-client",
     "description": "A PHP client library for the data.gouv.fr API.",
     "type": "library",
-    "keywords": ["data.gouv.fr", "api", "client", "php"],
+    "keywords": ["data.gouv.fr", "api", "client", "php", "data-gouv"],
     "require": {
         "php": ">=8.4",
         "jane-php/open-api-runtime": "^7.0",
         "php-http/client-common": "^2.7",
-        "symfony/http-client": "^7.0"
+        "symfony/http-client": "^8.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.71",
         "jane-php/open-api-2": "^7.0",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^12.0"
+        "phpunit/phpunit": "^13.0"
     },
     "license": "MIT",
     "autoload": {
@@ -51,8 +51,8 @@
         "test-integration": "phpunit tests/Integration/",
         "test-fast": "@test-unit",
         "phpstan": "phpstan analyse --memory-limit=-1",
-        "cs-fix": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix . --config .php-cs-fixer.php",
-        "cs-check": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix . --config .php-cs-fixer.php --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix . --config .php-cs-fixer.php",
+        "cs-check": "php-cs-fixer fix . --config .php-cs-fixer.php --dry-run --diff",
         "qa": [
             "@phpstan",
             "@cs-check",
