@@ -37,25 +37,40 @@ class EluNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('nom', $data)) {
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
             unset($data['nom']);
         }
-        if (\array_key_exists('prenoms', $data)) {
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
+        }
+        if (\array_key_exists('prenoms', $data) && $data['prenoms'] !== null) {
             $object->setPrenoms($data['prenoms']);
             unset($data['prenoms']);
         }
-        if (\array_key_exists('annee_de_naissance', $data)) {
+        elseif (\array_key_exists('prenoms', $data) && $data['prenoms'] === null) {
+            $object->setPrenoms(null);
+        }
+        if (\array_key_exists('annee_de_naissance', $data) && $data['annee_de_naissance'] !== null) {
             $object->setAnneeDeNaissance($data['annee_de_naissance']);
             unset($data['annee_de_naissance']);
         }
-        if (\array_key_exists('fonction', $data)) {
+        elseif (\array_key_exists('annee_de_naissance', $data) && $data['annee_de_naissance'] === null) {
+            $object->setAnneeDeNaissance(null);
+        }
+        if (\array_key_exists('fonction', $data) && $data['fonction'] !== null) {
             $object->setFonction($data['fonction']);
             unset($data['fonction']);
         }
-        if (\array_key_exists('sexe', $data)) {
+        elseif (\array_key_exists('fonction', $data) && $data['fonction'] === null) {
+            $object->setFonction(null);
+        }
+        if (\array_key_exists('sexe', $data) && $data['sexe'] !== null) {
             $object->setSexe($data['sexe']);
             unset($data['sexe']);
+        }
+        elseif (\array_key_exists('sexe', $data) && $data['sexe'] === null) {
+            $object->setSexe(null);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -67,19 +82,19 @@ class EluNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
-        if ($data->isInitialized('prenoms') && null !== $data->getPrenoms()) {
+        if ($data->isInitialized('prenoms')) {
             $dataArray['prenoms'] = $data->getPrenoms();
         }
-        if ($data->isInitialized('anneeDeNaissance') && null !== $data->getAnneeDeNaissance()) {
+        if ($data->isInitialized('anneeDeNaissance')) {
             $dataArray['annee_de_naissance'] = $data->getAnneeDeNaissance();
         }
-        if ($data->isInitialized('fonction') && null !== $data->getFonction()) {
+        if ($data->isInitialized('fonction')) {
             $dataArray['fonction'] = $data->getFonction();
         }
-        if ($data->isInitialized('sexe') && null !== $data->getSexe()) {
+        if ($data->isInitialized('sexe')) {
             $dataArray['sexe'] = $data->getSexe();
         }
         foreach ($data as $key => $value) {

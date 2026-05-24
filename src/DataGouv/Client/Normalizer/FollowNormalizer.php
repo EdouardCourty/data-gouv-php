@@ -47,7 +47,7 @@ class FollowNormalizer implements DenormalizerInterface, NormalizerInterface, De
             $object->setId(null);
         }
         if (\array_key_exists('since', $data) && $data['since'] !== null) {
-            $object->setSince(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['since']));
+            $object->setSince((new \DateTime($data['since'])));
         }
         elseif (\array_key_exists('since', $data) && $data['since'] === null) {
             $object->setSince(null);

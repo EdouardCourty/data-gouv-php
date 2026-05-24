@@ -40,13 +40,19 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if (\array_key_exists('est_siege', $data) && \is_int($data['est_siege'])) {
             $data['est_siege'] = (bool) $data['est_siege'];
         }
-        if (\array_key_exists('activite_principale', $data)) {
+        if (\array_key_exists('activite_principale', $data) && $data['activite_principale'] !== null) {
             $object->setActivitePrincipale($data['activite_principale']);
             unset($data['activite_principale']);
         }
-        if (\array_key_exists('activite_principale_naf25', $data)) {
+        elseif (\array_key_exists('activite_principale', $data) && $data['activite_principale'] === null) {
+            $object->setActivitePrincipale(null);
+        }
+        if (\array_key_exists('activite_principale_naf25', $data) && $data['activite_principale_naf25'] !== null) {
             $object->setActivitePrincipaleNaf25($data['activite_principale_naf25']);
             unset($data['activite_principale_naf25']);
+        }
+        elseif (\array_key_exists('activite_principale_naf25', $data) && $data['activite_principale_naf25'] === null) {
+            $object->setActivitePrincipaleNaf25(null);
         }
         if (\array_key_exists('activite_principale_registre_metier', $data) && $data['activite_principale_registre_metier'] !== null) {
             $object->setActivitePrincipaleRegistreMetier($data['activite_principale_registre_metier']);
@@ -62,13 +68,19 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('annee_tranche_effectif_salarie', $data) && $data['annee_tranche_effectif_salarie'] === null) {
             $object->setAnneeTrancheEffectifSalarie(null);
         }
-        if (\array_key_exists('adresse', $data)) {
+        if (\array_key_exists('adresse', $data) && $data['adresse'] !== null) {
             $object->setAdresse($data['adresse']);
             unset($data['adresse']);
         }
-        if (\array_key_exists('caractere_employeur', $data)) {
+        elseif (\array_key_exists('adresse', $data) && $data['adresse'] === null) {
+            $object->setAdresse(null);
+        }
+        if (\array_key_exists('caractere_employeur', $data) && $data['caractere_employeur'] !== null) {
             $object->setCaractereEmployeur($data['caractere_employeur']);
             unset($data['caractere_employeur']);
+        }
+        elseif (\array_key_exists('caractere_employeur', $data) && $data['caractere_employeur'] === null) {
+            $object->setCaractereEmployeur(null);
         }
         if (\array_key_exists('cedex', $data) && $data['cedex'] !== null) {
             $object->setCedex($data['cedex']);
@@ -91,9 +103,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('code_postal', $data) && $data['code_postal'] === null) {
             $object->setCodePostal(null);
         }
-        if (\array_key_exists('commune', $data)) {
+        if (\array_key_exists('commune', $data) && $data['commune'] !== null) {
             $object->setCommune($data['commune']);
             unset($data['commune']);
+        }
+        elseif (\array_key_exists('commune', $data) && $data['commune'] === null) {
+            $object->setCommune(null);
         }
         if (\array_key_exists('complement_adresse', $data) && $data['complement_adresse'] !== null) {
             $object->setComplementAdresse($data['complement_adresse']);
@@ -165,13 +180,19 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('epci', $data) && $data['epci'] === null) {
             $object->setEpci(null);
         }
-        if (\array_key_exists('est_siege', $data)) {
+        if (\array_key_exists('est_siege', $data) && $data['est_siege'] !== null) {
             $object->setEstSiege($data['est_siege']);
             unset($data['est_siege']);
         }
-        if (\array_key_exists('etat_administratif', $data)) {
+        elseif (\array_key_exists('est_siege', $data) && $data['est_siege'] === null) {
+            $object->setEstSiege(null);
+        }
+        if (\array_key_exists('etat_administratif', $data) && $data['etat_administratif'] !== null) {
             $object->setEtatAdministratif($data['etat_administratif']);
             unset($data['etat_administratif']);
+        }
+        elseif (\array_key_exists('etat_administratif', $data) && $data['etat_administratif'] === null) {
+            $object->setEtatAdministratif(null);
         }
         if (\array_key_exists('geo_adresse', $data) && $data['geo_adresse'] !== null) {
             $object->setGeoAdresse($data['geo_adresse']);
@@ -194,9 +215,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('indice_repetition', $data) && $data['indice_repetition'] === null) {
             $object->setIndiceRepetition(null);
         }
-        if (\array_key_exists('latitude', $data)) {
+        if (\array_key_exists('latitude', $data) && $data['latitude'] !== null) {
             $object->setLatitude($data['latitude']);
             unset($data['latitude']);
+        }
+        elseif (\array_key_exists('latitude', $data) && $data['latitude'] === null) {
+            $object->setLatitude(null);
         }
         if (\array_key_exists('libelle_cedex', $data) && $data['libelle_cedex'] !== null) {
             $object->setLibelleCedex($data['libelle_cedex']);
@@ -205,9 +229,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('libelle_cedex', $data) && $data['libelle_cedex'] === null) {
             $object->setLibelleCedex(null);
         }
-        if (\array_key_exists('libelle_commune', $data)) {
+        if (\array_key_exists('libelle_commune', $data) && $data['libelle_commune'] !== null) {
             $object->setLibelleCommune($data['libelle_commune']);
             unset($data['libelle_commune']);
+        }
+        elseif (\array_key_exists('libelle_commune', $data) && $data['libelle_commune'] === null) {
+            $object->setLibelleCommune(null);
         }
         if (\array_key_exists('libelle_commune_etranger', $data) && $data['libelle_commune_etranger'] !== null) {
             $object->setLibelleCommuneEtranger($data['libelle_commune_etranger']);
@@ -223,9 +250,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('libelle_pays_etranger', $data) && $data['libelle_pays_etranger'] === null) {
             $object->setLibellePaysEtranger(null);
         }
-        if (\array_key_exists('libelle_voie', $data)) {
+        if (\array_key_exists('libelle_voie', $data) && $data['libelle_voie'] !== null) {
             $object->setLibelleVoie($data['libelle_voie']);
             unset($data['libelle_voie']);
+        }
+        elseif (\array_key_exists('libelle_voie', $data) && $data['libelle_voie'] === null) {
+            $object->setLibelleVoie(null);
         }
         if (\array_key_exists('liste_enseignes', $data) && $data['liste_enseignes'] !== null) {
             $values = [];
@@ -289,9 +319,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
             $object->setListeUai($values_6);
             unset($data['liste_uai']);
         }
-        if (\array_key_exists('longitude', $data)) {
+        if (\array_key_exists('longitude', $data) && $data['longitude'] !== null) {
             $object->setLongitude($data['longitude']);
             unset($data['longitude']);
+        }
+        elseif (\array_key_exists('longitude', $data) && $data['longitude'] === null) {
+            $object->setLongitude(null);
         }
         if (\array_key_exists('nom_commercial', $data) && $data['nom_commercial'] !== null) {
             $object->setNomCommercial($data['nom_commercial']);
@@ -300,13 +333,19 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('nom_commercial', $data) && $data['nom_commercial'] === null) {
             $object->setNomCommercial(null);
         }
-        if (\array_key_exists('numero_voie', $data)) {
+        if (\array_key_exists('numero_voie', $data) && $data['numero_voie'] !== null) {
             $object->setNumeroVoie($data['numero_voie']);
             unset($data['numero_voie']);
         }
-        if (\array_key_exists('dernier_numero_voie', $data)) {
+        elseif (\array_key_exists('numero_voie', $data) && $data['numero_voie'] === null) {
+            $object->setNumeroVoie(null);
+        }
+        if (\array_key_exists('dernier_numero_voie', $data) && $data['dernier_numero_voie'] !== null) {
             $object->setDernierNumeroVoie($data['dernier_numero_voie']);
             unset($data['dernier_numero_voie']);
+        }
+        elseif (\array_key_exists('dernier_numero_voie', $data) && $data['dernier_numero_voie'] === null) {
+            $object->setDernierNumeroVoie(null);
         }
         if (\array_key_exists('region', $data) && $data['region'] !== null) {
             $object->setRegion($data['region']);
@@ -315,13 +354,19 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('region', $data) && $data['region'] === null) {
             $object->setRegion(null);
         }
-        if (\array_key_exists('siret', $data)) {
+        if (\array_key_exists('siret', $data) && $data['siret'] !== null) {
             $object->setSiret($data['siret']);
             unset($data['siret']);
         }
-        if (\array_key_exists('statut_diffusion_etablissement', $data)) {
+        elseif (\array_key_exists('siret', $data) && $data['siret'] === null) {
+            $object->setSiret(null);
+        }
+        if (\array_key_exists('statut_diffusion_etablissement', $data) && $data['statut_diffusion_etablissement'] !== null) {
             $object->setStatutDiffusionEtablissement($data['statut_diffusion_etablissement']);
             unset($data['statut_diffusion_etablissement']);
+        }
+        elseif (\array_key_exists('statut_diffusion_etablissement', $data) && $data['statut_diffusion_etablissement'] === null) {
+            $object->setStatutDiffusionEtablissement(null);
         }
         if (\array_key_exists('tranche_effectif_salarie', $data) && $data['tranche_effectif_salarie'] !== null) {
             $object->setTrancheEffectifSalarie($data['tranche_effectif_salarie']);
@@ -330,9 +375,12 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         elseif (\array_key_exists('tranche_effectif_salarie', $data) && $data['tranche_effectif_salarie'] === null) {
             $object->setTrancheEffectifSalarie(null);
         }
-        if (\array_key_exists('type_voie', $data)) {
+        if (\array_key_exists('type_voie', $data) && $data['type_voie'] !== null) {
             $object->setTypeVoie($data['type_voie']);
             unset($data['type_voie']);
+        }
+        elseif (\array_key_exists('type_voie', $data) && $data['type_voie'] === null) {
+            $object->setTypeVoie(null);
         }
         foreach ($data as $key => $value_7) {
             if (preg_match('/.*/', (string) $key)) {
@@ -344,10 +392,10 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('activitePrincipale') && null !== $data->getActivitePrincipale()) {
+        if ($data->isInitialized('activitePrincipale')) {
             $dataArray['activite_principale'] = $data->getActivitePrincipale();
         }
-        if ($data->isInitialized('activitePrincipaleNaf25') && null !== $data->getActivitePrincipaleNaf25()) {
+        if ($data->isInitialized('activitePrincipaleNaf25')) {
             $dataArray['activite_principale_naf25'] = $data->getActivitePrincipaleNaf25();
         }
         if ($data->isInitialized('activitePrincipaleRegistreMetier')) {
@@ -356,10 +404,10 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if ($data->isInitialized('anneeTrancheEffectifSalarie')) {
             $dataArray['annee_tranche_effectif_salarie'] = $data->getAnneeTrancheEffectifSalarie();
         }
-        if ($data->isInitialized('adresse') && null !== $data->getAdresse()) {
+        if ($data->isInitialized('adresse')) {
             $dataArray['adresse'] = $data->getAdresse();
         }
-        if ($data->isInitialized('caractereEmployeur') && null !== $data->getCaractereEmployeur()) {
+        if ($data->isInitialized('caractereEmployeur')) {
             $dataArray['caractere_employeur'] = $data->getCaractereEmployeur();
         }
         if ($data->isInitialized('cedex')) {
@@ -371,7 +419,7 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if ($data->isInitialized('codePostal')) {
             $dataArray['code_postal'] = $data->getCodePostal();
         }
-        if ($data->isInitialized('commune') && null !== $data->getCommune()) {
+        if ($data->isInitialized('commune')) {
             $dataArray['commune'] = $data->getCommune();
         }
         if ($data->isInitialized('complementAdresse')) {
@@ -404,10 +452,10 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if ($data->isInitialized('epci')) {
             $dataArray['epci'] = $data->getEpci();
         }
-        if ($data->isInitialized('estSiege') && null !== $data->getEstSiege()) {
+        if ($data->isInitialized('estSiege')) {
             $dataArray['est_siege'] = $data->getEstSiege();
         }
-        if ($data->isInitialized('etatAdministratif') && null !== $data->getEtatAdministratif()) {
+        if ($data->isInitialized('etatAdministratif')) {
             $dataArray['etat_administratif'] = $data->getEtatAdministratif();
         }
         if ($data->isInitialized('geoAdresse')) {
@@ -419,13 +467,13 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if ($data->isInitialized('indiceRepetition')) {
             $dataArray['indice_repetition'] = $data->getIndiceRepetition();
         }
-        if ($data->isInitialized('latitude') && null !== $data->getLatitude()) {
+        if ($data->isInitialized('latitude')) {
             $dataArray['latitude'] = $data->getLatitude();
         }
         if ($data->isInitialized('libelleCedex')) {
             $dataArray['libelle_cedex'] = $data->getLibelleCedex();
         }
-        if ($data->isInitialized('libelleCommune') && null !== $data->getLibelleCommune()) {
+        if ($data->isInitialized('libelleCommune')) {
             $dataArray['libelle_commune'] = $data->getLibelleCommune();
         }
         if ($data->isInitialized('libelleCommuneEtranger')) {
@@ -434,7 +482,7 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
         if ($data->isInitialized('libellePaysEtranger')) {
             $dataArray['libelle_pays_etranger'] = $data->getLibellePaysEtranger();
         }
-        if ($data->isInitialized('libelleVoie') && null !== $data->getLibelleVoie()) {
+        if ($data->isInitialized('libelleVoie')) {
             $dataArray['libelle_voie'] = $data->getLibelleVoie();
         }
         if ($data->isInitialized('listeEnseignes')) {
@@ -486,31 +534,31 @@ class SiegeNormalizer implements DenormalizerInterface, NormalizerInterface, Den
             }
             $dataArray['liste_uai'] = $values_6;
         }
-        if ($data->isInitialized('longitude') && null !== $data->getLongitude()) {
+        if ($data->isInitialized('longitude')) {
             $dataArray['longitude'] = $data->getLongitude();
         }
         if ($data->isInitialized('nomCommercial')) {
             $dataArray['nom_commercial'] = $data->getNomCommercial();
         }
-        if ($data->isInitialized('numeroVoie') && null !== $data->getNumeroVoie()) {
+        if ($data->isInitialized('numeroVoie')) {
             $dataArray['numero_voie'] = $data->getNumeroVoie();
         }
-        if ($data->isInitialized('dernierNumeroVoie') && null !== $data->getDernierNumeroVoie()) {
+        if ($data->isInitialized('dernierNumeroVoie')) {
             $dataArray['dernier_numero_voie'] = $data->getDernierNumeroVoie();
         }
         if ($data->isInitialized('region')) {
             $dataArray['region'] = $data->getRegion();
         }
-        if ($data->isInitialized('siret') && null !== $data->getSiret()) {
+        if ($data->isInitialized('siret')) {
             $dataArray['siret'] = $data->getSiret();
         }
-        if ($data->isInitialized('statutDiffusionEtablissement') && null !== $data->getStatutDiffusionEtablissement()) {
+        if ($data->isInitialized('statutDiffusionEtablissement')) {
             $dataArray['statut_diffusion_etablissement'] = $data->getStatutDiffusionEtablissement();
         }
         if ($data->isInitialized('trancheEffectifSalarie')) {
             $dataArray['tranche_effectif_salarie'] = $data->getTrancheEffectifSalarie();
         }
-        if ($data->isInitialized('typeVoie') && null !== $data->getTypeVoie()) {
+        if ($data->isInitialized('typeVoie')) {
             $dataArray['type_voie'] = $data->getTypeVoie();
         }
         foreach ($data as $key => $value_7) {

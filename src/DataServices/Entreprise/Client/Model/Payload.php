@@ -17,21 +17,21 @@ class Payload extends \ArrayObject
      */
     protected $results;
     /**
-     * @var int
+     * @var int|null
      */
     protected $totalResults;
     /**
-     * @var int
+     * @var int|null
      */
     protected $page = 1;
     /**
      * Nombre de résultats par page, limité à 25.
      *
-     * @var int
+     * @var int|null
      */
     protected $perPage = 10;
     /**
-     * @var int
+     * @var int|null
      */
     protected $totalPages;
     /**
@@ -53,36 +53,36 @@ class Payload extends \ArrayObject
         return $this;
     }
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalResults(): int
+    public function getTotalResults(): ?int
     {
         return $this->totalResults;
     }
     /**
-     * @param int $totalResults
+     * @param int|null $totalResults
      *
      * @return self
      */
-    public function setTotalResults(int $totalResults): self
+    public function setTotalResults(?int $totalResults): self
     {
         $this->initialized['totalResults'] = true;
         $this->totalResults = $totalResults;
         return $this;
     }
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPage(): int
+    public function getPage(): ?int
     {
         return $this->page;
     }
     /**
-     * @param int $page
+     * @param int|null $page
      *
      * @return self
      */
-    public function setPage(int $page): self
+    public function setPage(?int $page): self
     {
         $this->initialized['page'] = true;
         $this->page = $page;
@@ -91,38 +91,38 @@ class Payload extends \ArrayObject
     /**
      * Nombre de résultats par page, limité à 25.
      *
-     * @return int
+     * @return int|null
      */
-    public function getPerPage(): int
+    public function getPerPage(): ?int
     {
         return $this->perPage;
     }
     /**
      * Nombre de résultats par page, limité à 25.
      *
-     * @param int $perPage
+     * @param int|null $perPage
      *
      * @return self
      */
-    public function setPerPage(int $perPage): self
+    public function setPerPage(?int $perPage): self
     {
         $this->initialized['perPage'] = true;
         $this->perPage = $perPage;
         return $this;
     }
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalPages(): int
+    public function getTotalPages(): ?int
     {
         return $this->totalPages;
     }
     /**
-     * @param int $totalPages
+     * @param int|null $totalPages
      *
      * @return self
      */
-    public function setTotalPages(int $totalPages): self
+    public function setTotalPages(?int $totalPages): self
     {
         $this->initialized['totalPages'] = true;
         $this->totalPages = $totalPages;

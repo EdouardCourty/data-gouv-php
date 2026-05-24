@@ -63,7 +63,7 @@ final class ReportsApi
     /**
      *
      */
-        public function listReportsReasons(): null
+        public function listReportsReasons(): mixed
     {
         try {
             return $this->client->listReportsReasons(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

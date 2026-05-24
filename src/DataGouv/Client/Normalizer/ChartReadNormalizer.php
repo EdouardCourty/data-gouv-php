@@ -41,10 +41,10 @@ class ChartReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $data['private'] = (bool) $data['private'];
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('deleted_at', $data) && $data['deleted_at'] !== null) {
-            $object->setDeletedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted_at']));
+            $object->setDeletedAt((new \DateTime($data['deleted_at'])));
         }
         elseif (\array_key_exists('deleted_at', $data) && $data['deleted_at'] === null) {
             $object->setDeletedAt(null);
@@ -59,7 +59,7 @@ class ChartReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $object->setId($data['id']);
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('metrics', $data)) {
             $object->setMetrics($data['metrics']);

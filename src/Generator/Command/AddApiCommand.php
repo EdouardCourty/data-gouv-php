@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\Generator\Command;
 
+use Ecourty\DataGouv\Generator\ApiConfigRegistry;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -90,6 +91,14 @@ final class AddApiCommand extends Command
 
         if (str_contains($registryContent, "'{$name}' =>")) {
             $io->error("API '{$name}' is already registered.");
+
+            return Command::FAILURE;
+        }
+
+        $existingUrls = ApiConfigRegistry::specUrls();
+        $conflictingApi = array_search($specUrl, $existingUrls, true);
+        if ($conflictingApi !== false) {
+            $io->error("Spec URL '{$specUrl}' is already registered for API '{$conflictingApi}'.");
 
             return Command::FAILURE;
         }
@@ -199,8 +208,10 @@ final class AddApiCommand extends Command
         $docsDir = "{$root}/docs";
         $docsFile = "{$docsDir}/{$name}.md";
 
-        if (!is_dir($docsDir)) {
-            mkdir($docsDir, 0755, true);
+        if (!is_dir($docsDir) && !mkdir($docsDir, 0755, true)) {
+            $io->error("Could not create directory {$docsDir}");
+
+            return Command::FAILURE;
         }
 
         if (file_exists($docsFile)) {

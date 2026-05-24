@@ -50,7 +50,7 @@ class MemberReadNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setRole(null);
         }
         if (\array_key_exists('since', $data)) {
-            $object->setSince(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['since']));
+            $object->setSince((new \DateTime($data['since'])));
         }
         if (\array_key_exists('user', $data)) {
             $object->setUser($data['user']);

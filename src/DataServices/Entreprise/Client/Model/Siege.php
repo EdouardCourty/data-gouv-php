@@ -15,13 +15,13 @@ class Siege extends \ArrayObject
     /**
      * Activité principale de l'établissement (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $activitePrincipale;
     /**
      * Activité principale de l'établissement selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @var string
+     * @var string|null
      */
     protected $activitePrincipaleNaf25;
     /**
@@ -39,13 +39,13 @@ class Siege extends \ArrayObject
     /**
      * Champ construit depuis les champs d'adresse de la base SIRENE : *complement adresse + numéro voie + indice repetition + type voie + libelle voie + distribution spéciale + (code postal + libelle commune | cedex + libelle cedex) + libelle commune étranger + libelle pays étranger*
      *
-     * @var string
+     * @var string|null
      */
     protected $adresse;
     /**
      * Caractère employeur de l'établissement (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $caractereEmployeur;
     /**
@@ -69,7 +69,7 @@ class Siege extends \ArrayObject
     /**
      * Le code géographique de la commune de localisation de l'établissement, hors adresse à l'étranger (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $commune;
     /**
@@ -135,13 +135,13 @@ class Siege extends \ArrayObject
     /**
      * L'établissement est le siège de l'unité légale.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $estSiege;
     /**
      * État administratif de l'établissement (A : Actif, F : Fermé) (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $etatAdministratif;
     /**
@@ -165,7 +165,7 @@ class Siege extends \ArrayObject
     /**
      * Latitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $latitude;
     /**
@@ -177,7 +177,7 @@ class Siege extends \ArrayObject
     /**
      * Libellé de la commune (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $libelleCommune;
     /**
@@ -195,7 +195,7 @@ class Siege extends \ArrayObject
     /**
      * Libellé de la voie (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $libelleVoie;
     /**
@@ -243,7 +243,7 @@ class Siege extends \ArrayObject
     /**
      * Longitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $longitude;
     /**
@@ -255,13 +255,13 @@ class Siege extends \ArrayObject
     /**
      * Numéro dans la voie (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $numeroVoie;
     /**
      * Dernier numéro de l'adresse lorsque que l'adresse est une plage de numéro. Par exemple "9-10". (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $dernierNumeroVoie;
     /**
@@ -273,13 +273,13 @@ class Siege extends \ArrayObject
     /**
      * le numéro unique de l'établissement.
      *
-     * @var string
+     * @var string|null
      */
     protected $siret;
     /**
      * Statut de diffusion de l'établissement. Toutes les établissements diffusibles ont le statut de diffusion à "O". Les établissements ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $statutDiffusionEtablissement;
     /**
@@ -291,26 +291,26 @@ class Siege extends \ArrayObject
     /**
      * Type de voie de l'adresse (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $typeVoie;
     /**
      * Activité principale de l'établissement (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getActivitePrincipale(): string
+    public function getActivitePrincipale(): ?string
     {
         return $this->activitePrincipale;
     }
     /**
      * Activité principale de l'établissement (source : base SIRENE).
      *
-     * @param string $activitePrincipale
+     * @param string|null $activitePrincipale
      *
      * @return self
      */
-    public function setActivitePrincipale(string $activitePrincipale): self
+    public function setActivitePrincipale(?string $activitePrincipale): self
     {
         $this->initialized['activitePrincipale'] = true;
         $this->activitePrincipale = $activitePrincipale;
@@ -319,20 +319,20 @@ class Siege extends \ArrayObject
     /**
      * Activité principale de l'établissement selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @return string
+     * @return string|null
      */
-    public function getActivitePrincipaleNaf25(): string
+    public function getActivitePrincipaleNaf25(): ?string
     {
         return $this->activitePrincipaleNaf25;
     }
     /**
      * Activité principale de l'établissement selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @param string $activitePrincipaleNaf25
+     * @param string|null $activitePrincipaleNaf25
      *
      * @return self
      */
-    public function setActivitePrincipaleNaf25(string $activitePrincipaleNaf25): self
+    public function setActivitePrincipaleNaf25(?string $activitePrincipaleNaf25): self
     {
         $this->initialized['activitePrincipaleNaf25'] = true;
         $this->activitePrincipaleNaf25 = $activitePrincipaleNaf25;
@@ -385,20 +385,20 @@ class Siege extends \ArrayObject
     /**
      * Champ construit depuis les champs d'adresse de la base SIRENE : *complement adresse + numéro voie + indice repetition + type voie + libelle voie + distribution spéciale + (code postal + libelle commune | cedex + libelle cedex) + libelle commune étranger + libelle pays étranger*
      *
-     * @return string
+     * @return string|null
      */
-    public function getAdresse(): string
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }
     /**
      * Champ construit depuis les champs d'adresse de la base SIRENE : *complement adresse + numéro voie + indice repetition + type voie + libelle voie + distribution spéciale + (code postal + libelle commune | cedex + libelle cedex) + libelle commune étranger + libelle pays étranger*
      *
-     * @param string $adresse
+     * @param string|null $adresse
      *
      * @return self
      */
-    public function setAdresse(string $adresse): self
+    public function setAdresse(?string $adresse): self
     {
         $this->initialized['adresse'] = true;
         $this->adresse = $adresse;
@@ -407,20 +407,20 @@ class Siege extends \ArrayObject
     /**
      * Caractère employeur de l'établissement (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getCaractereEmployeur(): string
+    public function getCaractereEmployeur(): ?string
     {
         return $this->caractereEmployeur;
     }
     /**
      * Caractère employeur de l'établissement (source : base SIRENE).
      *
-     * @param string $caractereEmployeur
+     * @param string|null $caractereEmployeur
      *
      * @return self
      */
-    public function setCaractereEmployeur(string $caractereEmployeur): self
+    public function setCaractereEmployeur(?string $caractereEmployeur): self
     {
         $this->initialized['caractereEmployeur'] = true;
         $this->caractereEmployeur = $caractereEmployeur;
@@ -495,20 +495,20 @@ class Siege extends \ArrayObject
     /**
      * Le code géographique de la commune de localisation de l'établissement, hors adresse à l'étranger (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getCommune(): string
+    public function getCommune(): ?string
     {
         return $this->commune;
     }
     /**
      * Le code géographique de la commune de localisation de l'établissement, hors adresse à l'étranger (source : base SIRENE).
      *
-     * @param string $commune
+     * @param string|null $commune
      *
      * @return self
      */
-    public function setCommune(string $commune): self
+    public function setCommune(?string $commune): self
     {
         $this->initialized['commune'] = true;
         $this->commune = $commune;
@@ -737,20 +737,20 @@ class Siege extends \ArrayObject
     /**
      * L'établissement est le siège de l'unité légale.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getEstSiege(): bool
+    public function getEstSiege(): ?bool
     {
         return $this->estSiege;
     }
     /**
      * L'établissement est le siège de l'unité légale.
      *
-     * @param bool $estSiege
+     * @param bool|null $estSiege
      *
      * @return self
      */
-    public function setEstSiege(bool $estSiege): self
+    public function setEstSiege(?bool $estSiege): self
     {
         $this->initialized['estSiege'] = true;
         $this->estSiege = $estSiege;
@@ -759,20 +759,20 @@ class Siege extends \ArrayObject
     /**
      * État administratif de l'établissement (A : Actif, F : Fermé) (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getEtatAdministratif(): string
+    public function getEtatAdministratif(): ?string
     {
         return $this->etatAdministratif;
     }
     /**
      * État administratif de l'établissement (A : Actif, F : Fermé) (source : base SIRENE).
      *
-     * @param string $etatAdministratif
+     * @param string|null $etatAdministratif
      *
      * @return self
      */
-    public function setEtatAdministratif(string $etatAdministratif): self
+    public function setEtatAdministratif(?string $etatAdministratif): self
     {
         $this->initialized['etatAdministratif'] = true;
         $this->etatAdministratif = $etatAdministratif;
@@ -847,20 +847,20 @@ class Siege extends \ArrayObject
     /**
      * Latitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getLatitude(): string
+    public function getLatitude(): ?string
     {
         return $this->latitude;
     }
     /**
      * Latitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @param string $latitude
+     * @param string|null $latitude
      *
      * @return self
      */
-    public function setLatitude(string $latitude): self
+    public function setLatitude(?string $latitude): self
     {
         $this->initialized['latitude'] = true;
         $this->latitude = $latitude;
@@ -891,20 +891,20 @@ class Siege extends \ArrayObject
     /**
      * Libellé de la commune (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getLibelleCommune(): string
+    public function getLibelleCommune(): ?string
     {
         return $this->libelleCommune;
     }
     /**
      * Libellé de la commune (source : base SIRENE).
      *
-     * @param string $libelleCommune
+     * @param string|null $libelleCommune
      *
      * @return self
      */
-    public function setLibelleCommune(string $libelleCommune): self
+    public function setLibelleCommune(?string $libelleCommune): self
     {
         $this->initialized['libelleCommune'] = true;
         $this->libelleCommune = $libelleCommune;
@@ -957,20 +957,20 @@ class Siege extends \ArrayObject
     /**
      * Libellé de la voie (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getLibelleVoie(): string
+    public function getLibelleVoie(): ?string
     {
         return $this->libelleVoie;
     }
     /**
      * Libellé de la voie (source : base SIRENE).
      *
-     * @param string $libelleVoie
+     * @param string|null $libelleVoie
      *
      * @return self
      */
-    public function setLibelleVoie(string $libelleVoie): self
+    public function setLibelleVoie(?string $libelleVoie): self
     {
         $this->initialized['libelleVoie'] = true;
         $this->libelleVoie = $libelleVoie;
@@ -1133,20 +1133,20 @@ class Siege extends \ArrayObject
     /**
      * Longitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getLongitude(): string
+    public function getLongitude(): ?string
     {
         return $this->longitude;
     }
     /**
      * Longitude de l'établissement (source : la majorité des SIRET utilisent le géocodage provenant de la base SIRENE géocodée par l’INSEE pour les études statistiques, à l’exception des entreprises créées au cours des derniers mois, pour lesquelles la géolocalisation est directement extraite de la base SIRENE).
      *
-     * @param string $longitude
+     * @param string|null $longitude
      *
      * @return self
      */
-    public function setLongitude(string $longitude): self
+    public function setLongitude(?string $longitude): self
     {
         $this->initialized['longitude'] = true;
         $this->longitude = $longitude;
@@ -1177,20 +1177,20 @@ class Siege extends \ArrayObject
     /**
      * Numéro dans la voie (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getNumeroVoie(): string
+    public function getNumeroVoie(): ?string
     {
         return $this->numeroVoie;
     }
     /**
      * Numéro dans la voie (source : base SIRENE).
      *
-     * @param string $numeroVoie
+     * @param string|null $numeroVoie
      *
      * @return self
      */
-    public function setNumeroVoie(string $numeroVoie): self
+    public function setNumeroVoie(?string $numeroVoie): self
     {
         $this->initialized['numeroVoie'] = true;
         $this->numeroVoie = $numeroVoie;
@@ -1199,20 +1199,20 @@ class Siege extends \ArrayObject
     /**
      * Dernier numéro de l'adresse lorsque que l'adresse est une plage de numéro. Par exemple "9-10". (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getDernierNumeroVoie(): string
+    public function getDernierNumeroVoie(): ?string
     {
         return $this->dernierNumeroVoie;
     }
     /**
      * Dernier numéro de l'adresse lorsque que l'adresse est une plage de numéro. Par exemple "9-10". (source : base SIRENE).
      *
-     * @param string $dernierNumeroVoie
+     * @param string|null $dernierNumeroVoie
      *
      * @return self
      */
-    public function setDernierNumeroVoie(string $dernierNumeroVoie): self
+    public function setDernierNumeroVoie(?string $dernierNumeroVoie): self
     {
         $this->initialized['dernierNumeroVoie'] = true;
         $this->dernierNumeroVoie = $dernierNumeroVoie;
@@ -1243,20 +1243,20 @@ class Siege extends \ArrayObject
     /**
      * le numéro unique de l'établissement.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSiret(): string
+    public function getSiret(): ?string
     {
         return $this->siret;
     }
     /**
      * le numéro unique de l'établissement.
      *
-     * @param string $siret
+     * @param string|null $siret
      *
      * @return self
      */
-    public function setSiret(string $siret): self
+    public function setSiret(?string $siret): self
     {
         $this->initialized['siret'] = true;
         $this->siret = $siret;
@@ -1265,20 +1265,20 @@ class Siege extends \ArrayObject
     /**
      * Statut de diffusion de l'établissement. Toutes les établissements diffusibles ont le statut de diffusion à "O". Les établissements ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getStatutDiffusionEtablissement(): string
+    public function getStatutDiffusionEtablissement(): ?string
     {
         return $this->statutDiffusionEtablissement;
     }
     /**
      * Statut de diffusion de l'établissement. Toutes les établissements diffusibles ont le statut de diffusion à "O". Les établissements ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @param string $statutDiffusionEtablissement
+     * @param string|null $statutDiffusionEtablissement
      *
      * @return self
      */
-    public function setStatutDiffusionEtablissement(string $statutDiffusionEtablissement): self
+    public function setStatutDiffusionEtablissement(?string $statutDiffusionEtablissement): self
     {
         $this->initialized['statutDiffusionEtablissement'] = true;
         $this->statutDiffusionEtablissement = $statutDiffusionEtablissement;
@@ -1309,20 +1309,20 @@ class Siege extends \ArrayObject
     /**
      * Type de voie de l'adresse (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getTypeVoie(): string
+    public function getTypeVoie(): ?string
     {
         return $this->typeVoie;
     }
     /**
      * Type de voie de l'adresse (source : base SIRENE).
      *
-     * @param string $typeVoie
+     * @param string|null $typeVoie
      *
      * @return self
      */
-    public function setTypeVoie(string $typeVoie): self
+    public function setTypeVoie(?string $typeVoie): self
     {
         $this->initialized['typeVoie'] = true;
         $this->typeVoie = $typeVoie;

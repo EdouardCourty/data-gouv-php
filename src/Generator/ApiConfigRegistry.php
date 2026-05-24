@@ -12,6 +12,7 @@ namespace Ecourty\DataGouv\Generator;
  */
 final class ApiConfigRegistry
 {
+    private const string DATAGOUV_SPEC_URL = 'https://www.data.gouv.fr/api/1/swagger.json';
     private const string SIRENE_SPEC_URL = 'https://api-apimanager.insee.fr/portal/environments/DEFAULT/apis/2ba0e549-5587-3ef1-9082-99cd865de66f/pages/6548510e-c3e1-3099-be96-6edf02870699/content';
     private const string ENTREPRISE_SPEC_URL = 'https://recherche-entreprises.api.gouv.fr/openapi.json';
     private const string GEOPLATEFORME_SPEC_URL = 'https://data.geopf.fr/geocodage/openapi.yaml';
@@ -27,7 +28,7 @@ final class ApiConfigRegistry
         return match ($api) {
             'datagouv' => new ApiConfig(
                 name: 'datagouv',
-                specLocalPath: self::root() . '/specs/swagger.patched.json',
+                specLocalPath: self::root() . '/specs/datagouv.spec.json',
                 libNamespace: 'Ecourty\\DataGouv\\DataGouv',
                 baseUrl: 'https://www.data.gouv.fr/api/1',
                 auth: AuthConfig::apiKeyHeader('X-API-KEY'),
@@ -84,14 +85,14 @@ final class ApiConfigRegistry
             'calendrierscolaire' => new ApiConfig(
                 name: 'calendrierscolaire',
                 specLocalPath: self::root() . '/specs/calendrierscolaire.spec.json',
-                libNamespace: 'Ecourty\DataGouv\DataServices\CalendrierScolaire',
+                libNamespace: 'Ecourty\\DataGouv\\DataServices\\CalendrierScolaire',
                 baseUrl: 'https://data.education.gouv.fr/api/v2',
                 auth: AuthConfig::none(),
             ),
             'joursferies' => new ApiConfig(
                 name: 'joursferies',
                 specLocalPath: self::root() . '/specs/joursferies.spec.json',
-                libNamespace: 'Ecourty\DataGouv\DataServices\JoursFeries',
+                libNamespace: 'Ecourty\\DataGouv\\DataServices\\JoursFeries',
                 baseUrl: 'https://calendrier.api.gouv.fr/jours-feries',
                 auth: AuthConfig::none(),
             ),
@@ -111,6 +112,7 @@ final class ApiConfigRegistry
     public static function specUrls(): array
     {
         return [
+            'datagouv' => self::DATAGOUV_SPEC_URL,
             'sirene' => self::SIRENE_SPEC_URL,
             'entreprise' => self::ENTREPRISE_SPEC_URL,
             'geoplateforme' => self::GEOPLATEFORME_SPEC_URL,

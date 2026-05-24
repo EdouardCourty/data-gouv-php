@@ -56,10 +56,10 @@ class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterf
             $object->setConfig($data['config']);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);

@@ -75,7 +75,7 @@ class JobNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
             $object->setKwargs($data['kwargs']);
         }
         if (\array_key_exists('last_run_at', $data) && $data['last_run_at'] !== null) {
-            $object->setLastRunAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_run_at']));
+            $object->setLastRunAt((new \DateTime($data['last_run_at'])));
         }
         elseif (\array_key_exists('last_run_at', $data) && $data['last_run_at'] === null) {
             $object->setLastRunAt(null);

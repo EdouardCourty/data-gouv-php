@@ -16,9 +16,7 @@ use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * Main entry point for the Info Financière API (données budgétaires).
- *
- * @see https://www.info-financiere.gouv.fr
+ * @see https://www.info-financiere.gouv.fr/api/explore/v2.0
  */
 final class InfoFinanciereClient
 {
@@ -46,8 +44,11 @@ final class InfoFinanciereClient
 
         $plugins = [
             new AddHostPlugin($uri),
-            new AddPathPlugin($uri),
         ];
+
+        if ($uri->getPath() !== '' && $uri->getPath() !== '/') {
+            $plugins[] = new AddPathPlugin($uri);
+        }
 
         if ($apiKey !== null) {
             $plugins[] = new QueryDefaultsPlugin([self::AUTH_QUERY_PARAM => $apiKey]);
@@ -55,5 +56,13 @@ final class InfoFinanciereClient
         /** @var Client $janeClient */
         $janeClient = Client::create(new PluginClient($httpClient, $plugins));
         $this->janeClient = $janeClient;
+    }
+
+    /**
+     * Returns the underlying Jane-generated client for advanced usage (e.g. FETCH_RESPONSE).
+     */
+    public function getClient(): Client
+    {
+        return $this->janeClient;
     }
 }

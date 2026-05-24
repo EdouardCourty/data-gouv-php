@@ -16,12 +16,19 @@ final class SwaggerSpecParser
      */
     public function parseOperationTags(ApiConfig $config): array
     {
-        $content = @file_get_contents($config->specLocalPath);
-        if ($content === false) {
+        if (!file_exists($config->specLocalPath)) {
             throw new \RuntimeException(\sprintf(
-                'Could not read spec file: %s — run composer generate:%s first.',
+                'Spec file not found: %s — run composer generate:%s first.',
                 $config->specLocalPath,
                 $config->name,
+            ));
+        }
+
+        $content = file_get_contents($config->specLocalPath);
+        if ($content === false) {
+            throw new \RuntimeException(\sprintf(
+                'Could not read spec file (check permissions): %s',
+                $config->specLocalPath,
             ));
         }
 

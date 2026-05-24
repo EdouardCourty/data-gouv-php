@@ -44,10 +44,10 @@ final class EtablissementApi
      * @throws \Ecourty\DataGouv\DataServices\Sirene\Client\Exception\FindByGetEtablissementServiceUnavailableException
      *
      */
-        public function findByGetEtablissement(array $queryParameters = [], array $accept = []): null
+        public function findByGetEtablissement(array $queryParameters = [], array $accept = []): mixed
     {
         try {
-            return $this->client->findByGetEtablissement($queryParameters, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findByGetEtablissement($queryParameters, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
@@ -66,10 +66,10 @@ final class EtablissementApi
      * @throws \Ecourty\DataGouv\DataServices\Sirene\Client\Exception\FindByPostEtablissementServiceUnavailableException
      *
      */
-        public function findByPostEtablissement(?\Ecourty\DataGouv\DataServices\Sirene\Client\Model\EtablissementPostMultiCriteres $requestBody = null, array $accept = []): null
+        public function findByPostEtablissement(?\Ecourty\DataGouv\DataServices\Sirene\Client\Model\EtablissementPostMultiCriteres $requestBody = null, array $accept = []): mixed
     {
         try {
-            return $this->client->findByPostEtablissement($requestBody, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findByPostEtablissement($requestBody, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
@@ -120,10 +120,10 @@ final class EtablissementApi
      * @throws \Ecourty\DataGouv\DataServices\Sirene\Client\Exception\FindLienSuccessionServiceUnavailableException
      *
      */
-        public function findLienSuccession(array $queryParameters = [], array $accept = []): null
+        public function findLienSuccession(array $queryParameters = [], array $accept = []): mixed
     {
         try {
-            return $this->client->findLienSuccession($queryParameters, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findLienSuccession($queryParameters, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }

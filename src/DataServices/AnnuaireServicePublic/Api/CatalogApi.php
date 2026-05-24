@@ -108,7 +108,7 @@ final class CatalogApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetDatasetsInternalServerErrorException
     *
     */
-        public function getDatasets(array $queryParameters = []): null
+        public function getDatasets(array $queryParameters = []): mixed
     {
         try {
             return $this->client->getDatasets($queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -122,7 +122,7 @@ final class CatalogApi
      * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ListExportFormatsInternalServerErrorException
      *
      */
-        public function listExportFormats(): null
+        public function listExportFormats(): mixed
     {
         try {
             return $this->client->listExportFormats(\Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -205,7 +205,7 @@ final class CatalogApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportDatasetsInternalServerErrorException
     *
     */
-        public function exportDatasets(string $format, array $queryParameters = []): null
+        public function exportDatasets(string $format, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportDatasets($format, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -228,7 +228,7 @@ final class CatalogApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportCatalogCSVInternalServerErrorException
     *
     */
-        public function exportCatalogCSV(array $queryParameters = []): null
+        public function exportCatalogCSV(array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportCatalogCSV($queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -248,7 +248,7 @@ final class CatalogApi
      * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportCatalogDCATInternalServerErrorException
      *
      */
-        public function exportCatalogDCAT(string $dcatApFormat, array $queryParameters = []): null
+        public function exportCatalogDCAT(string $dcatApFormat, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportCatalogDCAT($dcatApFormat, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -305,7 +305,7 @@ final class CatalogApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetDatasetsFacetsInternalServerErrorException
     *
     */
-        public function getDatasetsFacets(array $queryParameters = []): null
+        public function getDatasetsFacets(array $queryParameters = []): mixed
     {
         try {
             return $this->client->getDatasetsFacets($queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -353,10 +353,10 @@ final class CatalogApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetDatasetInternalServerErrorException
     *
     */
-        public function getDataset(string $datasetId, array $queryParameters = [], array $accept = []): null
+        public function getDataset(string $datasetId, array $queryParameters = [], array $accept = []): mixed
     {
         try {
-            return $this->client->getDataset($datasetId, $queryParameters, $accept, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
+            return $this->client->getDataset($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }

@@ -15,50 +15,50 @@ class Elu extends \ArrayObject
     /**
      * Nom de l'élu
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
      * Prénom de l'élu
      *
-     * @var string
+     * @var string|null
      */
     protected $prenoms;
     /**
      * Année de naissance de l'élu
      *
-     * @var string
+     * @var string|null
      */
     protected $anneeDeNaissance;
     /**
      * Fonction de l'élu
      *
-     * @var string
+     * @var string|null
      */
     protected $fonction;
     /**
      * Sexe de l'élu
      *
-     * @var string
+     * @var string|null
      */
     protected $sexe;
     /**
      * Nom de l'élu
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom de l'élu
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;
@@ -67,20 +67,20 @@ class Elu extends \ArrayObject
     /**
      * Prénom de l'élu
      *
-     * @return string
+     * @return string|null
      */
-    public function getPrenoms(): string
+    public function getPrenoms(): ?string
     {
         return $this->prenoms;
     }
     /**
      * Prénom de l'élu
      *
-     * @param string $prenoms
+     * @param string|null $prenoms
      *
      * @return self
      */
-    public function setPrenoms(string $prenoms): self
+    public function setPrenoms(?string $prenoms): self
     {
         $this->initialized['prenoms'] = true;
         $this->prenoms = $prenoms;
@@ -89,20 +89,20 @@ class Elu extends \ArrayObject
     /**
      * Année de naissance de l'élu
      *
-     * @return string
+     * @return string|null
      */
-    public function getAnneeDeNaissance(): string
+    public function getAnneeDeNaissance(): ?string
     {
         return $this->anneeDeNaissance;
     }
     /**
      * Année de naissance de l'élu
      *
-     * @param string $anneeDeNaissance
+     * @param string|null $anneeDeNaissance
      *
      * @return self
      */
-    public function setAnneeDeNaissance(string $anneeDeNaissance): self
+    public function setAnneeDeNaissance(?string $anneeDeNaissance): self
     {
         $this->initialized['anneeDeNaissance'] = true;
         $this->anneeDeNaissance = $anneeDeNaissance;
@@ -111,20 +111,20 @@ class Elu extends \ArrayObject
     /**
      * Fonction de l'élu
      *
-     * @return string
+     * @return string|null
      */
-    public function getFonction(): string
+    public function getFonction(): ?string
     {
         return $this->fonction;
     }
     /**
      * Fonction de l'élu
      *
-     * @param string $fonction
+     * @param string|null $fonction
      *
      * @return self
      */
-    public function setFonction(string $fonction): self
+    public function setFonction(?string $fonction): self
     {
         $this->initialized['fonction'] = true;
         $this->fonction = $fonction;
@@ -133,20 +133,20 @@ class Elu extends \ArrayObject
     /**
      * Sexe de l'élu
      *
-     * @return string
+     * @return string|null
      */
-    public function getSexe(): string
+    public function getSexe(): ?string
     {
         return $this->sexe;
     }
     /**
      * Sexe de l'élu
      *
-     * @param string $sexe
+     * @param string|null $sexe
      *
      * @return self
      */
-    public function setSexe(string $sexe): self
+    public function setSexe(?string $sexe): self
     {
         $this->initialized['sexe'] = true;
         $this->sexe = $sexe;

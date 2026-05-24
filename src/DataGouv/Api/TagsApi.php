@@ -28,7 +28,7 @@ final class TagsApi
      * }
      *
      */
-        public function suggestTags(array $queryParameters = []): null
+        public function suggestTags(array $queryParameters = []): mixed
     {
         try {
             return $this->client->suggestTags($queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

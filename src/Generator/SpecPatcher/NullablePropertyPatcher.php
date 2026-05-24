@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Ecourty\DataGouv\Generator\SpecPatcher;
 
 /**
- * Adds x-nullable: true to every non-required scalar property in Swagger 2.0 definitions.
+ * Marks every non-required scalar property as nullable in OpenAPI/Swagger specs.
  *
- * Jane PHP generates non-nullable getters for properties that are absent from the `required`
- * array unless x-nullable is set — this causes type errors when the API returns null.
+ * - Swagger 2.0 (`definitions`): sets `x-nullable: true` on non-required scalar props
+ * - OpenAPI 3.0/3.1 (`components/schemas`): sets `nullable: true` on non-required scalar props
+ *
+ * Jane PHP generates non-nullable getters for properties absent from `required`, which causes
+ * type errors when the API returns null for optional fields.
  */
 final class NullablePropertyPatcher implements SpecPatcherInterface
 {
@@ -18,19 +21,45 @@ final class NullablePropertyPatcher implements SpecPatcherInterface
     {
         $patched = 0;
 
-        /** @var array<string, mixed> $definitions */
-        $definitions = \is_array($spec['definitions'] ?? null) ? $spec['definitions'] : [];
+        // Swagger 2.0
+        /** @var array<string, mixed>|null $definitions */
+        $definitions = \is_array($spec['definitions'] ?? null) ? $spec['definitions'] : null;
+        if ($definitions !== null) {
+            $patched += $this->patchSchemas($definitions, useXNullable: true);
+            $spec['definitions'] = $definitions;
+        }
 
-        foreach ($definitions as &$definition) {
-            if (!\is_array($definition) || !\is_array($definition['properties'] ?? null)) {
+        // OpenAPI 3.0 / 3.1
+        /** @var array<string, mixed> $components */
+        $components = \is_array($spec['components'] ?? null) ? $spec['components'] : [];
+        /** @var array<string, mixed>|null $schemas */
+        $schemas = \is_array($components['schemas'] ?? null) ? $components['schemas'] : null;
+        if ($schemas !== null) {
+            $patched += $this->patchSchemas($schemas, useXNullable: false);
+            $components['schemas'] = $schemas;
+            $spec['components'] = $components;
+        }
+
+        echo "NullablePropertyPatcher: marked {$patched} non-required scalar properties as nullable.\n";
+    }
+
+    /**
+     * @param array<string, mixed> $schemas
+     */
+    private function patchSchemas(array &$schemas, bool $useXNullable): int
+    {
+        $patched = 0;
+
+        foreach ($schemas as &$schema) {
+            if (!\is_array($schema) || !\is_array($schema['properties'] ?? null)) {
                 continue;
             }
 
             /** @var list<string> $requiredList */
-            $requiredList = \is_array($definition['required'] ?? null) ? $definition['required'] : [];
+            $requiredList = \is_array($schema['required'] ?? null) ? $schema['required'] : [];
             $required = array_flip($requiredList);
 
-            foreach ($definition['properties'] as $propName => &$prop) {
+            foreach ($schema['properties'] as $propName => &$prop) {
                 if (!\is_array($prop) || !isset($prop['type']) || !\is_string($prop['type'])) {
                     continue;
                 }
@@ -39,15 +68,26 @@ final class NullablePropertyPatcher implements SpecPatcherInterface
                     continue;
                 }
 
-                if (\in_array($prop['type'], self::SCALAR_TYPES, true) && ($prop['x-nullable'] ?? false) !== true) {
-                    $prop['x-nullable'] = true;
-                    ++$patched;
+                if (!\in_array($prop['type'], self::SCALAR_TYPES, true)) {
+                    continue;
+                }
+
+                if ($useXNullable) {
+                    if (($prop['x-nullable'] ?? false) !== true) {
+                        $prop['x-nullable'] = true;
+                        ++$patched;
+                    }
+                } else {
+                    if (($prop['nullable'] ?? false) !== true) {
+                        $prop['nullable'] = true;
+                        ++$patched;
+                    }
                 }
             }
             unset($prop);
         }
-        unset($definition);
+        unset($schema);
 
-        echo "NullablePropertyPatcher: marked {$patched} non-required scalar properties as x-nullable.\n";
+        return $patched;
     }
 }

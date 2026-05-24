@@ -38,10 +38,10 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('expires_at', $data) && $data['expires_at'] !== null) {
-            $object->setExpiresAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['expires_at']));
+            $object->setExpiresAt((new \DateTime($data['expires_at'])));
         }
         elseif (\array_key_exists('expires_at', $data) && $data['expires_at'] === null) {
             $object->setExpiresAt(null);
@@ -56,7 +56,7 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setKind(null);
         }
         if (\array_key_exists('last_used_at', $data) && $data['last_used_at'] !== null) {
-            $object->setLastUsedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_used_at']));
+            $object->setLastUsedAt((new \DateTime($data['last_used_at'])));
         }
         elseif (\array_key_exists('last_used_at', $data) && $data['last_used_at'] === null) {
             $object->setLastUsedAt(null);
@@ -68,7 +68,7 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setName(null);
         }
         if (\array_key_exists('revoked_at', $data) && $data['revoked_at'] !== null) {
-            $object->setRevokedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['revoked_at']));
+            $object->setRevokedAt((new \DateTime($data['revoked_at'])));
         }
         elseif (\array_key_exists('revoked_at', $data) && $data['revoked_at'] === null) {
             $object->setRevokedAt(null);

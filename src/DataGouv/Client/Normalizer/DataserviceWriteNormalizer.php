@@ -75,7 +75,7 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived_at', $data) && $data['archived_at'] !== null) {
-            $object->setArchivedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived_at']));
+            $object->setArchivedAt((new \DateTime($data['archived_at'])));
         }
         elseif (\array_key_exists('archived_at', $data) && $data['archived_at'] === null) {
             $object->setArchivedAt(null);
@@ -125,7 +125,7 @@ class DataserviceWriteNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setDatasets($values_2);
         }
         if (\array_key_exists('deleted_at', $data) && $data['deleted_at'] !== null) {
-            $object->setDeletedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted_at']));
+            $object->setDeletedAt((new \DateTime($data['deleted_at'])));
         }
         elseif (\array_key_exists('deleted_at', $data) && $data['deleted_at'] === null) {
             $object->setDeletedAt(null);

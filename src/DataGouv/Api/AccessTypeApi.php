@@ -24,7 +24,7 @@ final class AccessTypeApi
     /**
      *
      */
-        public function reasonCategories(): null
+        public function reasonCategories(): mixed
     {
         try {
             return $this->client->reasonCategories(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

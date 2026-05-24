@@ -70,7 +70,7 @@ final class DiscussionsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDiscussionForbiddenException
      *
      */
-        public function deleteDiscussion(string $id, array $queryParameters = []): null
+        public function deleteDiscussion(string $id, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteDiscussion($id, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -140,7 +140,7 @@ final class DiscussionsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDiscussionCommentForbiddenException
      *
      */
-        public function deleteDiscussionComment(string $id, string $cidx, array $queryParameters = []): null
+        public function deleteDiscussionComment(string $id, string $cidx, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteDiscussionComment($id, $cidx, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

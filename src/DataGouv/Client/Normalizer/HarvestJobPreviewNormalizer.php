@@ -38,10 +38,10 @@ class HarvestJobPreviewNormalizer implements DenormalizerInterface, NormalizerIn
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('created', $data)) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         if (\array_key_exists('ended', $data) && $data['ended'] !== null) {
-            $object->setEnded(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['ended']));
+            $object->setEnded((new \DateTime($data['ended'])));
         }
         elseif (\array_key_exists('ended', $data) && $data['ended'] === null) {
             $object->setEnded(null);
@@ -67,7 +67,7 @@ class HarvestJobPreviewNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setSource($data['source']);
         }
         if (\array_key_exists('started', $data) && $data['started'] !== null) {
-            $object->setStarted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['started']));
+            $object->setStarted((new \DateTime($data['started'])));
         }
         elseif (\array_key_exists('started', $data) && $data['started'] === null) {
             $object->setStarted(null);

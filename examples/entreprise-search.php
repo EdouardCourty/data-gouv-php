@@ -22,7 +22,7 @@ $query = 'La Poste';
 echo "Searching for companies matching '{$query}'...\n\n";
 
 try {
-    $result = $client->rechercheTextuelle->searchCompanies([
+    $result = $client->rechercheTextuelle->getSearch([
         'q' => $query,
         'per_page' => 3,
     ]);

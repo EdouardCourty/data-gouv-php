@@ -48,7 +48,7 @@ class ActivityNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setChanges($values);
         }
         if (\array_key_exists('created_at', $data) && $data['created_at'] !== null) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
             $object->setCreatedAt(null);

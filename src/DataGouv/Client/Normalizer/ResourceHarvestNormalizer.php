@@ -38,13 +38,13 @@ class ResourceHarvestNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('issued_at', $data) && $data['issued_at'] !== null) {
-            $object->setIssuedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['issued_at']));
+            $object->setIssuedAt((new \DateTime($data['issued_at'])));
         }
         elseif (\array_key_exists('issued_at', $data) && $data['issued_at'] === null) {
             $object->setIssuedAt(null);
         }
         if (\array_key_exists('modified_at', $data) && $data['modified_at'] !== null) {
-            $object->setModifiedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modified_at']));
+            $object->setModifiedAt((new \DateTime($data['modified_at'])));
         }
         elseif (\array_key_exists('modified_at', $data) && $data['modified_at'] === null) {
             $object->setModifiedAt(null);

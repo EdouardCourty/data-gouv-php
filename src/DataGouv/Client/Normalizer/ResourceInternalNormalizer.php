@@ -38,10 +38,10 @@ class ResourceInternalNormalizer implements DenormalizerInterface, NormalizerInt
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('created_at_internal', $data)) {
-            $object->setCreatedAtInternal(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at_internal']));
+            $object->setCreatedAtInternal((new \DateTime($data['created_at_internal'])));
         }
         if (\array_key_exists('last_modified_internal', $data)) {
-            $object->setLastModifiedInternal(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified_internal']));
+            $object->setLastModifiedInternal((new \DateTime($data['last_modified_internal'])));
         }
         return $object;
     }

@@ -84,7 +84,7 @@ final class DatasetsApi
     /**
      *
      */
-        public function availableDatasetBadges(): null
+        public function availableDatasetBadges(): mixed
     {
         try {
             return $this->client->availableDatasetBadges(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -140,7 +140,7 @@ final class DatasetsApi
      * }
      *
      */
-        public function deleteCommunityResource(string $community, array $queryParameters = []): null
+        public function deleteCommunityResource(string $community, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteCommunityResource($community, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -213,7 +213,7 @@ final class DatasetsApi
     /**
      *
      */
-        public function allowedExtensions(): null
+        public function allowedExtensions(): mixed
     {
         try {
             return $this->client->allowedExtensions(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -259,7 +259,7 @@ final class DatasetsApi
      * }
      *
      */
-        public function redirectResource(string $id, array $queryParameters = []): null
+        public function redirectResource(string $id, array $queryParameters = []): mixed
     {
         try {
             return $this->client->redirectResource($id, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -299,7 +299,7 @@ final class DatasetsApi
      * }
      *
      */
-        public function recentDatasetsAtomFeed(array $queryParameters = []): null
+        public function recentDatasetsAtomFeed(array $queryParameters = []): mixed
     {
         try {
             return $this->client->recentDatasetsAtomFeed($queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -364,7 +364,7 @@ final class DatasetsApi
      * }
      *
      */
-        public function suggestFormats(array $queryParameters = []): null
+        public function suggestFormats(array $queryParameters = []): mixed
     {
         try {
             return $this->client->suggestFormats($queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -380,7 +380,7 @@ final class DatasetsApi
      * }
      *
      */
-        public function suggestMime(array $queryParameters = []): null
+        public function suggestMime(array $queryParameters = []): mixed
     {
         try {
             return $this->client->suggestMime($queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -398,7 +398,7 @@ final class DatasetsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDatasetGoneException
      *
      */
-        public function deleteDataset(string $dataset, array $queryParameters = []): null
+        public function deleteDataset(string $dataset, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteDataset($dataset, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -467,7 +467,7 @@ final class DatasetsApi
      * @param string $dataset The dataset ID or slug
      *
      */
-        public function deleteDatasetBadge(string $badgeKind, string $dataset): null
+        public function deleteDatasetBadge(string $badgeKind, string $dataset): mixed
     {
         try {
             return $this->client->deleteDatasetBadge($badgeKind, $dataset, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -514,7 +514,7 @@ final class DatasetsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDatasetGoneException
      *
      */
-        public function rdfDataset(string $dataset): null
+        public function rdfDataset(string $dataset): mixed
     {
         try {
             return $this->client->rdfDataset($dataset, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -530,7 +530,7 @@ final class DatasetsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDatasetFormatGoneException
      *
      */
-        public function rdfDatasetFormat(string $dataset, string $format): null
+        public function rdfDatasetFormat(string $dataset, string $format): mixed
     {
         try {
             return $this->client->rdfDatasetFormat($dataset, $format, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -580,7 +580,7 @@ final class DatasetsApi
      * @param string $dataset The dataset ID or slug
      *
      */
-        public function deleteResource(string $rid, string $dataset): null
+        public function deleteResource(string $rid, string $dataset): mixed
     {
         try {
             return $this->client->deleteResource($rid, $dataset, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -703,7 +703,7 @@ final class DatasetsApi
      * @param string $id
      *
      */
-        public function unfollowDataset(string $id): null
+        public function unfollowDataset(string $id): mixed
     {
         try {
             return $this->client->unfollowDataset($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -738,7 +738,7 @@ final class DatasetsApi
      * @param string $id
      *
      */
-        public function followDataset(string $id): null
+        public function followDataset(string $id): mixed
     {
         try {
             return $this->client->followDataset($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

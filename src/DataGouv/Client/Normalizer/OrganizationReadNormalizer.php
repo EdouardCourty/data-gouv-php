@@ -57,10 +57,10 @@ class OrganizationReadNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setBusinessNumberId(null);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
@@ -84,7 +84,7 @@ class OrganizationReadNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setImageUrl(null);
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('logo', $data) && $data['logo'] !== null) {
             $object->setLogo($data['logo']);

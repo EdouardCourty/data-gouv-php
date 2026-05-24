@@ -44,7 +44,7 @@ class ReuseReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $data['private'] = (bool) $data['private'];
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived']));
+            $object->setArchived((new \DateTime($data['archived'])));
         }
         elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
@@ -57,7 +57,7 @@ class ReuseReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $object->setBadges($values);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('dataservices', $data)) {
             $values_1 = [];
@@ -74,7 +74,7 @@ class ReuseReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $object->setDatasets($values_2);
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
@@ -107,7 +107,7 @@ class ReuseReadNormalizer implements DenormalizerInterface, NormalizerInterface,
             $object->setImageThumbnail(null);
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('metrics', $data)) {
             $object->setMetrics($data['metrics']);

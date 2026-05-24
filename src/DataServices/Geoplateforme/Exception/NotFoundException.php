@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\DataServices\Geoplateforme\Exception;
 
-class NotFoundException extends GeoplatformeException
+class NotFoundException extends GeoplateformeException
 {
     public function __construct(string $message = 'Resource not found.', ?\Throwable $previous = null)
     {

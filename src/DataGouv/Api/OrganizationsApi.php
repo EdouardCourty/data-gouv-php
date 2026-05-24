@@ -65,7 +65,7 @@ final class OrganizationsApi
     /**
      *
      */
-        public function availableOrganizationBadges(): null
+        public function availableOrganizationBadges(): mixed
     {
         try {
             return $this->client->availableOrganizationBadges(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -113,7 +113,7 @@ final class OrganizationsApi
      * @param string $id
      *
      */
-        public function unfollowOrganization(string $id): null
+        public function unfollowOrganization(string $id): mixed
     {
         try {
             return $this->client->unfollowOrganization($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -148,7 +148,7 @@ final class OrganizationsApi
      * @param string $id
      *
      */
-        public function followOrganization(string $id): null
+        public function followOrganization(string $id): mixed
     {
         try {
             return $this->client->followOrganization($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -166,7 +166,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteOrganizationGoneException
      *
      */
-        public function deleteOrganization(string $org, array $queryParameters = []): null
+        public function deleteOrganization(string $org, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteOrganization($org, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -252,7 +252,7 @@ final class OrganizationsApi
      * @param string $org The organization ID or slug
      *
      */
-        public function deleteOrganizationBadge(string $badgeKind, string $org): null
+        public function deleteOrganizationBadge(string $badgeKind, string $org): mixed
     {
         try {
             return $this->client->deleteOrganizationBadge($badgeKind, $org, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -267,7 +267,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfOrganizationGoneException
      *
      */
-        public function rdfOrganization(string $org): null
+        public function rdfOrganization(string $org): mixed
     {
         try {
             return $this->client->rdfOrganization($org, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -311,7 +311,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfOrganizationFormatGoneException
      *
      */
-        public function rdfOrganizationFormat(string $org, string $format, array $queryParameters = []): null
+        public function rdfOrganizationFormat(string $org, string $format, array $queryParameters = []): mixed
     {
         try {
             return $this->client->rdfOrganizationFormat($org, $format, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -362,7 +362,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\GetDataservicesCsvGoneException
      *
      */
-        public function getDataservicesCsv(string $org): null
+        public function getDataservicesCsv(string $org): mixed
     {
         try {
             return $this->client->getDataservicesCsv($org, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -496,7 +496,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteOrganizationMemberForbiddenException
      *
      */
-        public function deleteOrganizationMember(string $org, string $user): null
+        public function deleteOrganizationMember(string $org, string $user): mixed
     {
         try {
             return $this->client->deleteOrganizationMember($org, $user, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -587,7 +587,7 @@ final class OrganizationsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\CancelMembershipBadRequestException
      *
      */
-        public function cancelMembership(string $id, string $org): null
+        public function cancelMembership(string $id, string $org): mixed
     {
         try {
             return $this->client->cancelMembership($id, $org, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -602,7 +602,7 @@ final class OrganizationsApi
      * @param \Ecourty\DataGouv\DataGouv\Client\Model\RefuseMembership $payload
      *
      */
-        public function refuseMembership(string $id, string $org, \Ecourty\DataGouv\DataGouv\Client\Model\RefuseMembership $payload): null
+        public function refuseMembership(string $id, string $org, \Ecourty\DataGouv\DataGouv\Client\Model\RefuseMembership $payload): mixed
     {
         try {
             return $this->client->refuseMembership($id, $org, $payload, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

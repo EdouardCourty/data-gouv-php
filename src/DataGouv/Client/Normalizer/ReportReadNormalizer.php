@@ -47,7 +47,7 @@ class ReportReadNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setCallbacksCount(null);
         }
         if (\array_key_exists('dismissed_at', $data) && $data['dismissed_at'] !== null) {
-            $object->setDismissedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dismissed_at']));
+            $object->setDismissedAt((new \DateTime($data['dismissed_at'])));
         }
         elseif (\array_key_exists('dismissed_at', $data) && $data['dismissed_at'] === null) {
             $object->setDismissedAt(null);
@@ -68,7 +68,7 @@ class ReportReadNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setReason($data['reason']);
         }
         if (\array_key_exists('reported_at', $data)) {
-            $object->setReportedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['reported_at']));
+            $object->setReportedAt((new \DateTime($data['reported_at'])));
         }
         if (\array_key_exists('self_api_url', $data) && $data['self_api_url'] !== null) {
             $object->setSelfApiUrl($data['self_api_url']);
@@ -80,7 +80,7 @@ class ReportReadNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setSubject($this->denormalizer->denormalize($data['subject'], \Ecourty\DataGouv\DataGouv\Client\Model\LazyReference::class, 'json', $context));
         }
         if (\array_key_exists('subject_deleted_at', $data) && $data['subject_deleted_at'] !== null) {
-            $object->setSubjectDeletedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['subject_deleted_at']));
+            $object->setSubjectDeletedAt((new \DateTime($data['subject_deleted_at'])));
         }
         elseif (\array_key_exists('subject_deleted_at', $data) && $data['subject_deleted_at'] === null) {
             $object->setSubjectDeletedAt(null);

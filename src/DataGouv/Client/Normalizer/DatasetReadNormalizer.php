@@ -75,7 +75,7 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived']));
+            $object->setArchived((new \DateTime($data['archived'])));
         }
         elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
@@ -101,10 +101,10 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setContactPoints($values_2);
         }
         if (\array_key_exists('created_at_internal', $data)) {
-            $object->setCreatedAtInternal(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at_internal']));
+            $object->setCreatedAtInternal((new \DateTime($data['created_at_internal'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
@@ -134,7 +134,7 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setFrequency(null);
         }
         if (\array_key_exists('frequency_date', $data) && $data['frequency_date'] !== null) {
-            $object->setFrequencyDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['frequency_date']));
+            $object->setFrequencyDate((new \DateTime($data['frequency_date'])));
         }
         elseif (\array_key_exists('frequency_date', $data) && $data['frequency_date'] === null) {
             $object->setFrequencyDate(null);
@@ -146,10 +146,10 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setId($data['id']);
         }
         if (\array_key_exists('last_modified_internal', $data)) {
-            $object->setLastModifiedInternal(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified_internal']));
+            $object->setLastModifiedInternal((new \DateTime($data['last_modified_internal'])));
         }
         if (\array_key_exists('last_update', $data)) {
-            $object->setLastUpdate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_update']));
+            $object->setLastUpdate((new \DateTime($data['last_update'])));
         }
         if (\array_key_exists('license', $data) && $data['license'] !== null) {
             $object->setLicense($data['license']);

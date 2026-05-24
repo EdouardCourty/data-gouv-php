@@ -98,7 +98,7 @@ final class UsersApi
      * @param string $id
      *
      */
-        public function unfollowUser(string $id): null
+        public function unfollowUser(string $id): mixed
     {
         try {
             return $this->client->unfollowUser($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -133,7 +133,7 @@ final class UsersApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\FollowUserForbiddenException
      *
      */
-        public function followUser(string $id): null
+        public function followUser(string $id): mixed
     {
         try {
             return $this->client->followUser($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -154,7 +154,7 @@ final class UsersApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteUserGoneException
      *
      */
-        public function deleteUser(string $user, array $queryParameters = []): null
+        public function deleteUser(string $user, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteUser($user, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -242,7 +242,7 @@ final class UsersApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RotateUserPasswordNotFoundException
      *
      */
-        public function rotateUserPassword(string $user): null
+        public function rotateUserPassword(string $user): mixed
     {
         try {
             return $this->client->rotateUserPassword($user, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

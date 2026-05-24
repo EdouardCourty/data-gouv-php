@@ -57,7 +57,7 @@ class PostReadNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setContent(null);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('credit_to', $data) && $data['credit_to'] !== null) {
             $object->setCreditTo($data['credit_to']);
@@ -112,7 +112,7 @@ class PostReadNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setKind(null);
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('name', $data)) {
             $object->setName($data['name']);
@@ -127,7 +127,7 @@ class PostReadNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setPage(null);
         }
         if (\array_key_exists('published', $data) && $data['published'] !== null) {
-            $object->setPublished(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['published']));
+            $object->setPublished((new \DateTime($data['published'])));
         }
         elseif (\array_key_exists('published', $data) && $data['published'] === null) {
             $object->setPublished(null);

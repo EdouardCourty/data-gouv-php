@@ -65,7 +65,7 @@ final class VisualizationsApi
      * @param string $visualization The visualization ID or slug
      *
      */
-        public function deleteVisualization(string $visualization): null
+        public function deleteVisualization(string $visualization): mixed
     {
         try {
             return $this->client->deleteVisualization($visualization, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

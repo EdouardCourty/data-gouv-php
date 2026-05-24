@@ -37,33 +37,54 @@ class DirigeantPpNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('nom', $data)) {
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
             unset($data['nom']);
         }
-        if (\array_key_exists('prenoms', $data)) {
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
+        }
+        if (\array_key_exists('prenoms', $data) && $data['prenoms'] !== null) {
             $object->setPrenoms($data['prenoms']);
             unset($data['prenoms']);
         }
-        if (\array_key_exists('annee_de_naissance', $data)) {
+        elseif (\array_key_exists('prenoms', $data) && $data['prenoms'] === null) {
+            $object->setPrenoms(null);
+        }
+        if (\array_key_exists('annee_de_naissance', $data) && $data['annee_de_naissance'] !== null) {
             $object->setAnneeDeNaissance($data['annee_de_naissance']);
             unset($data['annee_de_naissance']);
         }
-        if (\array_key_exists('date_de_naissance', $data)) {
+        elseif (\array_key_exists('annee_de_naissance', $data) && $data['annee_de_naissance'] === null) {
+            $object->setAnneeDeNaissance(null);
+        }
+        if (\array_key_exists('date_de_naissance', $data) && $data['date_de_naissance'] !== null) {
             $object->setDateDeNaissance($data['date_de_naissance']);
             unset($data['date_de_naissance']);
         }
-        if (\array_key_exists('qualite', $data)) {
+        elseif (\array_key_exists('date_de_naissance', $data) && $data['date_de_naissance'] === null) {
+            $object->setDateDeNaissance(null);
+        }
+        if (\array_key_exists('qualite', $data) && $data['qualite'] !== null) {
             $object->setQualite($data['qualite']);
             unset($data['qualite']);
         }
-        if (\array_key_exists('nationalite', $data)) {
+        elseif (\array_key_exists('qualite', $data) && $data['qualite'] === null) {
+            $object->setQualite(null);
+        }
+        if (\array_key_exists('nationalite', $data) && $data['nationalite'] !== null) {
             $object->setNationalite($data['nationalite']);
             unset($data['nationalite']);
         }
-        if (\array_key_exists('type_dirigeant', $data)) {
+        elseif (\array_key_exists('nationalite', $data) && $data['nationalite'] === null) {
+            $object->setNationalite(null);
+        }
+        if (\array_key_exists('type_dirigeant', $data) && $data['type_dirigeant'] !== null) {
             $object->setTypeDirigeant($data['type_dirigeant']);
             unset($data['type_dirigeant']);
+        }
+        elseif (\array_key_exists('type_dirigeant', $data) && $data['type_dirigeant'] === null) {
+            $object->setTypeDirigeant(null);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -75,25 +96,25 @@ class DirigeantPpNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
-        if ($data->isInitialized('prenoms') && null !== $data->getPrenoms()) {
+        if ($data->isInitialized('prenoms')) {
             $dataArray['prenoms'] = $data->getPrenoms();
         }
-        if ($data->isInitialized('anneeDeNaissance') && null !== $data->getAnneeDeNaissance()) {
+        if ($data->isInitialized('anneeDeNaissance')) {
             $dataArray['annee_de_naissance'] = $data->getAnneeDeNaissance();
         }
-        if ($data->isInitialized('dateDeNaissance') && null !== $data->getDateDeNaissance()) {
+        if ($data->isInitialized('dateDeNaissance')) {
             $dataArray['date_de_naissance'] = $data->getDateDeNaissance();
         }
-        if ($data->isInitialized('qualite') && null !== $data->getQualite()) {
+        if ($data->isInitialized('qualite')) {
             $dataArray['qualite'] = $data->getQualite();
         }
-        if ($data->isInitialized('nationalite') && null !== $data->getNationalite()) {
+        if ($data->isInitialized('nationalite')) {
             $dataArray['nationalite'] = $data->getNationalite();
         }
-        if ($data->isInitialized('typeDirigeant') && null !== $data->getTypeDirigeant()) {
+        if ($data->isInitialized('typeDirigeant')) {
             $dataArray['type_dirigeant'] = $data->getTypeDirigeant();
         }
         foreach ($data as $key => $value) {

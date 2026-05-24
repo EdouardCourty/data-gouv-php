@@ -48,6 +48,7 @@
             "@cs-fix"
         ],
         "add-api": "php bin/console add-api",
+        "validate-registry": "php bin/console validate-registry",
         "test": "phpunit tests",
         "test-unit": "phpunit tests/Unit/",
         "test-functional": "phpunit tests/Functional/",

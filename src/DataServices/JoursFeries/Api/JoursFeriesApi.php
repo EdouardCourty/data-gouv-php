@@ -25,7 +25,7 @@ final class JoursFeriesApi
      * @param string $zone Le nom de la zone
      *
      */
-        public function getByZone(string $zone): null
+        public function getByZone(string $zone): mixed
     {
         try {
             return $this->client->getByZone($zone, \Ecourty\DataGouv\DataServices\JoursFeries\Client\Client::FETCH_OBJECT);
@@ -39,7 +39,7 @@ final class JoursFeriesApi
      * @param int $annee L'année pour les jours fériés
      *
      */
-        public function getByZoneByAnnee(string $zone, int $annee): null
+        public function getByZoneByAnnee(string $zone, int $annee): mixed
     {
         try {
             return $this->client->getByZoneByAnnee($zone, $annee, \Ecourty\DataGouv\DataServices\JoursFeries\Client\Client::FETCH_OBJECT);

@@ -34,8 +34,10 @@ composer generate:{api}
 | `config/jane/` | ✍️ Jane PHP config files — one per API (e.g. `datagouv.php`, `sirene.php`, …) |
 | `src/Generator/ApiConfig.php` | ✍️ Immutable value object with all per-API generation config (including `exceptionDir`) |
 | `src/Generator/ApiConfigRegistry.php` | ✍️ Returns `ApiConfig` by name for all registered APIs; holds spec URLs |
+| `src/Generator/RegistryValidator.php` | ✍️ Validates consistency of `all()` / `get()` / `specUrls()` — run via `composer validate-registry` |
 | `src/Generator/Command/GenerateCommand.php` | ✍️ Orchestrates the full generation pipeline for all APIs or a single one |
 | `src/Generator/Command/AddApiCommand.php` | ✍️ Registers a new API domain (downloads spec, patches registry, creates docs stub) |
+| `src/Generator/Command/ValidateRegistryCommand.php` | ✍️ Console command `validate-registry`: reports any registry inconsistencies |
 | `src/Generator/Renderer/ExceptionRenderer.php` | ✍️ Generates the 5-file exception hierarchy for any API |
 | `src/DataGouv/Client/` | **Generated** by Jane PHP from `swagger.patched.json` (Swagger 2.0) |
 | `src/DataGouv/Api/{Tag}Api.php` | **Generated** sub-clients, one per tag (21 total) |
@@ -135,13 +137,15 @@ ecourty/data-gouv-client
 │   ├── Generator/                # ✍️ Generator infrastructure (not generated)
 │   │   ├── ApiConfig.php         # Immutable per-API config value object (incl. exceptionDir)
 │   │   ├── ApiConfigRegistry.php # Returns ApiConfig by name for all registered APIs; holds spec URLs
+│   │   ├── RegistryValidator.php # Validates consistency of all()/get()/specUrls()
 │   │   ├── AuthConfig.php        # Value object for auth strategies (named constructors)
 │   │   ├── ClientReflector.php   # Reflects on Jane Client methods; fully-qualifies return types
 │   │   ├── MethodInfo.php        # DTO for method metadata
 │   │   ├── SwaggerSpecParser.php # Parses local JSON/YAML spec → operationId→tags map
 │   │   ├── Command/
-│   │   │   ├── GenerateCommand.php  # Symfony Console: orchestrates full generation pipeline
-│   │   │   └── AddApiCommand.php    # Symfony Console: registers a new API domain
+│   │   │   ├── GenerateCommand.php        # Symfony Console: orchestrates full generation pipeline
+│   │   │   ├── AddApiCommand.php          # Symfony Console: registers a new API domain
+│   │   │   └── ValidateRegistryCommand.php # Symfony Console: validate-registry consistency check
 │   │   ├── Renderer/
 │   │   │   ├── ApiClassRenderer.php  # Generates {Tag}Api.php sub-clients
 │   │   │   ├── ExceptionRenderer.php # Generates 5-file exception hierarchy per API
@@ -237,7 +241,7 @@ ecourty/data-gouv-client
 
 Tests are located in `tests/{Unit|Integration|Functional}`.
 
-- **Unit** tests: mock the HTTP layer, test the facade and exceptions
+- **Unit** tests: mock the HTTP layer, test the facade, exceptions, and generator infrastructure (`ApiConfig`, `ApiConfigRegistry`, `SpecPatcher`, …)
 - **Integration** tests: hit the real API (read-only, no API key required)
 - **Functional** tests: end-to-end flows with authentication
 
@@ -246,6 +250,7 @@ Run:
 composer test          # all suites
 composer test-unit     # unit only
 composer test-fast     # alias for unit
+composer validate-registry  # check ApiConfigRegistry consistency
 ```
 
 ---
@@ -287,10 +292,11 @@ composer test-fast     # alias for unit
 ### Adding a New API
 
 1. Use `php bin/add-api.php` (or `composer add-api`) — it registers the API in `ApiConfigRegistry`, downloads the spec, and creates the Jane config
-2. Run `composer generate` — exceptions, sub-clients, and facade are all generated automatically
-3. Create `docs/{name}.md` — document the API (auth, sub-clients table, usage examples)
-4. Update `README.md` — add the new API to the "Supported APIs" table with a link to its doc file
-5. Update `AGENTS.md` — add the new entry to the project breakdown and `docs/` listing
+2. Run `composer validate-registry` to verify the registry is consistent (no orphaned entries)
+3. Run `composer generate` — exceptions, sub-clients, and facade are all generated automatically
+4. Create `docs/{name}.md` — document the API (auth, sub-clients table, usage examples)
+5. Update `README.md` — add the new API to the "Supported APIs" table with a link to its doc file
+6. Update `AGENTS.md` — add the new entry to the project breakdown and `docs/` listing
 
 > **No other files need to change**: `phpstan.neon` uses `src/DataServices/*/Client/**` globs, `.php-cs-fixer.php` excludes all dirs named `Client` or `Api`, and `GenerateCommand` reads from `ApiConfigRegistry::all()` dynamically.
 >

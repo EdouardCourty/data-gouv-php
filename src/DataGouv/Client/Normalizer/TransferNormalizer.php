@@ -44,7 +44,7 @@ class TransferNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setComment(null);
         }
         if (\array_key_exists('created', $data) && $data['created'] !== null) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         elseif (\array_key_exists('created', $data) && $data['created'] === null) {
             $object->setCreated(null);
@@ -68,7 +68,7 @@ class TransferNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setReponseComment(null);
         }
         if (\array_key_exists('responded', $data) && $data['responded'] !== null) {
-            $object->setResponded(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['responded']));
+            $object->setResponded((new \DateTime($data['responded'])));
         }
         elseif (\array_key_exists('responded', $data) && $data['responded'] === null) {
             $object->setResponded(null);

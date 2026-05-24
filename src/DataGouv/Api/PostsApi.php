@@ -64,7 +64,7 @@ final class PostsApi
     /**
      *
      */
-        public function recentPostsAtomFeed(): null
+        public function recentPostsAtomFeed(): mixed
     {
         try {
             return $this->client->recentPostsAtomFeed(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -78,7 +78,7 @@ final class PostsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeletePostNotFoundException
      *
      */
-        public function deletePost(string $post): null
+        public function deletePost(string $post): mixed
     {
         try {
             return $this->client->deletePost($post, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

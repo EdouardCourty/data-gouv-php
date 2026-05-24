@@ -38,13 +38,13 @@ class TemporalCoverageNormalizer implements DenormalizerInterface, NormalizerInt
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('end', $data) && $data['end'] !== null) {
-            $object->setEnd(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['end']));
+            $object->setEnd((new \DateTime($data['end'])));
         }
         elseif (\array_key_exists('end', $data) && $data['end'] === null) {
             $object->setEnd(null);
         }
         if (\array_key_exists('start', $data)) {
-            $object->setStart(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['start']));
+            $object->setStart((new \DateTime($data['start'])));
         }
         return $object;
     }

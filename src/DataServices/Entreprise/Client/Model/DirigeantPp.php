@@ -15,62 +15,62 @@ class DirigeantPp extends \ArrayObject
     /**
      * Nom du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
      * Prénom(s) du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $prenoms;
     /**
      * Année de naissance du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $anneeDeNaissance;
     /**
      * Année et mois de naissance du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $dateDeNaissance;
     /**
      * Qualité du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $qualite;
     /**
      * Nationalité du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $nationalite;
     /**
      * Type de dirgeant : "personne physique"
      *
-     * @var string
+     * @var string|null
      */
     protected $typeDirigeant;
     /**
      * Nom du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom du dirigeant
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;
@@ -79,20 +79,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Prénom(s) du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getPrenoms(): string
+    public function getPrenoms(): ?string
     {
         return $this->prenoms;
     }
     /**
      * Prénom(s) du dirigeant
      *
-     * @param string $prenoms
+     * @param string|null $prenoms
      *
      * @return self
      */
-    public function setPrenoms(string $prenoms): self
+    public function setPrenoms(?string $prenoms): self
     {
         $this->initialized['prenoms'] = true;
         $this->prenoms = $prenoms;
@@ -101,20 +101,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Année de naissance du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getAnneeDeNaissance(): string
+    public function getAnneeDeNaissance(): ?string
     {
         return $this->anneeDeNaissance;
     }
     /**
      * Année de naissance du dirigeant
      *
-     * @param string $anneeDeNaissance
+     * @param string|null $anneeDeNaissance
      *
      * @return self
      */
-    public function setAnneeDeNaissance(string $anneeDeNaissance): self
+    public function setAnneeDeNaissance(?string $anneeDeNaissance): self
     {
         $this->initialized['anneeDeNaissance'] = true;
         $this->anneeDeNaissance = $anneeDeNaissance;
@@ -123,20 +123,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Année et mois de naissance du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getDateDeNaissance(): string
+    public function getDateDeNaissance(): ?string
     {
         return $this->dateDeNaissance;
     }
     /**
      * Année et mois de naissance du dirigeant
      *
-     * @param string $dateDeNaissance
+     * @param string|null $dateDeNaissance
      *
      * @return self
      */
-    public function setDateDeNaissance(string $dateDeNaissance): self
+    public function setDateDeNaissance(?string $dateDeNaissance): self
     {
         $this->initialized['dateDeNaissance'] = true;
         $this->dateDeNaissance = $dateDeNaissance;
@@ -145,20 +145,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Qualité du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getQualite(): string
+    public function getQualite(): ?string
     {
         return $this->qualite;
     }
     /**
      * Qualité du dirigeant
      *
-     * @param string $qualite
+     * @param string|null $qualite
      *
      * @return self
      */
-    public function setQualite(string $qualite): self
+    public function setQualite(?string $qualite): self
     {
         $this->initialized['qualite'] = true;
         $this->qualite = $qualite;
@@ -167,20 +167,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Nationalité du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getNationalite(): string
+    public function getNationalite(): ?string
     {
         return $this->nationalite;
     }
     /**
      * Nationalité du dirigeant
      *
-     * @param string $nationalite
+     * @param string|null $nationalite
      *
      * @return self
      */
-    public function setNationalite(string $nationalite): self
+    public function setNationalite(?string $nationalite): self
     {
         $this->initialized['nationalite'] = true;
         $this->nationalite = $nationalite;
@@ -189,20 +189,20 @@ class DirigeantPp extends \ArrayObject
     /**
      * Type de dirgeant : "personne physique"
      *
-     * @return string
+     * @return string|null
      */
-    public function getTypeDirigeant(): string
+    public function getTypeDirigeant(): ?string
     {
         return $this->typeDirigeant;
     }
     /**
      * Type de dirgeant : "personne physique"
      *
-     * @param string $typeDirigeant
+     * @param string|null $typeDirigeant
      *
      * @return self
      */
-    public function setTypeDirigeant(string $typeDirigeant): self
+    public function setTypeDirigeant(?string $typeDirigeant): self
     {
         $this->initialized['typeDirigeant'] = true;
         $this->typeDirigeant = $typeDirigeant;

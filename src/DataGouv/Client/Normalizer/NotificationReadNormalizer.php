@@ -38,13 +38,13 @@ class NotificationReadNormalizer implements DenormalizerInterface, NormalizerInt
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('details', $data)) {
             $object->setDetails($data['details']);
         }
         if (\array_key_exists('handled_at', $data) && $data['handled_at'] !== null) {
-            $object->setHandledAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['handled_at']));
+            $object->setHandledAt((new \DateTime($data['handled_at'])));
         }
         elseif (\array_key_exists('handled_at', $data) && $data['handled_at'] === null) {
             $object->setHandledAt(null);
@@ -53,7 +53,7 @@ class NotificationReadNormalizer implements DenormalizerInterface, NormalizerInt
             $object->setId($data['id']);
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('user', $data)) {
             $object->setUser($data['user']);

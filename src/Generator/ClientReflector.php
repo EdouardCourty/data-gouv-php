@@ -31,13 +31,14 @@ final class ClientReflector
                 continue;
             }
 
-            [$signature, $callArgs] = $this->buildParamList($method);
+            [$signature, $callArgsBefore, $callArgsAfter] = $this->buildParamList($method);
 
             $methods[$method->getName()] = new MethodInfo(
                 name: $method->getName(),
                 tags: $tags,
                 signature: $signature,
-                callArgs: $callArgs,
+                callArgsBefore: $callArgsBefore,
+                callArgsAfter: $callArgsAfter,
                 docblock: $this->extractDocblock($method),
                 returnType: $this->extractReturnType($method, $janeNamespace),
             );
@@ -52,15 +53,18 @@ final class ClientReflector
     }
 
     /**
-     * @return array{0: string, 1: string} [signature, callArgs]
+     * @return array{0: string, 1: string, 2: string} [signature, callArgsBefore, callArgsAfter]
      */
     private function buildParamList(\ReflectionMethod $method): array
     {
         $sig = [];
-        $call = [];
+        $before = [];
+        $after = [];
+        $fetchSeen = false;
 
         foreach ($method->getParameters() as $param) {
             if ($param->getName() === 'fetch') {
+                $fetchSeen = true;
                 continue;
             }
 
@@ -82,10 +86,15 @@ final class ClientReflector
             }
 
             $sig[] = $part;
-            $call[] = '$' . $param->getName();
+
+            if ($fetchSeen) {
+                $after[] = '$' . $param->getName();
+            } else {
+                $before[] = '$' . $param->getName();
+            }
         }
 
-        return [implode(', ', $sig), implode(', ', $call)];
+        return [implode(', ', $sig), implode(', ', $before), implode(', ', $after)];
     }
 
     private function formatDefaultValue(mixed $value): string
@@ -125,6 +134,12 @@ final class ClientReflector
 
         if (preg_match("/@return\s+\(\\\$fetch is 'object' \? ([^:]+) :/", $doc, $m)) {
             $type = trim($m[1]);
+            // When the spec defines no response model, Jane emits `null` — but FETCH_OBJECT
+            // can still return a stdClass or model instance. Use mixed to avoid PHP type errors.
+            if ($type === 'null') {
+                return 'mixed';
+            }
+
             if (str_ends_with($type, '[]')) {
                 $type = preg_replace('/\\\\[\w\\\\]+\[\]/', 'array', $type);
             }
@@ -133,7 +148,14 @@ final class ClientReflector
         }
 
         if (preg_match('/@return\s+(\S+)/', $doc, $m)) {
-            return str_ends_with($m[1], '[]') ? 'array' : $m[1];
+            $type = $m[1];
+            // Jane emits @return null when no model exists, but FETCH_OBJECT can still
+            // return a stdClass or model instance — use mixed to avoid PHP type errors.
+            if ($type === 'null') {
+                return 'mixed';
+            }
+
+            return str_ends_with($type, '[]') ? 'array' : $type;
         }
 
         return 'mixed';

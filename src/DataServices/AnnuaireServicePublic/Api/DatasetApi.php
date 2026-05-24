@@ -111,7 +111,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetRecordsInternalServerErrorException
     *
     */
-        public function getRecords(string $datasetId, array $queryParameters = []): null
+        public function getRecords(string $datasetId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->getRecords($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -130,7 +130,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ListDatasetExportFormatsInternalServerErrorException
     *
     */
-        public function listDatasetExportFormats(string $datasetId): null
+        public function listDatasetExportFormats(string $datasetId): mixed
     {
         try {
             return $this->client->listDatasetExportFormats($datasetId, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -217,7 +217,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportRecordsInternalServerErrorException
     *
     */
-        public function exportRecords(string $datasetId, string $format, array $queryParameters = []): null
+        public function exportRecords(string $datasetId, string $format, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportRecords($datasetId, $format, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -243,7 +243,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportRecordsCSVInternalServerErrorException
     *
     */
-        public function exportRecordsCSV(string $datasetId, array $queryParameters = []): null
+        public function exportRecordsCSV(string $datasetId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportRecordsCSV($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -265,7 +265,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportRecordsParquetInternalServerErrorException
     *
     */
-        public function exportRecordsParquet(string $datasetId, array $queryParameters = []): null
+        public function exportRecordsParquet(string $datasetId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportRecordsParquet($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -290,7 +290,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\ExportRecordsGPXInternalServerErrorException
     *
     */
-        public function exportRecordsGPX(string $datasetId, array $queryParameters = []): null
+        public function exportRecordsGPX(string $datasetId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->exportRecordsGPX($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -355,7 +355,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetRecordsFacetsInternalServerErrorException
     *
     */
-        public function getRecordsFacets(string $datasetId, array $queryParameters = []): null
+        public function getRecordsFacets(string $datasetId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->getRecordsFacets($datasetId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -375,7 +375,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetDatasetAttachmentsInternalServerErrorException
     *
     */
-        public function getDatasetAttachments(string $datasetId): null
+        public function getDatasetAttachments(string $datasetId): mixed
     {
         try {
             return $this->client->getDatasetAttachments($datasetId, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);
@@ -416,7 +416,7 @@ final class DatasetApi
     * @throws \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Exception\GetRecordInternalServerErrorException
     *
     */
-        public function getRecord(string $datasetId, string $recordId, array $queryParameters = []): null
+        public function getRecord(string $datasetId, string $recordId, array $queryParameters = []): mixed
     {
         try {
             return $this->client->getRecord($datasetId, $recordId, $queryParameters, \Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client::FETCH_OBJECT);

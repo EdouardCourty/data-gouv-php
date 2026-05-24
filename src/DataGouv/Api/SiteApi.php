@@ -105,7 +105,7 @@ final class SiteApi
      * }
      *
      */
-        public function getSiteRdfCatalog(array $queryParameters = []): null
+        public function getSiteRdfCatalog(array $queryParameters = []): mixed
     {
         try {
             return $this->client->getSiteRdfCatalog($queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -147,7 +147,7 @@ final class SiteApi
      * }
      *
      */
-        public function getSiteRdfCatalogFormat(string $format, array $queryParameters = []): null
+        public function getSiteRdfCatalogFormat(string $format, array $queryParameters = []): mixed
     {
         try {
             return $this->client->getSiteRdfCatalogFormat($format, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -159,7 +159,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteJsonLdContext(): null
+        public function getSiteJsonLdContext(): mixed
     {
         try {
             return $this->client->getSiteJsonLdContext(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -172,7 +172,7 @@ final class SiteApi
      * @param string $format
      *
      */
-        public function getSiteDataPortal(string $format): null
+        public function getSiteDataPortal(string $format): mixed
     {
         try {
             return $this->client->getSiteDataPortal($format, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -184,7 +184,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteDataservicesCsv(): null
+        public function getSiteDataservicesCsv(): mixed
     {
         try {
             return $this->client->getSiteDataservicesCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -196,7 +196,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteDatasetsCsv(): null
+        public function getSiteDatasetsCsv(): mixed
     {
         try {
             return $this->client->getSiteDatasetsCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -208,7 +208,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteHarvestsCsv(): null
+        public function getSiteHarvestsCsv(): mixed
     {
         try {
             return $this->client->getSiteHarvestsCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -220,7 +220,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteOrganizationsCsv(): null
+        public function getSiteOrganizationsCsv(): mixed
     {
         try {
             return $this->client->getSiteOrganizationsCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -232,7 +232,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteResourcesCsv(): null
+        public function getSiteResourcesCsv(): mixed
     {
         try {
             return $this->client->getSiteResourcesCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -244,7 +244,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteReusesCsv(): null
+        public function getSiteReusesCsv(): mixed
     {
         try {
             return $this->client->getSiteReusesCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -256,7 +256,7 @@ final class SiteApi
     /**
      *
      */
-        public function getSiteTagsCsv(): null
+        public function getSiteTagsCsv(): mixed
     {
         try {
             return $this->client->getSiteTagsCsv(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

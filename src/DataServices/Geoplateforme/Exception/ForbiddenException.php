@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\DataServices\Geoplateforme\Exception;
 
-class ForbiddenException extends GeoplatformeException
+class ForbiddenException extends GeoplateformeException
 {
     public function __construct(string $message = 'Access forbidden.', ?\Throwable $previous = null)
     {

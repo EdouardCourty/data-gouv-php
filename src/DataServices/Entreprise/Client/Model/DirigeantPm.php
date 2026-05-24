@@ -13,40 +13,40 @@ class DirigeantPm extends \ArrayObject
         return array_key_exists($property, $this->initialized);
     }
     /**
-     * @var string
+     * @var string|null
      */
     protected $siren;
     /**
      * Dénomination de l'unité légale
      *
-     * @var string
+     * @var string|null
      */
     protected $denomination;
     /**
      * Qualité du dirigeant
      *
-     * @var string
+     * @var string|null
      */
     protected $qualite;
     /**
      * Type de dirgeant : "personne morale"
      *
-     * @var string
+     * @var string|null
      */
     protected $typeDirigeant;
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSiren(): string
+    public function getSiren(): ?string
     {
         return $this->siren;
     }
     /**
-     * @param string $siren
+     * @param string|null $siren
      *
      * @return self
      */
-    public function setSiren(string $siren): self
+    public function setSiren(?string $siren): self
     {
         $this->initialized['siren'] = true;
         $this->siren = $siren;
@@ -55,20 +55,20 @@ class DirigeantPm extends \ArrayObject
     /**
      * Dénomination de l'unité légale
      *
-     * @return string
+     * @return string|null
      */
-    public function getDenomination(): string
+    public function getDenomination(): ?string
     {
         return $this->denomination;
     }
     /**
      * Dénomination de l'unité légale
      *
-     * @param string $denomination
+     * @param string|null $denomination
      *
      * @return self
      */
-    public function setDenomination(string $denomination): self
+    public function setDenomination(?string $denomination): self
     {
         $this->initialized['denomination'] = true;
         $this->denomination = $denomination;
@@ -77,20 +77,20 @@ class DirigeantPm extends \ArrayObject
     /**
      * Qualité du dirigeant
      *
-     * @return string
+     * @return string|null
      */
-    public function getQualite(): string
+    public function getQualite(): ?string
     {
         return $this->qualite;
     }
     /**
      * Qualité du dirigeant
      *
-     * @param string $qualite
+     * @param string|null $qualite
      *
      * @return self
      */
-    public function setQualite(string $qualite): self
+    public function setQualite(?string $qualite): self
     {
         $this->initialized['qualite'] = true;
         $this->qualite = $qualite;
@@ -99,20 +99,20 @@ class DirigeantPm extends \ArrayObject
     /**
      * Type de dirgeant : "personne morale"
      *
-     * @return string
+     * @return string|null
      */
-    public function getTypeDirigeant(): string
+    public function getTypeDirigeant(): ?string
     {
         return $this->typeDirigeant;
     }
     /**
      * Type de dirgeant : "personne morale"
      *
-     * @param string $typeDirigeant
+     * @param string|null $typeDirigeant
      *
      * @return self
      */
-    public function setTypeDirigeant(string $typeDirigeant): self
+    public function setTypeDirigeant(?string $typeDirigeant): self
     {
         $this->initialized['typeDirigeant'] = true;
         $this->typeDirigeant = $typeDirigeant;

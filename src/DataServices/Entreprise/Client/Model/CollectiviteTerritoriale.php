@@ -15,13 +15,13 @@ class CollectiviteTerritoriale extends \ArrayObject
     /**
      * Code de la collectivité territoriale
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
      * Code INSEE de la collectivité territoriale
      *
-     * @var string
+     * @var string|null
      */
     protected $codeInsee;
     /**
@@ -31,26 +31,26 @@ class CollectiviteTerritoriale extends \ArrayObject
     /**
      * Niveau de la collectivité territoriale
      *
-     * @var string
+     * @var string|null
      */
     protected $niveau;
     /**
      * Code de la collectivité territoriale
      *
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
     /**
      * Code de la collectivité territoriale
      *
-     * @param string $code
+     * @param string|null $code
      *
      * @return self
      */
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -59,20 +59,20 @@ class CollectiviteTerritoriale extends \ArrayObject
     /**
      * Code INSEE de la collectivité territoriale
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeInsee(): string
+    public function getCodeInsee(): ?string
     {
         return $this->codeInsee;
     }
     /**
      * Code INSEE de la collectivité territoriale
      *
-     * @param string $codeInsee
+     * @param string|null $codeInsee
      *
      * @return self
      */
-    public function setCodeInsee(string $codeInsee): self
+    public function setCodeInsee(?string $codeInsee): self
     {
         $this->initialized['codeInsee'] = true;
         $this->codeInsee = $codeInsee;
@@ -99,20 +99,20 @@ class CollectiviteTerritoriale extends \ArrayObject
     /**
      * Niveau de la collectivité territoriale
      *
-     * @return string
+     * @return string|null
      */
-    public function getNiveau(): string
+    public function getNiveau(): ?string
     {
         return $this->niveau;
     }
     /**
      * Niveau de la collectivité territoriale
      *
-     * @param string $niveau
+     * @param string|null $niveau
      *
      * @return self
      */
-    public function setNiveau(string $niveau): self
+    public function setNiveau(?string $niveau): self
     {
         $this->initialized['niveau'] = true;
         $this->niveau = $niveau;

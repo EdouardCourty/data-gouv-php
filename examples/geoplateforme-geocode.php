@@ -28,15 +28,15 @@ try {
         'type' => 'housenumber',
     ]);
 
-    $features = $result->getFeatures() ?? [];
+    $features = $result->features ?? [];
     echo \sprintf("Found %d result(s):\n\n", \count($features));
 
     foreach ($features as $feature) {
-        $props = $feature->getProperties();
-        $coords = $feature->getGeometry()?->getCoordinates();
+        $props = $feature->properties ?? null;
+        $coords = $feature->geometry->coordinates ?? null;
 
-        echo '- ' . ($props?->getLabel() ?? 'N/A') . "\n";
-        echo '  Score: ' . ($props?->getScore() ?? 'N/A') . "\n";
+        echo '- ' . ($props?->label ?? 'N/A') . "\n";
+        echo '  Score: ' . ($props?->score ?? 'N/A') . "\n";
 
         if ($coords !== null && \count($coords) >= 2) {
             echo \sprintf("  Coords: %s, %s\n", $coords[1], $coords[0]);

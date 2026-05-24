@@ -72,7 +72,7 @@ final class ReusesApi
     /**
      *
      */
-        public function availableReuseBadges(): null
+        public function availableReuseBadges(): mixed
     {
         try {
             return $this->client->availableReuseBadges(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -84,7 +84,7 @@ final class ReusesApi
     /**
      *
      */
-        public function recentReusesAtomFeed(): null
+        public function recentReusesAtomFeed(): mixed
     {
         try {
             return $this->client->recentReusesAtomFeed(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -147,7 +147,7 @@ final class ReusesApi
      * @param string $id
      *
      */
-        public function unfollowReuse(string $id): null
+        public function unfollowReuse(string $id): mixed
     {
         try {
             return $this->client->unfollowReuse($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -182,7 +182,7 @@ final class ReusesApi
      * @param string $id
      *
      */
-        public function followReuse(string $id): null
+        public function followReuse(string $id): mixed
     {
         try {
             return $this->client->followReuse($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -200,7 +200,7 @@ final class ReusesApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteReuseGoneException
      *
      */
-        public function deleteReuse(string $reuse, array $queryParameters = []): null
+        public function deleteReuse(string $reuse, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteReuse($reuse, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -269,7 +269,7 @@ final class ReusesApi
      * @param string $reuse The reuse ID or slug
      *
      */
-        public function deleteReuseBadge(string $badgeKind, string $reuse): null
+        public function deleteReuseBadge(string $badgeKind, string $reuse): mixed
     {
         try {
             return $this->client->deleteReuseBadge($badgeKind, $reuse, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

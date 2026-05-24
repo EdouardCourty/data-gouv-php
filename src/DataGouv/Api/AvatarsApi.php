@@ -26,7 +26,7 @@ final class AvatarsApi
      * @param int $size
      *
      */
-        public function avatars(string $identifier, int $size): null
+        public function avatars(string $identifier, int $size): mixed
     {
         try {
             return $this->client->avatars($identifier, $size, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

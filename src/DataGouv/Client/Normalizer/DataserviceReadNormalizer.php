@@ -78,7 +78,7 @@ class DataserviceReadNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived_at', $data) && $data['archived_at'] !== null) {
-            $object->setArchivedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived_at']));
+            $object->setArchivedAt((new \DateTime($data['archived_at'])));
         }
         elseif (\array_key_exists('archived_at', $data) && $data['archived_at'] === null) {
             $object->setArchivedAt(null);
@@ -128,13 +128,13 @@ class DataserviceReadNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setContactPoints($values_2);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('datasets', $data)) {
             $object->setDatasets($data['datasets']);
         }
         if (\array_key_exists('deleted_at', $data) && $data['deleted_at'] !== null) {
-            $object->setDeletedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted_at']));
+            $object->setDeletedAt((new \DateTime($data['deleted_at'])));
         }
         elseif (\array_key_exists('deleted_at', $data) && $data['deleted_at'] === null) {
             $object->setDeletedAt(null);
@@ -179,7 +179,7 @@ class DataserviceReadNormalizer implements DenormalizerInterface, NormalizerInte
             $object->setMachineDocumentationUrl(null);
         }
         if (\array_key_exists('metadata_modified_at', $data)) {
-            $object->setMetadataModifiedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['metadata_modified_at']));
+            $object->setMetadataModifiedAt((new \DateTime($data['metadata_modified_at'])));
         }
         if (\array_key_exists('metrics', $data)) {
             $object->setMetrics($data['metrics']);

@@ -75,7 +75,7 @@ class DatasetPreviewNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived']));
+            $object->setArchived((new \DateTime($data['archived'])));
         }
         elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
@@ -108,10 +108,10 @@ class DatasetPreviewNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setContactPoints($values_3);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
@@ -138,7 +138,7 @@ class DatasetPreviewNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setFrequency($data['frequency']);
         }
         if (\array_key_exists('frequency_date', $data) && $data['frequency_date'] !== null) {
-            $object->setFrequencyDate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['frequency_date']));
+            $object->setFrequencyDate((new \DateTime($data['frequency_date'])));
         }
         elseif (\array_key_exists('frequency_date', $data) && $data['frequency_date'] === null) {
             $object->setFrequencyDate(null);
@@ -156,10 +156,10 @@ class DatasetPreviewNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setInternal($this->denormalizer->denormalize($data['internal'], \Ecourty\DataGouv\DataGouv\Client\Model\DatasetPreviewInternal::class, 'json', $context));
         }
         if (\array_key_exists('last_modified', $data)) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         if (\array_key_exists('last_update', $data)) {
-            $object->setLastUpdate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_update']));
+            $object->setLastUpdate((new \DateTime($data['last_update'])));
         }
         if (\array_key_exists('license', $data) && $data['license'] !== null) {
             $object->setLicense($data['license']);

@@ -50,7 +50,7 @@ class DiscussionMessageNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setId(null);
         }
         if (\array_key_exists('last_modified_at', $data) && $data['last_modified_at'] !== null) {
-            $object->setLastModifiedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified_at']));
+            $object->setLastModifiedAt((new \DateTime($data['last_modified_at'])));
         }
         elseif (\array_key_exists('last_modified_at', $data) && $data['last_modified_at'] === null) {
             $object->setLastModifiedAt(null);
@@ -65,7 +65,7 @@ class DiscussionMessageNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setPostedByOrganization($data['posted_by_organization']);
         }
         if (\array_key_exists('posted_on', $data) && $data['posted_on'] !== null) {
-            $object->setPostedOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['posted_on']));
+            $object->setPostedOn((new \DateTime($data['posted_on'])));
         }
         elseif (\array_key_exists('posted_on', $data) && $data['posted_on'] === null) {
             $object->setPostedOn(null);

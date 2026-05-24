@@ -58,7 +58,7 @@ final class ContactsApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteContactPointNotFoundException
      *
      */
-        public function deleteContactPoint(string $contactPoint): null
+        public function deleteContactPoint(string $contactPoint): mixed
     {
         try {
             return $this->client->deleteContactPoint($contactPoint, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

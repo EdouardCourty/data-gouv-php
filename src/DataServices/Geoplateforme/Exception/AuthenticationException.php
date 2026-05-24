@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\DataServices\Geoplateforme\Exception;
 
-class AuthenticationException extends GeoplatformeException
+class AuthenticationException extends GeoplateformeException
 {
     public function __construct(string $message = 'Authentication required.', ?\Throwable $previous = null)
     {

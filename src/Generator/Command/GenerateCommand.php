@@ -48,11 +48,7 @@ final class GenerateCommand extends Command
             $io->section("Generating: {$apiName}");
 
             try {
-                if ($apiName === 'datagouv') {
-                    $this->runProcess("{$php} {$root}/bin/scripts/patch-spec.php", $output);
-                } else {
-                    $this->runProcess("{$php} {$root}/bin/scripts/download-spec.php --api={$apiName}", $output);
-                }
+                $this->runProcess("{$php} {$root}/bin/scripts/download-spec.php --api={$apiName}", $output);
 
                 $this->runProcess("{$php} {$jane} generate --config-file {$root}/config/jane/{$apiName}.php", $output);
                 $this->runProcess("{$php} {$root}/bin/scripts/patch-generated.php {$config->clientDir}", $output);

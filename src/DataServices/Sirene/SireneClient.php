@@ -17,8 +17,6 @@ use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * Main entry point for the INSEE SIRENE API client.
- *
  * @see https://api.insee.fr/api-sirene/3.11
  */
 final class SireneClient
@@ -51,8 +49,11 @@ final class SireneClient
 
         $plugins = [
             new AddHostPlugin($uri),
-            new AddPathPlugin($uri),
         ];
+
+        if ($uri->getPath() !== '' && $uri->getPath() !== '/') {
+            $plugins[] = new AddPathPlugin($uri);
+        }
 
         if ($apiKey !== null) {
             $plugins[] = new HeaderSetPlugin([self::AUTH_HEADER => $apiKey]);
@@ -60,5 +61,13 @@ final class SireneClient
         /** @var Client $janeClient */
         $janeClient = Client::create(new PluginClient($httpClient, $plugins));
         $this->janeClient = $janeClient;
+    }
+
+    /**
+     * Returns the underlying Jane-generated client for advanced usage (e.g. FETCH_RESPONSE).
+     */
+    public function getClient(): Client
+    {
+        return $this->janeClient;
     }
 }

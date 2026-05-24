@@ -47,7 +47,7 @@ class HarvestSourceValidationNormalizer implements DenormalizerInterface, Normal
             $object->setComment(null);
         }
         if (\array_key_exists('on', $data) && $data['on'] !== null) {
-            $object->setOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['on']));
+            $object->setOn((new \DateTime($data['on'])));
         }
         elseif (\array_key_exists('on', $data) && $data['on'] === null) {
             $object->setOn(null);

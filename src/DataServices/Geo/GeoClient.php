@@ -55,11 +55,22 @@ final class GeoClient
 
         $plugins = [
             new AddHostPlugin($uri),
-            new AddPathPlugin($uri),
         ];
+
+        if ($uri->getPath() !== '' && $uri->getPath() !== '/') {
+            $plugins[] = new AddPathPlugin($uri);
+        }
 
         /** @var Client $janeClient */
         $janeClient = Client::create(new PluginClient($httpClient, $plugins));
         $this->janeClient = $janeClient;
+    }
+
+    /**
+     * Returns the underlying Jane-generated client for advanced usage (e.g. FETCH_RESPONSE).
+     */
+    public function getClient(): Client
+    {
+        return $this->janeClient;
     }
 }

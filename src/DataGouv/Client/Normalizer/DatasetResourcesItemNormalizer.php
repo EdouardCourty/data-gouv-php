@@ -41,7 +41,7 @@ class DatasetResourcesItemNormalizer implements DenormalizerInterface, Normalize
             $object->setChecksum($this->denormalizer->denormalize($data['checksum'], \Ecourty\DataGouv\DataGouv\Client\Model\ResourceChecksum::class, 'json', $context));
         }
         if (\array_key_exists('created_at', $data) && $data['created_at'] !== null) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
             $object->setCreatedAt(null);
@@ -80,7 +80,7 @@ class DatasetResourcesItemNormalizer implements DenormalizerInterface, Normalize
             $object->setInternal($this->denormalizer->denormalize($data['internal'], \Ecourty\DataGouv\DataGouv\Client\Model\ResourceInternal::class, 'json', $context));
         }
         if (\array_key_exists('last_modified', $data) && $data['last_modified'] !== null) {
-            $object->setLastModified(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_modified']));
+            $object->setLastModified((new \DateTime($data['last_modified'])));
         }
         elseif (\array_key_exists('last_modified', $data) && $data['last_modified'] === null) {
             $object->setLastModified(null);

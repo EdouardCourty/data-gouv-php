@@ -15,19 +15,19 @@ class Result extends \ArrayObject
     /**
      * le numéro unique de l'entreprise
      *
-     * @var string
+     * @var string|null
      */
     protected $siren;
     /**
      * Champ construit depuis les champs de dénomination : dénomination de l'unité légale | Nom et prénom | Nom inconnu (dénomination usuelle : Construite en priorité à partir de la dénomination usuelle de l'établissement siège. Si cette dernière n'existe pas, elle est construite à partir des trois champs de dénomination usuelle de l'unité légale. source : base SIRENE) (sigle de l'unité légale)
      *
-     * @var string
+     * @var string|null
      */
     protected $nomComplet;
     /**
      * La raison sociale pour les personnes morales (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $nomRaisonSociale;
     /**
@@ -37,11 +37,11 @@ class Result extends \ArrayObject
      */
     protected $sigle;
     /**
-     * @var int
+     * @var int|null
      */
     protected $nombreEtablissements;
     /**
-     * @var int
+     * @var int|null
      */
     protected $nombreEtablissementsOuverts;
     /**
@@ -51,49 +51,49 @@ class Result extends \ArrayObject
     /**
      * Code de l'activité principale exercée (APE) par l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $activitePrincipale;
     /**
      * Activité principale de l'unité légale selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @var string
+     * @var string|null
      */
     protected $activitePrincipaleNaf25;
     /**
      * Catégorie d'entreprise de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $categorieEntreprise;
     /**
      * Caractère employeur de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $caractereEmployeur;
     /**
      * Année de validité correspondant à la catégorie d'entreprise diffusée (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $anneeCategorieEntreprise;
     /**
      * Date de création de l'unité légale (source : base SIRENE).
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $dateCreation;
     /**
      * Date de fermeture de l'unité légale (source : base historique SIRENE).
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $dateFermeture;
     /**
      * Date de la dernière modification d'une variable de niveau unité légale, qu'elle soit historisée ou non (source : base SIRENE).
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $dateMiseAJour;
     /**
@@ -115,37 +115,37 @@ class Result extends \ArrayObject
     /**
      * État administratif de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $etatAdministratif;
     /**
      * Catégorie juridique de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $natureJuridique;
     /**
      * Calculée à partir de l'activité principale.
      *
-     * @var string
+     * @var string|null
      */
     protected $sectionActivitePrincipale;
     /**
      * Tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $trancheEffectifSalarie;
     /**
      * Année de validité de la tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $anneeTrancheEffectifSalarie;
     /**
      * Statut de diffusion de l'unité légale. Toutes les unités légales diffusibles ont le statut de diffusion à "O". Les unités légales ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @var string
+     * @var string|null
      */
     protected $statutDiffusion;
     /**
@@ -169,20 +169,20 @@ class Result extends \ArrayObject
     /**
      * le numéro unique de l'entreprise
      *
-     * @return string
+     * @return string|null
      */
-    public function getSiren(): string
+    public function getSiren(): ?string
     {
         return $this->siren;
     }
     /**
      * le numéro unique de l'entreprise
      *
-     * @param string $siren
+     * @param string|null $siren
      *
      * @return self
      */
-    public function setSiren(string $siren): self
+    public function setSiren(?string $siren): self
     {
         $this->initialized['siren'] = true;
         $this->siren = $siren;
@@ -191,20 +191,20 @@ class Result extends \ArrayObject
     /**
      * Champ construit depuis les champs de dénomination : dénomination de l'unité légale | Nom et prénom | Nom inconnu (dénomination usuelle : Construite en priorité à partir de la dénomination usuelle de l'établissement siège. Si cette dernière n'existe pas, elle est construite à partir des trois champs de dénomination usuelle de l'unité légale. source : base SIRENE) (sigle de l'unité légale)
      *
-     * @return string
+     * @return string|null
      */
-    public function getNomComplet(): string
+    public function getNomComplet(): ?string
     {
         return $this->nomComplet;
     }
     /**
      * Champ construit depuis les champs de dénomination : dénomination de l'unité légale | Nom et prénom | Nom inconnu (dénomination usuelle : Construite en priorité à partir de la dénomination usuelle de l'établissement siège. Si cette dernière n'existe pas, elle est construite à partir des trois champs de dénomination usuelle de l'unité légale. source : base SIRENE) (sigle de l'unité légale)
      *
-     * @param string $nomComplet
+     * @param string|null $nomComplet
      *
      * @return self
      */
-    public function setNomComplet(string $nomComplet): self
+    public function setNomComplet(?string $nomComplet): self
     {
         $this->initialized['nomComplet'] = true;
         $this->nomComplet = $nomComplet;
@@ -213,20 +213,20 @@ class Result extends \ArrayObject
     /**
      * La raison sociale pour les personnes morales (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getNomRaisonSociale(): string
+    public function getNomRaisonSociale(): ?string
     {
         return $this->nomRaisonSociale;
     }
     /**
      * La raison sociale pour les personnes morales (source : base SIRENE).
      *
-     * @param string $nomRaisonSociale
+     * @param string|null $nomRaisonSociale
      *
      * @return self
      */
-    public function setNomRaisonSociale(string $nomRaisonSociale): self
+    public function setNomRaisonSociale(?string $nomRaisonSociale): self
     {
         $this->initialized['nomRaisonSociale'] = true;
         $this->nomRaisonSociale = $nomRaisonSociale;
@@ -255,36 +255,36 @@ class Result extends \ArrayObject
         return $this;
     }
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNombreEtablissements(): int
+    public function getNombreEtablissements(): ?int
     {
         return $this->nombreEtablissements;
     }
     /**
-     * @param int $nombreEtablissements
+     * @param int|null $nombreEtablissements
      *
      * @return self
      */
-    public function setNombreEtablissements(int $nombreEtablissements): self
+    public function setNombreEtablissements(?int $nombreEtablissements): self
     {
         $this->initialized['nombreEtablissements'] = true;
         $this->nombreEtablissements = $nombreEtablissements;
         return $this;
     }
     /**
-     * @return int
+     * @return int|null
      */
-    public function getNombreEtablissementsOuverts(): int
+    public function getNombreEtablissementsOuverts(): ?int
     {
         return $this->nombreEtablissementsOuverts;
     }
     /**
-     * @param int $nombreEtablissementsOuverts
+     * @param int|null $nombreEtablissementsOuverts
      *
      * @return self
      */
-    public function setNombreEtablissementsOuverts(int $nombreEtablissementsOuverts): self
+    public function setNombreEtablissementsOuverts(?int $nombreEtablissementsOuverts): self
     {
         $this->initialized['nombreEtablissementsOuverts'] = true;
         $this->nombreEtablissementsOuverts = $nombreEtablissementsOuverts;
@@ -311,20 +311,20 @@ class Result extends \ArrayObject
     /**
      * Code de l'activité principale exercée (APE) par l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getActivitePrincipale(): string
+    public function getActivitePrincipale(): ?string
     {
         return $this->activitePrincipale;
     }
     /**
      * Code de l'activité principale exercée (APE) par l'unité légale (source : base SIRENE).
      *
-     * @param string $activitePrincipale
+     * @param string|null $activitePrincipale
      *
      * @return self
      */
-    public function setActivitePrincipale(string $activitePrincipale): self
+    public function setActivitePrincipale(?string $activitePrincipale): self
     {
         $this->initialized['activitePrincipale'] = true;
         $this->activitePrincipale = $activitePrincipale;
@@ -333,20 +333,20 @@ class Result extends \ArrayObject
     /**
      * Activité principale de l'unité légale selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @return string
+     * @return string|null
      */
-    public function getActivitePrincipaleNaf25(): string
+    public function getActivitePrincipaleNaf25(): ?string
     {
         return $this->activitePrincipaleNaf25;
     }
     /**
      * Activité principale de l'unité légale selon la nomenclature NAF 2025 (source : base SIRENE). Champ temporaire, supprimé à compter du 1er janvier 2027.
      *
-     * @param string $activitePrincipaleNaf25
+     * @param string|null $activitePrincipaleNaf25
      *
      * @return self
      */
-    public function setActivitePrincipaleNaf25(string $activitePrincipaleNaf25): self
+    public function setActivitePrincipaleNaf25(?string $activitePrincipaleNaf25): self
     {
         $this->initialized['activitePrincipaleNaf25'] = true;
         $this->activitePrincipaleNaf25 = $activitePrincipaleNaf25;
@@ -355,20 +355,20 @@ class Result extends \ArrayObject
     /**
      * Catégorie d'entreprise de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getCategorieEntreprise(): string
+    public function getCategorieEntreprise(): ?string
     {
         return $this->categorieEntreprise;
     }
     /**
      * Catégorie d'entreprise de l'unité légale (source : base SIRENE).
      *
-     * @param string $categorieEntreprise
+     * @param string|null $categorieEntreprise
      *
      * @return self
      */
-    public function setCategorieEntreprise(string $categorieEntreprise): self
+    public function setCategorieEntreprise(?string $categorieEntreprise): self
     {
         $this->initialized['categorieEntreprise'] = true;
         $this->categorieEntreprise = $categorieEntreprise;
@@ -377,20 +377,20 @@ class Result extends \ArrayObject
     /**
      * Caractère employeur de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getCaractereEmployeur(): string
+    public function getCaractereEmployeur(): ?string
     {
         return $this->caractereEmployeur;
     }
     /**
      * Caractère employeur de l'unité légale (source : base SIRENE).
      *
-     * @param string $caractereEmployeur
+     * @param string|null $caractereEmployeur
      *
      * @return self
      */
-    public function setCaractereEmployeur(string $caractereEmployeur): self
+    public function setCaractereEmployeur(?string $caractereEmployeur): self
     {
         $this->initialized['caractereEmployeur'] = true;
         $this->caractereEmployeur = $caractereEmployeur;
@@ -399,20 +399,20 @@ class Result extends \ArrayObject
     /**
      * Année de validité correspondant à la catégorie d'entreprise diffusée (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getAnneeCategorieEntreprise(): string
+    public function getAnneeCategorieEntreprise(): ?string
     {
         return $this->anneeCategorieEntreprise;
     }
     /**
      * Année de validité correspondant à la catégorie d'entreprise diffusée (source : base SIRENE).
      *
-     * @param string $anneeCategorieEntreprise
+     * @param string|null $anneeCategorieEntreprise
      *
      * @return self
      */
-    public function setAnneeCategorieEntreprise(string $anneeCategorieEntreprise): self
+    public function setAnneeCategorieEntreprise(?string $anneeCategorieEntreprise): self
     {
         $this->initialized['anneeCategorieEntreprise'] = true;
         $this->anneeCategorieEntreprise = $anneeCategorieEntreprise;
@@ -421,20 +421,20 @@ class Result extends \ArrayObject
     /**
      * Date de création de l'unité légale (source : base SIRENE).
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDateCreation(): \DateTime
+    public function getDateCreation(): ?\DateTime
     {
         return $this->dateCreation;
     }
     /**
      * Date de création de l'unité légale (source : base SIRENE).
      *
-     * @param \DateTime $dateCreation
+     * @param \DateTime|null $dateCreation
      *
      * @return self
      */
-    public function setDateCreation(\DateTime $dateCreation): self
+    public function setDateCreation(?\DateTime $dateCreation): self
     {
         $this->initialized['dateCreation'] = true;
         $this->dateCreation = $dateCreation;
@@ -443,20 +443,20 @@ class Result extends \ArrayObject
     /**
      * Date de fermeture de l'unité légale (source : base historique SIRENE).
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDateFermeture(): \DateTime
+    public function getDateFermeture(): ?\DateTime
     {
         return $this->dateFermeture;
     }
     /**
      * Date de fermeture de l'unité légale (source : base historique SIRENE).
      *
-     * @param \DateTime $dateFermeture
+     * @param \DateTime|null $dateFermeture
      *
      * @return self
      */
-    public function setDateFermeture(\DateTime $dateFermeture): self
+    public function setDateFermeture(?\DateTime $dateFermeture): self
     {
         $this->initialized['dateFermeture'] = true;
         $this->dateFermeture = $dateFermeture;
@@ -465,20 +465,20 @@ class Result extends \ArrayObject
     /**
      * Date de la dernière modification d'une variable de niveau unité légale, qu'elle soit historisée ou non (source : base SIRENE).
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDateMiseAJour(): \DateTime
+    public function getDateMiseAJour(): ?\DateTime
     {
         return $this->dateMiseAJour;
     }
     /**
      * Date de la dernière modification d'une variable de niveau unité légale, qu'elle soit historisée ou non (source : base SIRENE).
      *
-     * @param \DateTime $dateMiseAJour
+     * @param \DateTime|null $dateMiseAJour
      *
      * @return self
      */
-    public function setDateMiseAJour(\DateTime $dateMiseAJour): self
+    public function setDateMiseAJour(?\DateTime $dateMiseAJour): self
     {
         $this->initialized['dateMiseAJour'] = true;
         $this->dateMiseAJour = $dateMiseAJour;
@@ -549,20 +549,20 @@ class Result extends \ArrayObject
     /**
      * État administratif de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getEtatAdministratif(): string
+    public function getEtatAdministratif(): ?string
     {
         return $this->etatAdministratif;
     }
     /**
      * État administratif de l'unité légale (source : base SIRENE).
      *
-     * @param string $etatAdministratif
+     * @param string|null $etatAdministratif
      *
      * @return self
      */
-    public function setEtatAdministratif(string $etatAdministratif): self
+    public function setEtatAdministratif(?string $etatAdministratif): self
     {
         $this->initialized['etatAdministratif'] = true;
         $this->etatAdministratif = $etatAdministratif;
@@ -571,20 +571,20 @@ class Result extends \ArrayObject
     /**
      * Catégorie juridique de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getNatureJuridique(): string
+    public function getNatureJuridique(): ?string
     {
         return $this->natureJuridique;
     }
     /**
      * Catégorie juridique de l'unité légale (source : base SIRENE).
      *
-     * @param string $natureJuridique
+     * @param string|null $natureJuridique
      *
      * @return self
      */
-    public function setNatureJuridique(string $natureJuridique): self
+    public function setNatureJuridique(?string $natureJuridique): self
     {
         $this->initialized['natureJuridique'] = true;
         $this->natureJuridique = $natureJuridique;
@@ -593,20 +593,20 @@ class Result extends \ArrayObject
     /**
      * Calculée à partir de l'activité principale.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSectionActivitePrincipale(): string
+    public function getSectionActivitePrincipale(): ?string
     {
         return $this->sectionActivitePrincipale;
     }
     /**
      * Calculée à partir de l'activité principale.
      *
-     * @param string $sectionActivitePrincipale
+     * @param string|null $sectionActivitePrincipale
      *
      * @return self
      */
-    public function setSectionActivitePrincipale(string $sectionActivitePrincipale): self
+    public function setSectionActivitePrincipale(?string $sectionActivitePrincipale): self
     {
         $this->initialized['sectionActivitePrincipale'] = true;
         $this->sectionActivitePrincipale = $sectionActivitePrincipale;
@@ -615,20 +615,20 @@ class Result extends \ArrayObject
     /**
      * Tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getTrancheEffectifSalarie(): string
+    public function getTrancheEffectifSalarie(): ?string
     {
         return $this->trancheEffectifSalarie;
     }
     /**
      * Tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @param string $trancheEffectifSalarie
+     * @param string|null $trancheEffectifSalarie
      *
      * @return self
      */
-    public function setTrancheEffectifSalarie(string $trancheEffectifSalarie): self
+    public function setTrancheEffectifSalarie(?string $trancheEffectifSalarie): self
     {
         $this->initialized['trancheEffectifSalarie'] = true;
         $this->trancheEffectifSalarie = $trancheEffectifSalarie;
@@ -637,20 +637,20 @@ class Result extends \ArrayObject
     /**
      * Année de validité de la tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getAnneeTrancheEffectifSalarie(): string
+    public function getAnneeTrancheEffectifSalarie(): ?string
     {
         return $this->anneeTrancheEffectifSalarie;
     }
     /**
      * Année de validité de la tranche d'effectif salarié de l'unité légale (source : base SIRENE).
      *
-     * @param string $anneeTrancheEffectifSalarie
+     * @param string|null $anneeTrancheEffectifSalarie
      *
      * @return self
      */
-    public function setAnneeTrancheEffectifSalarie(string $anneeTrancheEffectifSalarie): self
+    public function setAnneeTrancheEffectifSalarie(?string $anneeTrancheEffectifSalarie): self
     {
         $this->initialized['anneeTrancheEffectifSalarie'] = true;
         $this->anneeTrancheEffectifSalarie = $anneeTrancheEffectifSalarie;
@@ -659,20 +659,20 @@ class Result extends \ArrayObject
     /**
      * Statut de diffusion de l'unité légale. Toutes les unités légales diffusibles ont le statut de diffusion à "O". Les unités légales ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @return string
+     * @return string|null
      */
-    public function getStatutDiffusion(): string
+    public function getStatutDiffusion(): ?string
     {
         return $this->statutDiffusion;
     }
     /**
      * Statut de diffusion de l'unité légale. Toutes les unités légales diffusibles ont le statut de diffusion à "O". Les unités légales ayant fait l'objet d'une demande d'opposition ont le statut de diffusion à "P" pour diffusion partielle (source : base SIRENE).
      *
-     * @param string $statutDiffusion
+     * @param string|null $statutDiffusion
      *
      * @return self
      */
-    public function setStatutDiffusion(string $statutDiffusion): self
+    public function setStatutDiffusion(?string $statutDiffusion): self
     {
         $this->initialized['statutDiffusion'] = true;
         $this->statutDiffusion = $statutDiffusion;

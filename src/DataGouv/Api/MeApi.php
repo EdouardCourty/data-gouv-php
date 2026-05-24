@@ -24,7 +24,7 @@ final class MeApi
     /**
      *
      */
-        public function deleteMe(): null
+        public function deleteMe(): mixed
     {
         try {
             return $this->client->deleteMe(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -103,7 +103,7 @@ final class MeApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RevokeApiTokenGoneException
      *
      */
-        public function revokeApiToken(string $apiToken): null
+        public function revokeApiToken(string $apiToken): mixed
     {
         try {
             return $this->client->revokeApiToken($apiToken, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -236,7 +236,7 @@ final class MeApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\AcceptOrgInvitationNotFoundException
      *
      */
-        public function acceptOrgInvitation(string $id): null
+        public function acceptOrgInvitation(string $id): mixed
     {
         try {
             return $this->client->acceptOrgInvitation($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -251,7 +251,7 @@ final class MeApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RefuseOrgInvitationNotFoundException
      *
      */
-        public function refuseOrgInvitation(string $id): null
+        public function refuseOrgInvitation(string $id): mixed
     {
         try {
             return $this->client->refuseOrgInvitation($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

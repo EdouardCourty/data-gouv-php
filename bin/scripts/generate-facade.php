@@ -87,8 +87,9 @@ ksort($tagMethods);
 
 // ─── Generate Exception hierarchy ────────────────────────────────────────────
 
-if (!is_dir($config->exceptionDir)) {
-    mkdir($config->exceptionDir, 0755, true);
+if (!is_dir($config->exceptionDir) && !mkdir($config->exceptionDir, 0755, true)) {
+    fwrite(\STDERR, "ERROR: Could not create directory {$config->exceptionDir}\n");
+    exit(1);
 }
 
 $exceptionRenderer = new ExceptionRenderer();
@@ -99,8 +100,9 @@ echo 'Generated Exception/' . $config->exceptionBaseClass . ".php (+ 4 subclasse
 
 // ─── Generate Api/ sub-clients ────────────────────────────────────────────────
 
-if (!is_dir($config->apiDir)) {
-    mkdir($config->apiDir, 0755, true);
+if (!is_dir($config->apiDir) && !mkdir($config->apiDir, 0755, true)) {
+    fwrite(\STDERR, "ERROR: Could not create directory {$config->apiDir}\n");
+    exit(1);
 }
 
 $apiRenderer = new ApiClassRenderer();

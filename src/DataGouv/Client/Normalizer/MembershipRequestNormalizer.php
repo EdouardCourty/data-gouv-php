@@ -51,7 +51,7 @@ class MembershipRequestNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setComment(null);
         }
         if (\array_key_exists('created', $data) && $data['created'] !== null) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         elseif (\array_key_exists('created', $data) && $data['created'] === null) {
             $object->setCreated(null);

@@ -8,7 +8,7 @@ use Ecourty\DataGouv\DataServices\Geoplateforme\Client\Client;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception\ClientException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\ApiException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\AuthenticationException;
-use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\GeoplatformeException;
+use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\GeoplateformeException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\NotFoundException;
 
@@ -34,7 +34,7 @@ final class GetCapabilitiesApi
         }
     }
 
-    private function convertException(ClientException $e): GeoplatformeException
+    private function convertException(ClientException $e): GeoplateformeException
     {
         return match ($e->getCode()) {
             401 => new AuthenticationException($e->getMessage(), $e),

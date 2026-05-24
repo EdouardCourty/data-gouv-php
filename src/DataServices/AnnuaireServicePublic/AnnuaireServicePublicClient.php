@@ -15,9 +15,7 @@ use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * Main entry point for the Annuaire des services publics API.
- *
- * @see https://api-lannuaire.service-public.gouv.fr
+ * @see https://api-lannuaire.service-public.gouv.fr/api/explore/v2.1
  */
 final class AnnuaireServicePublicClient
 {
@@ -42,11 +40,22 @@ final class AnnuaireServicePublicClient
 
         $plugins = [
             new AddHostPlugin($uri),
-            new AddPathPlugin($uri),
         ];
+
+        if ($uri->getPath() !== '' && $uri->getPath() !== '/') {
+            $plugins[] = new AddPathPlugin($uri);
+        }
 
         /** @var Client $janeClient */
         $janeClient = Client::create(new PluginClient($httpClient, $plugins));
         $this->janeClient = $janeClient;
+    }
+
+    /**
+     * Returns the underlying Jane-generated client for advanced usage (e.g. FETCH_RESPONSE).
+     */
+    public function getClient(): Client
+    {
+        return $this->janeClient;
     }
 }

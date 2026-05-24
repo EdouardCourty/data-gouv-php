@@ -72,7 +72,7 @@ final class DataservicesApi
     /**
      *
      */
-        public function recentDataservicesAtomFeed(): null
+        public function recentDataservicesAtomFeed(): mixed
     {
         try {
             return $this->client->recentDataservicesAtomFeed(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -88,7 +88,7 @@ final class DataservicesApi
      * }
      *
      */
-        public function deleteDataservice(string $dataservice, array $queryParameters = []): null
+        public function deleteDataservice(string $dataservice, array $queryParameters = []): mixed
     {
         try {
             return $this->client->deleteDataservice($dataservice, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -190,7 +190,7 @@ final class DataservicesApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDataserviceGoneException
      *
      */
-        public function rdfDataservice(string $dataservice): null
+        public function rdfDataservice(string $dataservice): mixed
     {
         try {
             return $this->client->rdfDataservice($dataservice, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -206,7 +206,7 @@ final class DataservicesApi
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDataserviceFormatGoneException
      *
      */
-        public function rdfDataserviceFormat(string $dataservice, string $format): null
+        public function rdfDataserviceFormat(string $dataservice, string $format): mixed
     {
         try {
             return $this->client->rdfDataserviceFormat($dataservice, $format, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -220,7 +220,7 @@ final class DataservicesApi
      * @param string $id
      *
      */
-        public function unfollowDataservice(string $id): null
+        public function unfollowDataservice(string $id): mixed
     {
         try {
             return $this->client->unfollowDataservice($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -255,7 +255,7 @@ final class DataservicesApi
      * @param string $id
      *
      */
-        public function followDataservice(string $id): null
+        public function followDataservice(string $id): mixed
     {
         try {
             return $this->client->followDataservice($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

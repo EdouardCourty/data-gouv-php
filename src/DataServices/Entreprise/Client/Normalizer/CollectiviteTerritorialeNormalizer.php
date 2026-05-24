@@ -37,13 +37,19 @@ class CollectiviteTerritorialeNormalizer implements DenormalizerInterface, Norma
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
             unset($data['code']);
         }
-        if (\array_key_exists('code_insee', $data)) {
+        elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('code_insee', $data) && $data['code_insee'] !== null) {
             $object->setCodeInsee($data['code_insee']);
             unset($data['code_insee']);
+        }
+        elseif (\array_key_exists('code_insee', $data) && $data['code_insee'] === null) {
+            $object->setCodeInsee(null);
         }
         if (\array_key_exists('elus', $data)) {
             $values = [];
@@ -53,9 +59,12 @@ class CollectiviteTerritorialeNormalizer implements DenormalizerInterface, Norma
             $object->setElus($values);
             unset($data['elus']);
         }
-        if (\array_key_exists('niveau', $data)) {
+        if (\array_key_exists('niveau', $data) && $data['niveau'] !== null) {
             $object->setNiveau($data['niveau']);
             unset($data['niveau']);
+        }
+        elseif (\array_key_exists('niveau', $data) && $data['niveau'] === null) {
+            $object->setNiveau(null);
         }
         foreach ($data as $key => $value_1) {
             if (preg_match('/.*/', (string) $key)) {
@@ -67,10 +76,10 @@ class CollectiviteTerritorialeNormalizer implements DenormalizerInterface, Norma
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('code') && null !== $data->getCode()) {
+        if ($data->isInitialized('code')) {
             $dataArray['code'] = $data->getCode();
         }
-        if ($data->isInitialized('codeInsee') && null !== $data->getCodeInsee()) {
+        if ($data->isInitialized('codeInsee')) {
             $dataArray['code_insee'] = $data->getCodeInsee();
         }
         if ($data->isInitialized('elus') && null !== $data->getElus()) {
@@ -80,7 +89,7 @@ class CollectiviteTerritorialeNormalizer implements DenormalizerInterface, Norma
             }
             $dataArray['elus'] = $values;
         }
-        if ($data->isInitialized('niveau') && null !== $data->getNiveau()) {
+        if ($data->isInitialized('niveau')) {
             $dataArray['niveau'] = $data->getNiveau();
         }
         foreach ($data as $key => $value_1) {

@@ -65,9 +65,14 @@ final class ApiClassRenderer
     private function renderMethod(MethodInfo $info, string $janeNs): string
     {
         $fetchConst = '\\' . $janeNs . '\\Client::FETCH_OBJECT';
-        $callArgs = $info->callArgs !== ''
-            ? $info->callArgs . ', ' . $fetchConst
-            : $fetchConst;
+
+        $parts = array_filter([
+            $info->callArgsBefore,
+            $fetchConst,
+            $info->callArgsAfter,
+        ], static fn (string $s): bool => $s !== '');
+
+        $callArgs = implode(', ', $parts);
 
         $doc = $info->docblock !== '' ? $info->docblock . "\n        " : '';
 

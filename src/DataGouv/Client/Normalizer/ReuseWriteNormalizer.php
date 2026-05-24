@@ -41,7 +41,7 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
             $data['private'] = (bool) $data['private'];
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived']));
+            $object->setArchived((new \DateTime($data['archived'])));
         }
         elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
@@ -61,7 +61,7 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setDatasets($values_1);
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['deleted']));
+            $object->setDeleted((new \DateTime($data['deleted'])));
         }
         elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);

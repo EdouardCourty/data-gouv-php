@@ -22,7 +22,7 @@ $query = 'Lyon';
 echo "Searching communes matching '{$query}'...\n\n";
 
 try {
-    $communes = $client->communes->getCommunes(['nom' => $query, 'fields' => 'nom,code,codesPostaux,population', 'limit' => 5]);
+    $communes = $client->communes->getCommunes(['nom' => $query, 'fields' => ['nom', 'code', 'codesPostaux', 'population']]);
 
     if (empty($communes)) {
         echo "No communes found.\n";
@@ -45,7 +45,7 @@ try {
 
 echo "\nFetching a specific département (69 — Rhône)...\n";
 try {
-    $dept = $client->departements->getDepartementByCode(code: '69');
+    $dept = $client->departements->getDepartementsByCode(code: '69');
     echo \sprintf("  %s (code: %s)\n", $dept?->getNom() ?? 'N/A', $dept?->getCode() ?? 'N/A');
 } catch (Throwable $e) {
     echo 'Error: ' . $e->getMessage() . "\n";

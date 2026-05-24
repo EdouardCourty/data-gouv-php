@@ -44,7 +44,7 @@ class HarvestDatasetMetadataNormalizer implements DenormalizerInterface, Normali
             $object->setArchived(null);
         }
         if (\array_key_exists('archived_at', $data) && $data['archived_at'] !== null) {
-            $object->setArchivedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['archived_at']));
+            $object->setArchivedAt((new \DateTime($data['archived_at'])));
         }
         elseif (\array_key_exists('archived_at', $data) && $data['archived_at'] === null) {
             $object->setArchivedAt(null);
@@ -56,7 +56,7 @@ class HarvestDatasetMetadataNormalizer implements DenormalizerInterface, Normali
             $object->setBackend(null);
         }
         if (\array_key_exists('created_at', $data) && $data['created_at'] !== null) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
             $object->setCreatedAt(null);
@@ -74,19 +74,19 @@ class HarvestDatasetMetadataNormalizer implements DenormalizerInterface, Normali
             $object->setDomain(null);
         }
         if (\array_key_exists('issued_at', $data) && $data['issued_at'] !== null) {
-            $object->setIssuedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['issued_at']));
+            $object->setIssuedAt((new \DateTime($data['issued_at'])));
         }
         elseif (\array_key_exists('issued_at', $data) && $data['issued_at'] === null) {
             $object->setIssuedAt(null);
         }
         if (\array_key_exists('last_update', $data) && $data['last_update'] !== null) {
-            $object->setLastUpdate(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['last_update']));
+            $object->setLastUpdate((new \DateTime($data['last_update'])));
         }
         elseif (\array_key_exists('last_update', $data) && $data['last_update'] === null) {
             $object->setLastUpdate(null);
         }
         if (\array_key_exists('modified_at', $data) && $data['modified_at'] !== null) {
-            $object->setModifiedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['modified_at']));
+            $object->setModifiedAt((new \DateTime($data['modified_at'])));
         }
         elseif (\array_key_exists('modified_at', $data) && $data['modified_at'] === null) {
             $object->setModifiedAt(null);

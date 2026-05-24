@@ -41,7 +41,7 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setClass($data['class']);
         }
         if (\array_key_exists('closed', $data) && $data['closed'] !== null) {
-            $object->setClosed(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['closed']));
+            $object->setClosed((new \DateTime($data['closed'])));
         }
         elseif (\array_key_exists('closed', $data) && $data['closed'] === null) {
             $object->setClosed(null);
@@ -53,7 +53,7 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setClosedByOrganization($data['closed_by_organization']);
         }
         if (\array_key_exists('created', $data) && $data['created'] !== null) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         elseif (\array_key_exists('created', $data) && $data['created'] === null) {
             $object->setCreated(null);

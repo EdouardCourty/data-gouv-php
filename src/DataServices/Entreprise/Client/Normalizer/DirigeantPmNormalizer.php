@@ -37,21 +37,33 @@ class DirigeantPmNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('siren', $data)) {
+        if (\array_key_exists('siren', $data) && $data['siren'] !== null) {
             $object->setSiren($data['siren']);
             unset($data['siren']);
         }
-        if (\array_key_exists('denomination', $data)) {
+        elseif (\array_key_exists('siren', $data) && $data['siren'] === null) {
+            $object->setSiren(null);
+        }
+        if (\array_key_exists('denomination', $data) && $data['denomination'] !== null) {
             $object->setDenomination($data['denomination']);
             unset($data['denomination']);
         }
-        if (\array_key_exists('qualite', $data)) {
+        elseif (\array_key_exists('denomination', $data) && $data['denomination'] === null) {
+            $object->setDenomination(null);
+        }
+        if (\array_key_exists('qualite', $data) && $data['qualite'] !== null) {
             $object->setQualite($data['qualite']);
             unset($data['qualite']);
         }
-        if (\array_key_exists('type_dirigeant', $data)) {
+        elseif (\array_key_exists('qualite', $data) && $data['qualite'] === null) {
+            $object->setQualite(null);
+        }
+        if (\array_key_exists('type_dirigeant', $data) && $data['type_dirigeant'] !== null) {
             $object->setTypeDirigeant($data['type_dirigeant']);
             unset($data['type_dirigeant']);
+        }
+        elseif (\array_key_exists('type_dirigeant', $data) && $data['type_dirigeant'] === null) {
+            $object->setTypeDirigeant(null);
         }
         foreach ($data as $key => $value) {
             if (preg_match('/.*/', (string) $key)) {
@@ -63,16 +75,16 @@ class DirigeantPmNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('siren') && null !== $data->getSiren()) {
+        if ($data->isInitialized('siren')) {
             $dataArray['siren'] = $data->getSiren();
         }
-        if ($data->isInitialized('denomination') && null !== $data->getDenomination()) {
+        if ($data->isInitialized('denomination')) {
             $dataArray['denomination'] = $data->getDenomination();
         }
-        if ($data->isInitialized('qualite') && null !== $data->getQualite()) {
+        if ($data->isInitialized('qualite')) {
             $dataArray['qualite'] = $data->getQualite();
         }
-        if ($data->isInitialized('typeDirigeant') && null !== $data->getTypeDirigeant()) {
+        if ($data->isInitialized('typeDirigeant')) {
             $dataArray['type_dirigeant'] = $data->getTypeDirigeant();
         }
         foreach ($data as $key => $value) {

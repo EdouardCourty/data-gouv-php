@@ -55,7 +55,7 @@ final class WorkersApi
     /**
      *
      */
-        public function getJobsReferenceApi(): null
+        public function getJobsReferenceApi(): mixed
     {
         try {
             return $this->client->getJobsReferenceApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -68,7 +68,7 @@ final class WorkersApi
      * @param string $id A job ID
      *
      */
-        public function deleteJobApi(string $id): null
+        public function deleteJobApi(string $id): mixed
     {
         try {
             return $this->client->deleteJobApi($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

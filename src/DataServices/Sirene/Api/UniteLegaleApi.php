@@ -44,10 +44,10 @@ final class UniteLegaleApi
      * @throws \Ecourty\DataGouv\DataServices\Sirene\Client\Exception\FindByGetUniteLegaleServiceUnavailableException
      *
      */
-        public function findByGetUniteLegale(array $queryParameters = [], array $accept = []): null
+        public function findByGetUniteLegale(array $queryParameters = [], array $accept = []): mixed
     {
         try {
-            return $this->client->findByGetUniteLegale($queryParameters, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findByGetUniteLegale($queryParameters, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
@@ -66,10 +66,10 @@ final class UniteLegaleApi
      * @throws \Ecourty\DataGouv\DataServices\Sirene\Client\Exception\FindByPostUniteLegaleServiceUnavailableException
      *
      */
-        public function findByPostUniteLegale(?\Ecourty\DataGouv\DataServices\Sirene\Client\Model\UniteLegalePostMultiCriteres $requestBody = null, array $accept = []): null
+        public function findByPostUniteLegale(?\Ecourty\DataGouv\DataServices\Sirene\Client\Model\UniteLegalePostMultiCriteres $requestBody = null, array $accept = []): mixed
     {
         try {
-            return $this->client->findByPostUniteLegale($requestBody, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findByPostUniteLegale($requestBody, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
@@ -97,7 +97,7 @@ final class UniteLegaleApi
         public function findBySiren(string $siren, array $queryParameters = [], array $accept = []): null|\Ecourty\DataGouv\DataServices\Sirene\Client\Model\ReponseUniteLegale
     {
         try {
-            return $this->client->findBySiren($siren, $queryParameters, $accept, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT);
+            return $this->client->findBySiren($siren, $queryParameters, \Ecourty\DataGouv\DataServices\Sirene\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Sirene\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }

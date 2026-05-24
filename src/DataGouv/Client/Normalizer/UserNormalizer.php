@@ -112,7 +112,7 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             $object->setRoles($values_1);
         }
         if (\array_key_exists('since', $data)) {
-            $object->setSince(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['since']));
+            $object->setSince((new \DateTime($data['since'])));
         }
         if (\array_key_exists('slug', $data) && $data['slug'] !== null) {
             $object->setSlug($data['slug']);

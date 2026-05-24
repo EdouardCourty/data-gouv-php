@@ -24,7 +24,7 @@ final class ProconnectApi
     /**
      *
      */
-        public function getProconnectAuthApi(): null
+        public function getProconnectAuthApi(): mixed
     {
         try {
             return $this->client->getProconnectAuthApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -36,7 +36,7 @@ final class ProconnectApi
     /**
      *
      */
-        public function getProconnectLoginApi(): null
+        public function getProconnectLoginApi(): mixed
     {
         try {
             return $this->client->getProconnectLoginApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -48,7 +48,7 @@ final class ProconnectApi
     /**
      *
      */
-        public function getProconnectLogoutApi(): null
+        public function getProconnectLogoutApi(): mixed
     {
         try {
             return $this->client->getProconnectLogoutApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
@@ -60,7 +60,7 @@ final class ProconnectApi
     /**
      *
      */
-        public function getProconnectLogoutOAuthApi(): null
+        public function getProconnectLogoutOAuthApi(): mixed
     {
         try {
             return $this->client->getProconnectLogoutOAuthApi(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

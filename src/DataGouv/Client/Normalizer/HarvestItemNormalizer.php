@@ -45,7 +45,7 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setArgs($values);
         }
         if (\array_key_exists('created', $data)) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         if (\array_key_exists('dataservice', $data)) {
             $object->setDataservice($data['dataservice']);
@@ -54,7 +54,7 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setDataset($data['dataset']);
         }
         if (\array_key_exists('ended', $data) && $data['ended'] !== null) {
-            $object->setEnded(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['ended']));
+            $object->setEnded((new \DateTime($data['ended'])));
         }
         elseif (\array_key_exists('ended', $data) && $data['ended'] === null) {
             $object->setEnded(null);
@@ -86,7 +86,7 @@ class HarvestItemNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setRemoteUrl(null);
         }
         if (\array_key_exists('started', $data) && $data['started'] !== null) {
-            $object->setStarted(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['started']));
+            $object->setStarted((new \DateTime($data['started'])));
         }
         elseif (\array_key_exists('started', $data) && $data['started'] === null) {
             $object->setStarted(null);

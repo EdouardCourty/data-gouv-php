@@ -44,7 +44,7 @@ class OrganizationReadRequestsItemNormalizer implements DenormalizerInterface, N
             $object->setComment(null);
         }
         if (\array_key_exists('created', $data)) {
-            $object->setCreated(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['created']));
+            $object->setCreated((new \DateTime($data['created'])));
         }
         if (\array_key_exists('created_by', $data)) {
             $object->setCreatedBy($data['created_by']);
@@ -59,7 +59,7 @@ class OrganizationReadRequestsItemNormalizer implements DenormalizerInterface, N
             $object->setHandledBy($data['handled_by']);
         }
         if (\array_key_exists('handled_on', $data) && $data['handled_on'] !== null) {
-            $object->setHandledOn(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['handled_on']));
+            $object->setHandledOn((new \DateTime($data['handled_on'])));
         }
         elseif (\array_key_exists('handled_on', $data) && $data['handled_on'] === null) {
             $object->setHandledOn(null);

@@ -8,7 +8,7 @@ use Ecourty\DataGouv\DataServices\Geoplateforme\Client\Client;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception\ClientException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\ApiException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\AuthenticationException;
-use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\GeoplatformeException;
+use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\GeoplateformeException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataServices\Geoplateforme\Exception\NotFoundException;
 
@@ -80,7 +80,7 @@ final class ReverseApi
     * @throws \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception\ReverseBadRequestException
     *
     */
-        public function reverse(array $queryParameters = []): null
+        public function reverse(array $queryParameters = []): mixed
     {
         try {
             return $this->client->reverse($queryParameters, \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Client::FETCH_OBJECT);
@@ -99,16 +99,16 @@ final class ReverseApi
      * @throws \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception\ReverseCsvBadRequestException
      *
      */
-        public function reverseCsv(\Ecourty\DataGouv\DataServices\Geoplateforme\Client\Model\ReverseCsvPostBody $requestBody, array $accept = []): null
+        public function reverseCsv(\Ecourty\DataGouv\DataServices\Geoplateforme\Client\Model\ReverseCsvPostBody $requestBody, array $accept = []): mixed
     {
         try {
-            return $this->client->reverseCsv($requestBody, $accept, \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Client::FETCH_OBJECT);
+            return $this->client->reverseCsv($requestBody, \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Client::FETCH_OBJECT, $accept);
         } catch (\Ecourty\DataGouv\DataServices\Geoplateforme\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
-    private function convertException(ClientException $e): GeoplatformeException
+    private function convertException(ClientException $e): GeoplateformeException
     {
         return match ($e->getCode()) {
             401 => new AuthenticationException($e->getMessage(), $e),

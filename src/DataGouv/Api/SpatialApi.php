@@ -71,7 +71,7 @@ final class SpatialApi
      * @param string $id A zone identifier
      *
      */
-        public function spatialZone(string $id): null
+        public function spatialZone(string $id): mixed
     {
         try {
             return $this->client->spatialZone($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);

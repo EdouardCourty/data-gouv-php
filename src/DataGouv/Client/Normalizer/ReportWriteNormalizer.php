@@ -38,7 +38,7 @@ class ReportWriteNormalizer implements DenormalizerInterface, NormalizerInterfac
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('dismissed_at', $data) && $data['dismissed_at'] !== null) {
-            $object->setDismissedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dismissed_at']));
+            $object->setDismissedAt((new \DateTime($data['dismissed_at'])));
         }
         elseif (\array_key_exists('dismissed_at', $data) && $data['dismissed_at'] === null) {
             $object->setDismissedAt(null);
