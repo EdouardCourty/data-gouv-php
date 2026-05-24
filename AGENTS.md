@@ -242,15 +242,31 @@ ecourty/data-gouv-client
 Tests are located in `tests/{Unit|Integration|Functional}`.
 
 - **Unit** tests: mock the HTTP layer, test the facade, exceptions, and generator infrastructure (`ApiConfig`, `ApiConfigRegistry`, `SpecPatcher`, …)
-- **Integration** tests: hit the real API (read-only, no API key required)
+- **Integration** tests: hit the real API (read-only, no API key required). One directory per API domain, one file per logical group of sub-clients.
 - **Functional** tests: end-to-end flows with authentication
 
-Run:
+### Integration test structure
+
+Every integration test class extends `tests/Integration/IntegrationTestCase.php`, which provides:
+
+| Helper | Purpose |
+|---|---|
+| `callApi(callable $fn): mixed` | Wraps API calls; auto-skips on network error, 429, 503 |
+| `assertSuccessfulResponse(ResponseInterface $r)` | Asserts 2xx, skips on rate-limit/downtime |
+| `decodeResponse(ResponseInterface $r): array<array-key, mixed>` | JSON-decodes a raw PSR-7 response |
+
+Test files follow the pattern `tests/Integration/{Domain}/{Tag}IntegrationTest.php`. When testing a "get by ID" endpoint, always derive the ID from the corresponding list endpoint first.
+
+**ODS APIs** (Education, Annuaire, CalendrierScolaire, InfoFinancière) have empty Jane response handlers — use `FETCH_RESPONSE` on `$client->getClient()` and decode manually with `decodeResponse()`.
+
+### Run
+
 ```bash
-composer test          # all suites
-composer test-unit     # unit only
-composer test-fast     # alias for unit
-composer validate-registry  # check ApiConfigRegistry consistency
+composer test              # all suites (unit + integration)
+composer test-unit         # unit only (alias: composer test-fast)
+composer test-integration  # integration only (hits live APIs)
+composer validate-registry # check ApiConfigRegistry consistency
+./vendor/bin/phpunit tests/Integration/{Domain}/  # one domain only
 ```
 
 ---

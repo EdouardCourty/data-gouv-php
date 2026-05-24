@@ -131,3 +131,18 @@ See [`.github/skills/support-new-api/SKILL.md`](.github/skills/support-new-api/S
 3. Make your changes (update `AGENTS.md`, `README.md`, and `docs/` as needed)
 4. Ensure `composer qa` passes
 5. Open a pull request
+
+#### Writing integration tests
+
+Every API domain has integration tests in `tests/Integration/{Domain}/`. When adding a new API or a new endpoint, add the corresponding integration test:
+
+- Extend `IntegrationTestCase` and annotate with `#[Group('integration')]`
+- Wrap all API calls with `$this->callApi(fn () => ...)` — it auto-skips on network errors and rate limits
+- For "get by ID" endpoints, derive the ID from the list endpoint first
+- For ODS-platform APIs (OpenDataSoft), use `$client->getClient()->method(FETCH_RESPONSE)` and `$this->decodeResponse($response)` since their Jane-generated typed methods return `null`
+
+Run integration tests with:
+```bash
+composer test-integration                               # all domains
+./vendor/bin/phpunit tests/Integration/{Domain}/        # one domain only
+```

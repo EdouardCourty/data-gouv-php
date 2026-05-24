@@ -165,7 +165,84 @@ return new CompositePatcher(
 3. **Complete the documentation stub**: fill in `docs/{name}.md` — description, sub-clients table, usage examples
 4. **Update `README.md`**: add the new API to the "Supported APIs" table with a link to `docs/{name}.md`
 5. **Update `AGENTS.md`**: add the new entry to the project breakdown and the `docs/` listing
-6. **Write a smoke test** in `tests/Integration/` to confirm the facade connects (optional but recommended)
+6. **Write integration tests** in `tests/Integration/{Name}/` (see below)
+
+---
+
+## Writing Integration Tests
+
+Every API must have integration tests in `tests/Integration/{Name}/`. All test classes extend the shared `IntegrationTestCase`:
+
+```php
+use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
+
+#[Group('integration')]
+final class MyApiIntegrationTest extends IntegrationTestCase
+{
+    private MyApiClient $client;
+
+    protected function setUp(): void
+    {
+        $this->client = new MyApiClient();
+    }
+
+    #[Test]
+    public function itListsResources(): void
+    {
+        $result = $this->callApi(fn () => $this->client->resources->listResources());
+        self::assertNotEmpty($result);
+    }
+}
+```
+
+### `IntegrationTestCase` helpers
+
+| Method | Purpose |
+|---|---|
+| `callApi(callable $fn): mixed` | Wraps any API call — auto-skips on network error, 429, 503 |
+| `assertSuccessfulResponse(ResponseInterface $r)` | Asserts 2xx, skips on 429/503 |
+| `decodeResponse(ResponseInterface $r): array<array-key, mixed>` | JSON-decodes a raw PSR-7 response |
+
+### List → Get by ID pattern
+
+When testing a "get by ID" endpoint, always derive the ID from the list endpoint:
+
+```php
+$list = $this->callApi(fn () => $this->client->resources->listResources());
+if (empty($list)) {
+    self::markTestSkipped('No resources available in the live API.');
+}
+$id = $list[0]->getId();
+$item = $this->callApi(fn () => $this->client->resources->getResource($id));
+self::assertSame($id, $item->getId());
+```
+
+### ODS APIs (OpenDataSoft platform)
+
+APIs on the OpenDataSoft platform (Education, Annuaire, CalendrierScolaire, InfoFinancière) have incomplete 200-response schemas — Jane generates empty handlers so typed methods return `null`. Use `FETCH_RESPONSE` via `getClient()` and decode JSON manually:
+
+```php
+use Ecourty\DataGouv\DataServices\MyApi\Client\Client as JaneClient;
+
+$response = $this->callApi(
+    fn () => $this->client->getClient()->getRecords(
+        queryParameters: ['limit' => 3],
+        fetch: JaneClient::FETCH_RESPONSE,
+    )
+);
+$this->assertSuccessfulResponse($response);
+$body = $this->decodeResponse($response);
+self::assertArrayHasKey('results', $body);
+```
+
+### Running integration tests
+
+```bash
+composer test-integration                                # all integration tests
+./vendor/bin/phpunit tests/Integration/{Name}/           # one domain only
+```
 
 ---
 

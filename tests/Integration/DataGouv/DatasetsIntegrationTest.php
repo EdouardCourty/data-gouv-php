@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Ecourty\DataGouv\Tests\Integration;
+namespace Ecourty\DataGouv\Tests\Integration\DataGouv;
 
 use Ecourty\DataGouv\DataGouv\Client\Model\Dataset;
 use Ecourty\DataGouv\DataGouv\Client\Model\DatasetPage;
 use Ecourty\DataGouv\DataGouv\Client\Model\OrganizationPage;
 use Ecourty\DataGouv\DataGouv\Client\Model\OrganizationRead;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
+use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\TestCase;
 
 /**
- * Integration tests that hit the real data.gouv.fr API.
+ * Integration tests for the DataGouv Datasets and Organizations sub-clients.
  *
- * These tests require a working internet connection and may be slow.
- * Run them with: composer test-integration
+ * Covers: listDatasets, getDataset, listOrganizations, getOrganization,
+ * listOrganizationDatasets, and dataset resources.
  */
 #[Group('integration')]
-final class DataGouvFlowTest extends TestCase
+final class DatasetsIntegrationTest extends IntegrationTestCase
 {
     private DataGouvClient $client;
 
@@ -30,10 +30,9 @@ final class DataGouvFlowTest extends TestCase
     }
 
     #[Test]
-    public function itListsDatasetsAndFetchesOneByIdFlow(): void
+    public function itListsDatasetsAndFetchesOneById(): void
     {
-        // Step 1 — list datasets matching a well-known query
-        $page = $this->client->datasets->listDatasets(['q' => 'budget', 'page_size' => 5]);
+        $page = $this->callApi(fn () => $this->client->datasets->listDatasets(['q' => 'budget', 'page_size' => 5]));
 
         self::assertInstanceOf(DatasetPage::class, $page);
         self::assertNotEmpty($page->getData());
@@ -44,8 +43,7 @@ final class DataGouvFlowTest extends TestCase
         self::assertNotEmpty($first->getTitle());
         self::assertNotEmpty($first->getSlug());
 
-        // Step 2 — fetch that exact dataset by ID
-        $dataset = $this->client->datasets->getDataset($first->getId());
+        $dataset = $this->callApi(fn () => $this->client->datasets->getDataset($first->getId()));
 
         self::assertInstanceOf(Dataset::class, $dataset);
         self::assertSame($first->getId(), $dataset->getId());
@@ -54,10 +52,9 @@ final class DataGouvFlowTest extends TestCase
     }
 
     #[Test]
-    public function itListsDatasetResourcesFlow(): void
+    public function itListsDatasetResources(): void
     {
-        // Step 1 — find a dataset that has resources
-        $page = $this->client->datasets->listDatasets(['q' => 'prenoms', 'page_size' => 10]);
+        $page = $this->callApi(fn () => $this->client->datasets->listDatasets(['q' => 'prenoms', 'page_size' => 10]));
 
         self::assertInstanceOf(DatasetPage::class, $page);
         self::assertNotEmpty($page->getData());
@@ -74,8 +71,7 @@ final class DataGouvFlowTest extends TestCase
             self::markTestSkipped('No dataset with resources found in first page of results.');
         }
 
-        // Step 2 — fetch it individually and verify resources are present
-        $dataset = $this->client->datasets->getDataset($datasetWithResources->getId());
+        $dataset = $this->callApi(fn () => $this->client->datasets->getDataset($datasetWithResources->getId()));
 
         self::assertInstanceOf(Dataset::class, $dataset);
         self::assertNotEmpty($dataset->getResources());
@@ -87,10 +83,9 @@ final class DataGouvFlowTest extends TestCase
     }
 
     #[Test]
-    public function itListsOrganizationsAndFetchesOneFlow(): void
+    public function itListsOrganizationsAndFetchesOne(): void
     {
-        // Step 1 — list organizations
-        $page = $this->client->organizations->listOrganizations(['q' => 'ministère', 'page_size' => 5]);
+        $page = $this->callApi(fn () => $this->client->organizations->listOrganizations(['q' => 'ministère', 'page_size' => 5]));
 
         self::assertInstanceOf(OrganizationPage::class, $page);
         self::assertNotEmpty($page->getData());
@@ -101,8 +96,7 @@ final class DataGouvFlowTest extends TestCase
         self::assertNotEmpty($first->getName());
         self::assertNotEmpty($first->getSlug());
 
-        // Step 2 — fetch that organization individually by ID
-        $org = $this->client->organizations->getOrganization($first->getId());
+        $org = $this->callApi(fn () => $this->client->organizations->getOrganization($first->getId()));
 
         self::assertInstanceOf(OrganizationRead::class, $org);
         self::assertSame($first->getId(), $org->getId());
@@ -110,18 +104,18 @@ final class DataGouvFlowTest extends TestCase
     }
 
     #[Test]
-    public function itListsOrganizationDatasetsFlow(): void
+    public function itListsOrganizationDatasets(): void
     {
-        // Step 1 — find an organization
-        $orgPage = $this->client->organizations->listOrganizations(['q' => 'etalab', 'page_size' => 5]);
+        $orgPage = $this->callApi(fn () => $this->client->organizations->listOrganizations(['q' => 'etalab', 'page_size' => 5]));
 
         self::assertInstanceOf(OrganizationPage::class, $orgPage);
         self::assertNotEmpty($orgPage->getData());
 
         $org = $orgPage->getData()[0];
 
-        // Step 2 — list its datasets
-        $datasetPage = $this->client->organizations->listOrganizationDatasets($org->getId(), ['page_size' => 5]);
+        $datasetPage = $this->callApi(
+            fn () => $this->client->organizations->listOrganizationDatasets($org->getId(), ['page_size' => 5]),
+        );
 
         self::assertInstanceOf(DatasetPage::class, $datasetPage);
         self::assertNotEmpty($datasetPage->getData());
@@ -130,10 +124,26 @@ final class DataGouvFlowTest extends TestCase
         self::assertNotEmpty($dataset->getId());
         self::assertNotEmpty($dataset->getTitle());
 
-        // Step 3 — fetch one of the org's datasets individually
-        $fullDataset = $this->client->datasets->getDataset($dataset->getId());
+        $fullDataset = $this->callApi(fn () => $this->client->datasets->getDataset($dataset->getId()));
 
         self::assertInstanceOf(Dataset::class, $fullDataset);
         self::assertSame($dataset->getId(), $fullDataset->getId());
+    }
+
+    #[Test]
+    public function itSearchesDatasetsWithSlug(): void
+    {
+        $page = $this->callApi(fn () => $this->client->datasets->listDatasets(['q' => 'sirene', 'page_size' => 3]));
+
+        self::assertInstanceOf(DatasetPage::class, $page);
+        self::assertNotEmpty($page->getData());
+
+        $slug = $page->getData()[0]->getSlug();
+        self::assertNotEmpty($slug);
+
+        $bySlug = $this->callApi(fn () => $this->client->datasets->getDataset($slug));
+
+        self::assertInstanceOf(Dataset::class, $bySlug);
+        self::assertSame($slug, $bySlug->getSlug());
     }
 }
