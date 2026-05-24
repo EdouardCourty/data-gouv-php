@@ -228,7 +228,7 @@ ecourty/data-gouv-client
 ├── tests/
 │   ├── Unit/
 │   ├── Integration/
-│   └── Functional/
+│   └── Integration/
 └── .github/workflows/
     ├── ci.yml                    # CI: YAML lint + tests + PHPStan + CS + drift check
     ├── release.yml               # Secure auto-release for bot-merged spec-update PRs
@@ -239,11 +239,10 @@ ecourty/data-gouv-client
 
 ## 🧪 Testing
 
-Tests are located in `tests/{Unit|Integration|Functional}`.
+Tests are located in `tests/{Unit|Integration}`.
 
 - **Unit** tests: mock the HTTP layer, test the facade, exceptions, and generator infrastructure (`ApiConfig`, `ApiConfigRegistry`, `SpecPatcher`, …)
 - **Integration** tests: hit the real API (read-only, no API key required). One directory per API domain, one file per logical group of sub-clients.
-- **Functional** tests: end-to-end flows with authentication
 
 ### Integration test structure
 

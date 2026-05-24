@@ -51,7 +51,6 @@
         "validate-registry": "php bin/console validate-registry",
         "test": "phpunit tests",
         "test-unit": "phpunit tests/Unit/",
-        "test-functional": "phpunit tests/Functional/",
         "test-integration": "phpunit tests/Integration/",
         "test-fast": "@test-unit",
         "phpstan": "phpstan analyse --memory-limit=-1",
