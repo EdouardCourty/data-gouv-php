@@ -144,5 +144,6 @@ Every API domain has integration tests in `tests/Integration/{Domain}/`. When ad
 Run integration tests with:
 ```bash
 composer test-integration                               # all domains
+composer validate-integration-coverage                  # verify every domain has ≥1 test
 ./vendor/bin/phpunit tests/Integration/{Domain}/        # one domain only
 ```

@@ -59,7 +59,7 @@ class EtablissementNormalizer implements DenormalizerInterface, NormalizerInterf
             $object->setStatutDiffusionEtablissement($data['statutDiffusionEtablissement']);
         }
         if (\array_key_exists('dateCreationEtablissement', $data)) {
-            $object->setDateCreationEtablissement(\DateTime::createFromFormat('Y-m-d', $data['dateCreationEtablissement'])->setTime(0, 0, 0));
+            $object->setDateCreationEtablissement((new \DateTime($data['dateCreationEtablissement']))->setTime(0, 0, 0));
         }
         if (\array_key_exists('trancheEffectifsEtablissement', $data)) {
             $object->setTrancheEffectifsEtablissement($data['trancheEffectifsEtablissement']);
@@ -71,7 +71,7 @@ class EtablissementNormalizer implements DenormalizerInterface, NormalizerInterf
             $object->setActivitePrincipaleRegistreMetiersEtablissement($data['activitePrincipaleRegistreMetiersEtablissement']);
         }
         if (\array_key_exists('dateDernierTraitementEtablissement', $data)) {
-            $object->setDateDernierTraitementEtablissement(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dateDernierTraitementEtablissement']));
+            $object->setDateDernierTraitementEtablissement((new \DateTime($data['dateDernierTraitementEtablissement'])));
         }
         if (\array_key_exists('etablissementSiege', $data)) {
             $object->setEtablissementSiege($data['etablissementSiege']);

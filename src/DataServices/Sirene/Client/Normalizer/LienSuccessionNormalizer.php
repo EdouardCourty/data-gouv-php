@@ -50,7 +50,7 @@ class LienSuccessionNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setSiretEtablissementSuccesseur($data['siretEtablissementSuccesseur']);
         }
         if (\array_key_exists('dateLienSuccession', $data)) {
-            $object->setDateLienSuccession(\DateTime::createFromFormat('Y-m-d', $data['dateLienSuccession'])->setTime(0, 0, 0));
+            $object->setDateLienSuccession((new \DateTime($data['dateLienSuccession']))->setTime(0, 0, 0));
         }
         if (\array_key_exists('transfertSiege', $data)) {
             $object->setTransfertSiege($data['transfertSiege']);
@@ -59,7 +59,7 @@ class LienSuccessionNormalizer implements DenormalizerInterface, NormalizerInter
             $object->setContinuiteEconomique($data['continuiteEconomique']);
         }
         if (\array_key_exists('dateDernierTraitementLienSuccession', $data)) {
-            $object->setDateDernierTraitementLienSuccession(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dateDernierTraitementLienSuccession']));
+            $object->setDateDernierTraitementLienSuccession((new \DateTime($data['dateDernierTraitementLienSuccession'])));
         }
         return $object;
     }

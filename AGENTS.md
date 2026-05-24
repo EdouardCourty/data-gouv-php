@@ -26,18 +26,19 @@ composer generate:{api}
 
 | Path | Role |
 |---|---|
-| `bin/console` | ✍️ Symfony Console entry point — exposes `generate [--api=<name>]` and `add-api` commands |
+| `bin/console` | ✍️ Symfony Console entry point — exposes `generate [--api=<name>]`, `add-api`, `validate-registry`, and `validate-integration-coverage` commands |
 | `bin/scripts/generate-facade.php` | ✍️ Generator (phase 2): generates exceptions + sub-clients + facade. Accepts `--api=<name>` |
-| `bin/scripts/download-spec.php` | ✍️ Downloads & patches OpenAPI specs for all non-DataGouv APIs. Handles Entreprise (missing operationIds) and API Géo (YAML→JSON + operationId injection) |
-| `bin/scripts/patch-spec.php` | ✍️ Downloads & patches the DataGouv Swagger 2.0 spec (nullable fields) |
+| `bin/scripts/download-spec.php` | ✍️ Downloads and (optionally) patches an OpenAPI spec for any API. Loads `bin/scripts/patches/{name}.php` automatically when it exists |
 | `bin/scripts/patch-generated.php` | ✍️ Fixes DateTime parsing in Jane-generated normalizers. Accepts a directory argument |
 | `config/jane/` | ✍️ Jane PHP config files — one per API (e.g. `datagouv.php`, `sirene.php`, …) |
 | `src/Generator/ApiConfig.php` | ✍️ Immutable value object with all per-API generation config (including `exceptionDir`) |
 | `src/Generator/ApiConfigRegistry.php` | ✍️ Returns `ApiConfig` by name for all registered APIs; holds spec URLs |
+| `src/Generator/IntegrationCoverageValidator.php` | ✍️ Validates every registered API has ≥1 `*Test.php` in `tests/Integration/{Domain}/` — run via `composer validate-integration-coverage` |
 | `src/Generator/RegistryValidator.php` | ✍️ Validates consistency of `all()` / `get()` / `specUrls()` — run via `composer validate-registry` |
 | `src/Generator/Command/GenerateCommand.php` | ✍️ Orchestrates the full generation pipeline for all APIs or a single one |
 | `src/Generator/Command/AddApiCommand.php` | ✍️ Registers a new API domain (downloads spec, patches registry, creates docs stub) |
 | `src/Generator/Command/ValidateRegistryCommand.php` | ✍️ Console command `validate-registry`: reports any registry inconsistencies |
+| `src/Generator/Command/ValidateIntegrationCoverageCommand.php` | ✍️ Console command `validate-integration-coverage`: checks every API has ≥1 integration test |
 | `src/Generator/Renderer/ExceptionRenderer.php` | ✍️ Generates the 5-file exception hierarchy for any API |
 | `src/DataGouv/Client/` | **Generated** by Jane PHP from `swagger.patched.json` (Swagger 2.0) |
 | `src/DataGouv/Api/{Tag}Api.php` | **Generated** sub-clients, one per tag (21 total) |
@@ -49,6 +50,10 @@ composer generate:{api}
 | `src/DataServices/Sirene/Exception/` | **Generated** by `ExceptionRenderer` (5 files) |
 | `src/DataServices/Entreprise/` | Same structure — OpenAPI 3.0 JSON |
 | `src/DataServices/Geoplateforme/` | Same structure — OpenAPI 3.1 YAML |
+
+### Known Structural Asymmetry
+
+`data.gouv.fr` lives in `src/DataGouv/` (namespace `Ecourty\DataGouv\DataGouv`) while all other APIs live in `src/DataServices/{Name}/` (namespace `Ecourty\DataGouv\DataServices\{Name}`). This is intentional and historical — `data.gouv.fr` was the founding API. **Do not move it** without a major version bump, as it would break all consumer imports.
 
 ---
 
@@ -145,7 +150,8 @@ ecourty/data-gouv-client
 │   │   ├── Command/
 │   │   │   ├── GenerateCommand.php        # Symfony Console: orchestrates full generation pipeline
 │   │   │   ├── AddApiCommand.php          # Symfony Console: registers a new API domain
-│   │   │   └── ValidateRegistryCommand.php # Symfony Console: validate-registry consistency check
+│   │   │   ├── ValidateRegistryCommand.php # Symfony Console: validate-registry consistency check
+│   │   │   └── ValidateIntegrationCoverageCommand.php # Symfony Console: validate-integration-coverage
 │   │   ├── Renderer/
 │   │   │   ├── ApiClassRenderer.php  # Generates {Tag}Api.php sub-clients
 │   │   │   ├── ExceptionRenderer.php # Generates 5-file exception hierarchy per API
@@ -227,7 +233,6 @@ ecourty/data-gouv-client
 │   └── annuaire-search.php
 ├── tests/
 │   ├── Unit/
-│   ├── Integration/
 │   └── Integration/
 └── .github/workflows/
     ├── ci.yml                    # CI: YAML lint + tests + PHPStan + CS + drift check
@@ -264,7 +269,8 @@ Test files follow the pattern `tests/Integration/{Domain}/{Tag}IntegrationTest.p
 composer test              # all suites (unit + integration)
 composer test-unit         # unit only (alias: composer test-fast)
 composer test-integration  # integration only (hits live APIs)
-composer validate-registry # check ApiConfigRegistry consistency
+composer validate-registry            # check ApiConfigRegistry consistency
+composer validate-integration-coverage # check every API has ≥1 integration test
 ./vendor/bin/phpunit tests/Integration/{Domain}/  # one domain only
 ```
 
@@ -309,9 +315,11 @@ composer validate-registry # check ApiConfigRegistry consistency
 1. Use `php bin/add-api.php` (or `composer add-api`) — it registers the API in `ApiConfigRegistry`, downloads the spec, and creates the Jane config
 2. Run `composer validate-registry` to verify the registry is consistent (no orphaned entries)
 3. Run `composer generate` — exceptions, sub-clients, and facade are all generated automatically
-4. Create `docs/{name}.md` — document the API (auth, sub-clients table, usage examples)
-5. Update `README.md` — add the new API to the "Supported APIs" table with a link to its doc file
-6. Update `AGENTS.md` — add the new entry to the project breakdown and `docs/` listing
+4. Create `tests/Integration/{Domain}/{Tag}IntegrationTest.php` — add integration tests for all endpoints (skip when auth key is missing for authenticated APIs)
+5. Run `composer validate-integration-coverage` to confirm the new domain is covered
+6. Create `docs/{name}.md` — document the API (auth, sub-clients table, usage examples)
+7. Update `README.md` — add the new API to the "Supported APIs" table with a link to its doc file
+8. Update `AGENTS.md` — add the new entry to the project breakdown and `docs/` listing
 
 > **No other files need to change**: `phpstan.neon` uses `src/DataServices/*/Client/**` globs, `.php-cs-fixer.php` excludes all dirs named `Client` or `Api`, and `GenerateCommand` reads from `ApiConfigRegistry::all()` dynamically.
 >

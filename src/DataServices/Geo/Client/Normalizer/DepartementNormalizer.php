@@ -37,14 +37,23 @@ class DepartementNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
         }
-        if (\array_key_exists('nom', $data)) {
+        elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
         }
-        if (\array_key_exists('codeRegion', $data)) {
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
+        }
+        if (\array_key_exists('codeRegion', $data) && $data['codeRegion'] !== null) {
             $object->setCodeRegion($data['codeRegion']);
+        }
+        elseif (\array_key_exists('codeRegion', $data) && $data['codeRegion'] === null) {
+            $object->setCodeRegion(null);
         }
         if (\array_key_exists('region', $data)) {
             $object->setRegion($this->denormalizer->denormalize($data['region'], \Ecourty\DataGouv\DataServices\Geo\Client\Model\Region::class, 'json', $context));
@@ -54,13 +63,13 @@ class DepartementNormalizer implements DenormalizerInterface, NormalizerInterfac
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('code') && null !== $data->getCode()) {
+        if ($data->isInitialized('code')) {
             $dataArray['code'] = $data->getCode();
         }
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
-        if ($data->isInitialized('codeRegion') && null !== $data->getCodeRegion()) {
+        if ($data->isInitialized('codeRegion')) {
             $dataArray['codeRegion'] = $data->getCodeRegion();
         }
         if ($data->isInitialized('region') && null !== $data->getRegion()) {

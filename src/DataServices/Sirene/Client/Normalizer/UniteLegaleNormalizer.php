@@ -56,7 +56,7 @@ class UniteLegaleNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setUnitePurgeeUniteLegale($data['unitePurgeeUniteLegale']);
         }
         if (\array_key_exists('dateCreationUniteLegale', $data)) {
-            $object->setDateCreationUniteLegale(\DateTime::createFromFormat('Y-m-d', $data['dateCreationUniteLegale'])->setTime(0, 0, 0));
+            $object->setDateCreationUniteLegale((new \DateTime($data['dateCreationUniteLegale']))->setTime(0, 0, 0));
         }
         if (\array_key_exists('dateNaissanceUniteLegale', $data)) {
             $object->setDateNaissanceUniteLegale($data['dateNaissanceUniteLegale']);

@@ -51,6 +51,12 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Validate ApiConfigRegistry
+        run: composer validate-registry
+
+      - name: Validate integration test coverage
+        run: composer validate-integration-coverage
+
       - name: Regenerate client from spec
         run: composer generate
 

@@ -15,13 +15,13 @@ class Commune
     /**
      * Code INSEE de la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
      * Nom de la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
@@ -33,25 +33,25 @@ class Commune
     /**
      * Code SIREN de la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $siren;
     /**
      * Code de l'EPCI associé à la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $codeEpci;
     /**
      * Code du département associé à la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $codeDepartement;
     /**
      * Code de la région associée à la commune
      *
-     * @var string
+     * @var string|null
      */
     protected $codeRegion;
     /**
@@ -81,7 +81,7 @@ class Commune
     /**
      * Population municipale
      *
-     * @var int
+     * @var int|null
      */
     protected $population;
     /**
@@ -93,7 +93,7 @@ class Commune
     /**
      * Surface de la commune, en hectares
      *
-     * @var float
+     * @var float|null
      */
     protected $surface;
     /**
@@ -123,20 +123,20 @@ class Commune
     /**
      * Code INSEE de la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
     /**
      * Code INSEE de la commune
      *
-     * @param string $code
+     * @param string|null $code
      *
      * @return self
      */
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -145,20 +145,20 @@ class Commune
     /**
      * Nom de la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom de la commune
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;
@@ -189,20 +189,20 @@ class Commune
     /**
      * Code SIREN de la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getSiren(): string
+    public function getSiren(): ?string
     {
         return $this->siren;
     }
     /**
      * Code SIREN de la commune
      *
-     * @param string $siren
+     * @param string|null $siren
      *
      * @return self
      */
-    public function setSiren(string $siren): self
+    public function setSiren(?string $siren): self
     {
         $this->initialized['siren'] = true;
         $this->siren = $siren;
@@ -211,20 +211,20 @@ class Commune
     /**
      * Code de l'EPCI associé à la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeEpci(): string
+    public function getCodeEpci(): ?string
     {
         return $this->codeEpci;
     }
     /**
      * Code de l'EPCI associé à la commune
      *
-     * @param string $codeEpci
+     * @param string|null $codeEpci
      *
      * @return self
      */
-    public function setCodeEpci(string $codeEpci): self
+    public function setCodeEpci(?string $codeEpci): self
     {
         $this->initialized['codeEpci'] = true;
         $this->codeEpci = $codeEpci;
@@ -233,20 +233,20 @@ class Commune
     /**
      * Code du département associé à la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeDepartement(): string
+    public function getCodeDepartement(): ?string
     {
         return $this->codeDepartement;
     }
     /**
      * Code du département associé à la commune
      *
-     * @param string $codeDepartement
+     * @param string|null $codeDepartement
      *
      * @return self
      */
-    public function setCodeDepartement(string $codeDepartement): self
+    public function setCodeDepartement(?string $codeDepartement): self
     {
         $this->initialized['codeDepartement'] = true;
         $this->codeDepartement = $codeDepartement;
@@ -255,20 +255,20 @@ class Commune
     /**
      * Code de la région associée à la commune
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeRegion(): string
+    public function getCodeRegion(): ?string
     {
         return $this->codeRegion;
     }
     /**
      * Code de la région associée à la commune
      *
-     * @param string $codeRegion
+     * @param string|null $codeRegion
      *
      * @return self
      */
-    public function setCodeRegion(string $codeRegion): self
+    public function setCodeRegion(?string $codeRegion): self
     {
         $this->initialized['codeRegion'] = true;
         $this->codeRegion = $codeRegion;
@@ -375,20 +375,20 @@ class Commune
     /**
      * Population municipale
      *
-     * @return int
+     * @return int|null
      */
-    public function getPopulation(): int
+    public function getPopulation(): ?int
     {
         return $this->population;
     }
     /**
      * Population municipale
      *
-     * @param int $population
+     * @param int|null $population
      *
      * @return self
      */
-    public function setPopulation(int $population): self
+    public function setPopulation(?int $population): self
     {
         $this->initialized['population'] = true;
         $this->population = $population;
@@ -419,20 +419,20 @@ class Commune
     /**
      * Surface de la commune, en hectares
      *
-     * @return float
+     * @return float|null
      */
-    public function getSurface(): float
+    public function getSurface(): ?float
     {
         return $this->surface;
     }
     /**
      * Surface de la commune, en hectares
      *
-     * @param float $surface
+     * @param float|null $surface
      *
      * @return self
      */
-    public function setSurface(float $surface): self
+    public function setSurface(?float $surface): self
     {
         $this->initialized['surface'] = true;
         $this->surface = $surface;

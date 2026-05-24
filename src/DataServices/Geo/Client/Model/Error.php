@@ -15,38 +15,38 @@ class Error
     /**
      * Code HTTP de l'erreur
      *
-     * @var int
+     * @var int|null
      */
     protected $code;
     /**
      * Libellé de l'erreur
      *
-     * @var string
+     * @var string|null
      */
     protected $message;
     /**
      * Explication
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
     /**
      * Code HTTP de l'erreur
      *
-     * @return int
+     * @return int|null
      */
-    public function getCode(): int
+    public function getCode(): ?int
     {
         return $this->code;
     }
     /**
      * Code HTTP de l'erreur
      *
-     * @param int $code
+     * @param int|null $code
      *
      * @return self
      */
-    public function setCode(int $code): self
+    public function setCode(?int $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -55,20 +55,20 @@ class Error
     /**
      * Libellé de l'erreur
      *
-     * @return string
+     * @return string|null
      */
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->message;
     }
     /**
      * Libellé de l'erreur
      *
-     * @param string $message
+     * @param string|null $message
      *
      * @return self
      */
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->initialized['message'] = true;
         $this->message = $message;
@@ -77,20 +77,20 @@ class Error
     /**
      * Explication
      *
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
     /**
      * Explication
      *
-     * @param string $description
+     * @param string|null $description
      *
      * @return self
      */
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->initialized['description'] = true;
         $this->description = $description;

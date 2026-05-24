@@ -44,10 +44,10 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
             $object->setStatus($data['status']);
         }
         if (\array_key_exists('createdAt', $data)) {
-            $object->setCreatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['createdAt']));
+            $object->setCreatedAt((new \DateTime($data['createdAt'])));
         }
         if (\array_key_exists('updatedAt', $data)) {
-            $object->setUpdatedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['updatedAt']));
+            $object->setUpdatedAt((new \DateTime($data['updatedAt'])));
         }
         if (\array_key_exists('params', $data)) {
             $object->setParams($this->denormalizer->denormalize($data['params'], \Ecourty\DataGouv\DataServices\Geoplateforme\Client\Model\ProjectParams::class, 'json', $context));

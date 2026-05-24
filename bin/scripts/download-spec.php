@@ -95,6 +95,11 @@ if (file_exists($patchFile)) {
 
 // ─── Save ─────────────────────────────────────────────────────────────────────
 
+$specDir = \dirname($config->specLocalPath);
+if (!is_dir($specDir)) {
+    mkdir($specDir, 0755, true);
+}
+
 file_put_contents($config->specLocalPath, $content);
 echo "Saved to {$config->specLocalPath}\n";
 

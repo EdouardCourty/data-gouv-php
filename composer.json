@@ -49,6 +49,7 @@
         ],
         "add-api": "php bin/console add-api",
         "validate-registry": "php bin/console validate-registry",
+        "validate-integration-coverage": "php bin/console validate-integration-coverage",
         "test": "phpunit tests",
         "test-unit": "phpunit tests/Unit/",
         "test-integration": "phpunit tests/Integration/",

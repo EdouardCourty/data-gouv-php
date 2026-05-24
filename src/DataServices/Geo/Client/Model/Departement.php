@@ -15,19 +15,19 @@ class Departement
     /**
      * Code du département
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
      * Nom du département
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
      * Code de la région
      *
-     * @var string
+     * @var string|null
      */
     protected $codeRegion;
     /**
@@ -37,20 +37,20 @@ class Departement
     /**
      * Code du département
      *
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
     /**
      * Code du département
      *
-     * @param string $code
+     * @param string|null $code
      *
      * @return self
      */
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -59,20 +59,20 @@ class Departement
     /**
      * Nom du département
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom du département
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;
@@ -81,20 +81,20 @@ class Departement
     /**
      * Code de la région
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeRegion(): string
+    public function getCodeRegion(): ?string
     {
         return $this->codeRegion;
     }
     /**
      * Code de la région
      *
-     * @param string $codeRegion
+     * @param string|null $codeRegion
      *
      * @return self
      */
-    public function setCodeRegion(string $codeRegion): self
+    public function setCodeRegion(?string $codeRegion): self
     {
         $this->initialized['codeRegion'] = true;
         $this->codeRegion = $codeRegion;

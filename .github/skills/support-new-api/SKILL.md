@@ -162,10 +162,11 @@ return new CompositePatcher(
 
 1. **Verify generation succeeded**: `ls src/DataServices/{Name}/`
 2. **Run QA**: `composer phpstan && composer cs-check && composer test-unit`
-3. **Complete the documentation stub**: fill in `docs/{name}.md` — description, sub-clients table, usage examples
-4. **Update `README.md`**: add the new API to the "Supported APIs" table with a link to `docs/{name}.md`
-5. **Update `AGENTS.md`**: add the new entry to the project breakdown and the `docs/` listing
-6. **Write integration tests** in `tests/Integration/{Name}/` (see below)
+3. **Write integration tests** in `tests/Integration/{Name}/` (see below)
+4. **Run coverage check**: `composer validate-integration-coverage` — must pass before opening a PR
+5. **Complete the documentation stub**: fill in `docs/{name}.md` — description, sub-clients table, usage examples
+6. **Update `README.md`**: add the new API to the "Supported APIs" table with a link to `docs/{name}.md`
+7. **Update `AGENTS.md`**: add the new entry to the project breakdown and the `docs/` listing
 
 ---
 
@@ -241,6 +242,7 @@ self::assertArrayHasKey('results', $body);
 
 ```bash
 composer test-integration                                # all integration tests
+composer validate-integration-coverage                   # verify every domain has ≥1 test
 ./vendor/bin/phpunit tests/Integration/{Name}/           # one domain only
 ```
 

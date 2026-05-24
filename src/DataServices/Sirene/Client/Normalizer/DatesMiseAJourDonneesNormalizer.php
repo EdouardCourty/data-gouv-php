@@ -41,13 +41,13 @@ class DatesMiseAJourDonneesNormalizer implements DenormalizerInterface, Normaliz
             $object->setCollection($data['collection']);
         }
         if (\array_key_exists('dateDerniereMiseADisposition', $data)) {
-            $object->setDateDerniereMiseADisposition(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dateDerniereMiseADisposition']));
+            $object->setDateDerniereMiseADisposition((new \DateTime($data['dateDerniereMiseADisposition'])));
         }
         if (\array_key_exists('dateDernierTraitementMaximum', $data)) {
-            $object->setDateDernierTraitementMaximum(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dateDernierTraitementMaximum']));
+            $object->setDateDernierTraitementMaximum((new \DateTime($data['dateDernierTraitementMaximum'])));
         }
         if (\array_key_exists('dateDernierTraitementDeMasse', $data)) {
-            $object->setDateDernierTraitementDeMasse(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['dateDernierTraitementDeMasse']));
+            $object->setDateDernierTraitementDeMasse((new \DateTime($data['dateDernierTraitementDeMasse'])));
         }
         return $object;
     }

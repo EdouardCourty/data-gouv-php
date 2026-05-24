@@ -15,32 +15,32 @@ class Region
     /**
      * Code de la région
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
      * Nom de la région
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
      * Code de la région
      *
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
     /**
      * Code de la région
      *
-     * @param string $code
+     * @param string|null $code
      *
      * @return self
      */
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -49,20 +49,20 @@ class Region
     /**
      * Nom de la région
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom de la région
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;

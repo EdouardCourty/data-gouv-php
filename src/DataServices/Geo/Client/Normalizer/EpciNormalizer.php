@@ -40,17 +40,29 @@ class EpciNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         if (\array_key_exists('surface', $data) && \is_int($data['surface'])) {
             $data['surface'] = (double) $data['surface'];
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
         }
-        if (\array_key_exists('nom', $data)) {
+        elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
         }
-        if (\array_key_exists('type', $data)) {
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
+        }
+        if (\array_key_exists('type', $data) && $data['type'] !== null) {
             $object->setType($data['type']);
         }
-        if (\array_key_exists('financement', $data)) {
+        elseif (\array_key_exists('type', $data) && $data['type'] === null) {
+            $object->setType(null);
+        }
+        if (\array_key_exists('financement', $data) && $data['financement'] !== null) {
             $object->setFinancement($data['financement']);
+        }
+        elseif (\array_key_exists('financement', $data) && $data['financement'] === null) {
+            $object->setFinancement(null);
         }
         if (\array_key_exists('codesDepartements', $data)) {
             $values = [];
@@ -66,11 +78,17 @@ class EpciNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             }
             $object->setCodesRegions($values_1);
         }
-        if (\array_key_exists('population', $data)) {
+        if (\array_key_exists('population', $data) && $data['population'] !== null) {
             $object->setPopulation($data['population']);
         }
-        if (\array_key_exists('surface', $data)) {
+        elseif (\array_key_exists('population', $data) && $data['population'] === null) {
+            $object->setPopulation(null);
+        }
+        if (\array_key_exists('surface', $data) && $data['surface'] !== null) {
             $object->setSurface($data['surface']);
+        }
+        elseif (\array_key_exists('surface', $data) && $data['surface'] === null) {
+            $object->setSurface(null);
         }
         if (\array_key_exists('centre', $data)) {
             $object->setCentre($data['centre']);
@@ -86,16 +104,16 @@ class EpciNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('code') && null !== $data->getCode()) {
+        if ($data->isInitialized('code')) {
             $dataArray['code'] = $data->getCode();
         }
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
-        if ($data->isInitialized('type') && null !== $data->getType()) {
+        if ($data->isInitialized('type')) {
             $dataArray['type'] = $data->getType();
         }
-        if ($data->isInitialized('financement') && null !== $data->getFinancement()) {
+        if ($data->isInitialized('financement')) {
             $dataArray['financement'] = $data->getFinancement();
         }
         if ($data->isInitialized('codesDepartements') && null !== $data->getCodesDepartements()) {
@@ -112,10 +130,10 @@ class EpciNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
             }
             $dataArray['codesRegions'] = $values_1;
         }
-        if ($data->isInitialized('population') && null !== $data->getPopulation()) {
+        if ($data->isInitialized('population')) {
             $dataArray['population'] = $data->getPopulation();
         }
-        if ($data->isInitialized('surface') && null !== $data->getSurface()) {
+        if ($data->isInitialized('surface')) {
             $dataArray['surface'] = $data->getSurface();
         }
         if ($data->isInitialized('centre') && null !== $data->getCentre()) {

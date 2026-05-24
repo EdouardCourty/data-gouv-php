@@ -53,10 +53,10 @@ class PeriodeEtablissementNormalizer implements DenormalizerInterface, Normalize
             $data['changementCaractereEmployeurEtablissement'] = (bool) $data['changementCaractereEmployeurEtablissement'];
         }
         if (\array_key_exists('dateFin', $data)) {
-            $object->setDateFin(\DateTime::createFromFormat('Y-m-d', $data['dateFin'])->setTime(0, 0, 0));
+            $object->setDateFin((new \DateTime($data['dateFin']))->setTime(0, 0, 0));
         }
         if (\array_key_exists('dateDebut', $data)) {
-            $object->setDateDebut(\DateTime::createFromFormat('Y-m-d', $data['dateDebut'])->setTime(0, 0, 0));
+            $object->setDateDebut((new \DateTime($data['dateDebut']))->setTime(0, 0, 0));
         }
         if (\array_key_exists('etatAdministratifEtablissement', $data)) {
             $object->setEtatAdministratifEtablissement($data['etatAdministratifEtablissement']);

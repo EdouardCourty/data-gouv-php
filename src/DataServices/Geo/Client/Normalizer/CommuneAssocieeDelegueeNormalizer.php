@@ -40,20 +40,35 @@ class CommuneAssocieeDelegueeNormalizer implements DenormalizerInterface, Normal
         if (\array_key_exists('surface', $data) && \is_int($data['surface'])) {
             $data['surface'] = (double) $data['surface'];
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
         }
-        if (\array_key_exists('nom', $data)) {
+        elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
         }
-        if (\array_key_exists('codeEpci', $data)) {
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
+        }
+        if (\array_key_exists('codeEpci', $data) && $data['codeEpci'] !== null) {
             $object->setCodeEpci($data['codeEpci']);
         }
-        if (\array_key_exists('codeDepartement', $data)) {
+        elseif (\array_key_exists('codeEpci', $data) && $data['codeEpci'] === null) {
+            $object->setCodeEpci(null);
+        }
+        if (\array_key_exists('codeDepartement', $data) && $data['codeDepartement'] !== null) {
             $object->setCodeDepartement($data['codeDepartement']);
         }
-        if (\array_key_exists('codeRegion', $data)) {
+        elseif (\array_key_exists('codeDepartement', $data) && $data['codeDepartement'] === null) {
+            $object->setCodeDepartement(null);
+        }
+        if (\array_key_exists('codeRegion', $data) && $data['codeRegion'] !== null) {
             $object->setCodeRegion($data['codeRegion']);
+        }
+        elseif (\array_key_exists('codeRegion', $data) && $data['codeRegion'] === null) {
+            $object->setCodeRegion(null);
         }
         if (\array_key_exists('epci', $data)) {
             $object->setEpci($this->denormalizer->denormalize($data['epci'], \Ecourty\DataGouv\DataServices\Geo\Client\Model\Epci::class, 'json', $context));
@@ -64,8 +79,11 @@ class CommuneAssocieeDelegueeNormalizer implements DenormalizerInterface, Normal
         if (\array_key_exists('region', $data)) {
             $object->setRegion($this->denormalizer->denormalize($data['region'], \Ecourty\DataGouv\DataServices\Geo\Client\Model\Region::class, 'json', $context));
         }
-        if (\array_key_exists('surface', $data)) {
+        if (\array_key_exists('surface', $data) && $data['surface'] !== null) {
             $object->setSurface($data['surface']);
+        }
+        elseif (\array_key_exists('surface', $data) && $data['surface'] === null) {
+            $object->setSurface(null);
         }
         if (\array_key_exists('centre', $data)) {
             $object->setCentre($data['centre']);
@@ -81,19 +99,19 @@ class CommuneAssocieeDelegueeNormalizer implements DenormalizerInterface, Normal
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('code') && null !== $data->getCode()) {
+        if ($data->isInitialized('code')) {
             $dataArray['code'] = $data->getCode();
         }
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
-        if ($data->isInitialized('codeEpci') && null !== $data->getCodeEpci()) {
+        if ($data->isInitialized('codeEpci')) {
             $dataArray['codeEpci'] = $data->getCodeEpci();
         }
-        if ($data->isInitialized('codeDepartement') && null !== $data->getCodeDepartement()) {
+        if ($data->isInitialized('codeDepartement')) {
             $dataArray['codeDepartement'] = $data->getCodeDepartement();
         }
-        if ($data->isInitialized('codeRegion') && null !== $data->getCodeRegion()) {
+        if ($data->isInitialized('codeRegion')) {
             $dataArray['codeRegion'] = $data->getCodeRegion();
         }
         if ($data->isInitialized('epci') && null !== $data->getEpci()) {
@@ -105,7 +123,7 @@ class CommuneAssocieeDelegueeNormalizer implements DenormalizerInterface, Normal
         if ($data->isInitialized('region') && null !== $data->getRegion()) {
             $dataArray['region'] = $this->normalizer->normalize($data->getRegion(), 'json', $context);
         }
-        if ($data->isInitialized('surface') && null !== $data->getSurface()) {
+        if ($data->isInitialized('surface')) {
             $dataArray['surface'] = $data->getSurface();
         }
         if ($data->isInitialized('centre') && null !== $data->getCentre()) {

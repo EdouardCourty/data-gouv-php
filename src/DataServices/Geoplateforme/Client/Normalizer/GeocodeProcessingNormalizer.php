@@ -56,13 +56,13 @@ class GeocodeProcessingNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setGlobalError($data['globalError']);
         }
         if (\array_key_exists('startedAt', $data)) {
-            $object->setStartedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['startedAt']));
+            $object->setStartedAt((new \DateTime($data['startedAt'])));
         }
         if (\array_key_exists('finishedAt', $data)) {
-            $object->setFinishedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['finishedAt']));
+            $object->setFinishedAt((new \DateTime($data['finishedAt'])));
         }
         if (\array_key_exists('heartbeat', $data)) {
-            $object->setHeartbeat(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $data['heartbeat']));
+            $object->setHeartbeat((new \DateTime($data['heartbeat'])));
         }
         return $object;
     }

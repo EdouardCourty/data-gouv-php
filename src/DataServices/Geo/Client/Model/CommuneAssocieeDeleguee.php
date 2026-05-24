@@ -15,31 +15,31 @@ class CommuneAssocieeDeleguee
     /**
      * Code INSEE de la commune associée ou déléguée
      *
-     * @var string
+     * @var string|null
      */
     protected $code;
     /**
      * Nom de la commune associée ou déléguée
      *
-     * @var string
+     * @var string|null
      */
     protected $nom;
     /**
      * Code de l'EPCI associé à la commune associée ou déléguée
      *
-     * @var string
+     * @var string|null
      */
     protected $codeEpci;
     /**
      * Code du département associé à la commune associée ou déléguée
      *
-     * @var string
+     * @var string|null
      */
     protected $codeDepartement;
     /**
      * Code de la région associée à la commune associée ou déléguée
      *
-     * @var string
+     * @var string|null
      */
     protected $codeRegion;
     /**
@@ -57,7 +57,7 @@ class CommuneAssocieeDeleguee
     /**
      * Surface de la commune associée ou déléguée, en hectares
      *
-     * @var float
+     * @var float|null
      */
     protected $surface;
     /**
@@ -81,20 +81,20 @@ class CommuneAssocieeDeleguee
     /**
      * Code INSEE de la commune associée ou déléguée
      *
-     * @return string
+     * @return string|null
      */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
     /**
      * Code INSEE de la commune associée ou déléguée
      *
-     * @param string $code
+     * @param string|null $code
      *
      * @return self
      */
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->initialized['code'] = true;
         $this->code = $code;
@@ -103,20 +103,20 @@ class CommuneAssocieeDeleguee
     /**
      * Nom de la commune associée ou déléguée
      *
-     * @return string
+     * @return string|null
      */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
     /**
      * Nom de la commune associée ou déléguée
      *
-     * @param string $nom
+     * @param string|null $nom
      *
      * @return self
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->initialized['nom'] = true;
         $this->nom = $nom;
@@ -125,20 +125,20 @@ class CommuneAssocieeDeleguee
     /**
      * Code de l'EPCI associé à la commune associée ou déléguée
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeEpci(): string
+    public function getCodeEpci(): ?string
     {
         return $this->codeEpci;
     }
     /**
      * Code de l'EPCI associé à la commune associée ou déléguée
      *
-     * @param string $codeEpci
+     * @param string|null $codeEpci
      *
      * @return self
      */
-    public function setCodeEpci(string $codeEpci): self
+    public function setCodeEpci(?string $codeEpci): self
     {
         $this->initialized['codeEpci'] = true;
         $this->codeEpci = $codeEpci;
@@ -147,20 +147,20 @@ class CommuneAssocieeDeleguee
     /**
      * Code du département associé à la commune associée ou déléguée
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeDepartement(): string
+    public function getCodeDepartement(): ?string
     {
         return $this->codeDepartement;
     }
     /**
      * Code du département associé à la commune associée ou déléguée
      *
-     * @param string $codeDepartement
+     * @param string|null $codeDepartement
      *
      * @return self
      */
-    public function setCodeDepartement(string $codeDepartement): self
+    public function setCodeDepartement(?string $codeDepartement): self
     {
         $this->initialized['codeDepartement'] = true;
         $this->codeDepartement = $codeDepartement;
@@ -169,20 +169,20 @@ class CommuneAssocieeDeleguee
     /**
      * Code de la région associée à la commune associée ou déléguée
      *
-     * @return string
+     * @return string|null
      */
-    public function getCodeRegion(): string
+    public function getCodeRegion(): ?string
     {
         return $this->codeRegion;
     }
     /**
      * Code de la région associée à la commune associée ou déléguée
      *
-     * @param string $codeRegion
+     * @param string|null $codeRegion
      *
      * @return self
      */
-    public function setCodeRegion(string $codeRegion): self
+    public function setCodeRegion(?string $codeRegion): self
     {
         $this->initialized['codeRegion'] = true;
         $this->codeRegion = $codeRegion;
@@ -245,20 +245,20 @@ class CommuneAssocieeDeleguee
     /**
      * Surface de la commune associée ou déléguée, en hectares
      *
-     * @return float
+     * @return float|null
      */
-    public function getSurface(): float
+    public function getSurface(): ?float
     {
         return $this->surface;
     }
     /**
      * Surface de la commune associée ou déléguée, en hectares
      *
-     * @param float $surface
+     * @param float|null $surface
      *
      * @return self
      */
-    public function setSurface(float $surface): self
+    public function setSurface(?float $surface): self
     {
         $this->initialized['surface'] = true;
         $this->surface = $surface;

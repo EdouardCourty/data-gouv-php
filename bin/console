@@ -7,6 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Ecourty\DataGouv\Generator\Command\AddApiCommand;
 use Ecourty\DataGouv\Generator\Command\GenerateCommand;
+use Ecourty\DataGouv\Generator\Command\ValidateIntegrationCoverageCommand;
 use Ecourty\DataGouv\Generator\Command\ValidateRegistryCommand;
 use Symfony\Component\Console\Application;
 
@@ -14,5 +15,6 @@ $app = new Application('data-gouv-client', '1.0.0');
 $app->addCommand(new GenerateCommand());
 $app->addCommand(new AddApiCommand());
 $app->addCommand(new ValidateRegistryCommand());
+$app->addCommand(new ValidateIntegrationCoverageCommand());
 $app->setDefaultCommand('list');
 $app->run();

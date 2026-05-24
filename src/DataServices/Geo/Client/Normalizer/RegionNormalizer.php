@@ -37,21 +37,27 @@ class RegionNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        if (\array_key_exists('code', $data)) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
             $object->setCode($data['code']);
         }
-        if (\array_key_exists('nom', $data)) {
+        elseif (\array_key_exists('code', $data) && $data['code'] === null) {
+            $object->setCode(null);
+        }
+        if (\array_key_exists('nom', $data) && $data['nom'] !== null) {
             $object->setNom($data['nom']);
+        }
+        elseif (\array_key_exists('nom', $data) && $data['nom'] === null) {
+            $object->setNom(null);
         }
         return $object;
     }
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
-        if ($data->isInitialized('code') && null !== $data->getCode()) {
+        if ($data->isInitialized('code')) {
             $dataArray['code'] = $data->getCode();
         }
-        if ($data->isInitialized('nom') && null !== $data->getNom()) {
+        if ($data->isInitialized('nom')) {
             $dataArray['nom'] = $data->getNom();
         }
         return $dataArray;
