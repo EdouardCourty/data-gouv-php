@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
  * Provides shared helpers for asserting CSV/RDF export responses and reading
  * raw response body snippets, which are identical across all ODS-based test suites.
  */
-abstract class AbstractOdsIntegrationTest extends IntegrationTestCase
+abstract class OdsIntegrationTestCase extends IntegrationTestCase
 {
     protected const string HEADER_CONTENT_TYPE = 'content-type';
     protected const string CSV_CONTENT_TYPE = 'text/csv';

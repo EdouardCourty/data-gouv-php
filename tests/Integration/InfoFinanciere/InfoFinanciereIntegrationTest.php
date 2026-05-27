@@ -6,13 +6,13 @@ namespace Ecourty\DataGouv\Tests\Integration\InfoFinanciere;
 
 use Ecourty\DataGouv\DataServices\InfoFinanciere\Client\Client as InfoFinanciereJaneClient;
 use Ecourty\DataGouv\DataServices\InfoFinanciere\InfoFinanciereClient;
-use Ecourty\DataGouv\Tests\Integration\AbstractOdsIntegrationTest;
+use Ecourty\DataGouv\Tests\Integration\OdsIntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 #[Group('integration')]
-final class InfoFinanciereIntegrationTest extends AbstractOdsIntegrationTest
+final class InfoFinanciereIntegrationTest extends OdsIntegrationTestCase
 {
     private const int LIMIT = 3;
     private const string DATASET_ID = 'societes-cac40';

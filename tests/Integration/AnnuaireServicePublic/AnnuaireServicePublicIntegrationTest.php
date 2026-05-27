@@ -6,13 +6,13 @@ namespace Ecourty\DataGouv\Tests\Integration\AnnuaireServicePublic;
 
 use Ecourty\DataGouv\DataServices\AnnuaireServicePublic\AnnuaireServicePublicClient;
 use Ecourty\DataGouv\DataServices\AnnuaireServicePublic\Client\Client as AnnuaireJaneClient;
-use Ecourty\DataGouv\Tests\Integration\AbstractOdsIntegrationTest;
+use Ecourty\DataGouv\Tests\Integration\OdsIntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 #[Group('integration')]
-final class AnnuaireServicePublicIntegrationTest extends AbstractOdsIntegrationTest
+final class AnnuaireServicePublicIntegrationTest extends OdsIntegrationTestCase
 {
     private const int LIMIT = 3;
     private const string DATASET_ID = 'api-lannuaire-administration';

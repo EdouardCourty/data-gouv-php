@@ -6,13 +6,13 @@ namespace Ecourty\DataGouv\Tests\Integration\CalendrierScolaire;
 
 use Ecourty\DataGouv\DataServices\CalendrierScolaire\CalendrierScolaireClient;
 use Ecourty\DataGouv\DataServices\CalendrierScolaire\Client\Client as CalendrierJaneClient;
-use Ecourty\DataGouv\Tests\Integration\AbstractOdsIntegrationTest;
+use Ecourty\DataGouv\Tests\Integration\OdsIntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 #[Group('integration')]
-final class CalendrierScolaireIntegrationTest extends AbstractOdsIntegrationTest
+final class CalendrierScolaireIntegrationTest extends OdsIntegrationTestCase
 {
     private const int LIMIT = 3;
     private const string PREFERRED_DATASET_ID = 'fr-en-calendrier-scolaire';
