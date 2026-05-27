@@ -12,6 +12,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\HarvestSourcePage;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class HarvestIntegrationTest extends IntegrationTestCase
@@ -23,7 +24,7 @@ final class HarvestIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsHarvestBackends(): void
     {
         $backends = $this->callApi(fn () => $this->client->harvest->harvestBackends());
@@ -31,8 +32,8 @@ final class HarvestIntegrationTest extends IntegrationTestCase
         self::assertInstanceOf(HarvestBackend::class, $backends);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function itListsHarvestSourcesAndUsesThemWhenTheResponseIsDeserializable(): void
+    #[Test]
+    public function itListsHarvestSources(): void
     {
         $sources = $this->callApi(fn () => $this->client->harvest->listHarvestSources(['page_size' => 1]));
 
@@ -41,18 +42,48 @@ final class HarvestIntegrationTest extends IntegrationTestCase
         self::assertArrayHasKey('page', $sources);
         self::assertArrayHasKey('total', $sources);
         self::assertInstanceOf(HarvestSourcePage::class, $sources['data']);
+    }
+
+    #[Test]
+    public function itGetsHarvestSourceByIdAndListsItsJobs(): void
+    {
+        $sources = $this->callApi(fn () => $this->client->harvest->listHarvestSources(['page_size' => 1]));
+
+        self::assertIsArray($sources);
+        self::assertInstanceOf(HarvestSourcePage::class, $sources['data']);
 
         $sourceId = $this->extractFirstHarvestSourceId($sources['data']);
 
         if ($sourceId === null) {
-            self::markTestSkipped('The harvest sources list response is not deserializable enough to extract a public source id.');
+            self::markTestSkipped('Could not extract a public harvest source ID from the listing response.');
         }
 
         $source = $this->callApi(fn () => $this->client->harvest->getHarvestSource($sourceId));
-        $jobs = $this->callApi(fn () => $this->client->harvest->listHarvestJobs($sourceId, ['page_size' => 5]));
 
         self::assertInstanceOf(HarvestSource::class, $source);
         self::assertSame($sourceId, $source->getId());
+
+        $jobs = $this->callApi(fn () => $this->client->harvest->listHarvestJobs($sourceId, ['page_size' => 5]));
+
+        self::assertInstanceOf(HarvestJobPage::class, $jobs);
+    }
+
+    #[Test]
+    public function itGetsHarvestJobById(): void
+    {
+        $sources = $this->callApi(fn () => $this->client->harvest->listHarvestSources(['page_size' => 1]));
+
+        self::assertIsArray($sources);
+        self::assertInstanceOf(HarvestSourcePage::class, $sources['data']);
+
+        $sourceId = $this->extractFirstHarvestSourceId($sources['data']);
+
+        if ($sourceId === null) {
+            self::markTestSkipped('Could not extract a public harvest source ID from the listing response.');
+        }
+
+        $jobs = $this->callApi(fn () => $this->client->harvest->listHarvestJobs($sourceId, ['page_size' => 5]));
+
         self::assertInstanceOf(HarvestJobPage::class, $jobs);
 
         if ($jobs->getData() === []) {
@@ -69,16 +100,14 @@ final class HarvestIntegrationTest extends IntegrationTestCase
 
     private function extractFirstHarvestSourceId(HarvestSourcePage $page): ?string
     {
-        try {
-            $data = $page->getData();
-        } catch (\Throwable) {
-            return null;
-        }
+        $data = $page->getData();
 
         if ($data === []) {
             return null;
         }
 
-        return $data[0]->getId();
+        $id = $data[0]->getId();
+
+        return $id !== null && $id !== '' ? $id : null;
     }
 }

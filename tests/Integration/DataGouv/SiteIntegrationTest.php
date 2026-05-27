@@ -10,6 +10,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\SiteRead;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class SiteIntegrationTest extends IntegrationTestCase
@@ -21,7 +22,7 @@ final class SiteIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itGetsTheSiteAndRecentActivity(): void
     {
         $site = $this->callApi(fn () => $this->client->site->getSite());
@@ -37,7 +38,7 @@ final class SiteIntegrationTest extends IntegrationTestCase
         self::assertInstanceOf(Activity::class, $activity->getData()[0]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itCallsTheStructuredSiteEndpoints(): void
     {
         $jsonLdContext = $this->callApi(fn () => $this->client->site->getSiteJsonLdContext());

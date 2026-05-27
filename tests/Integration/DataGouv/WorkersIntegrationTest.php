@@ -8,6 +8,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\Job;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class WorkersIntegrationTest extends IntegrationTestCase
@@ -19,7 +20,7 @@ final class WorkersIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsJobsAndFetchesOneById(): void
     {
         $jobs = $this->callApi(fn () => $this->client->workers->listJobs());
@@ -41,7 +42,7 @@ final class WorkersIntegrationTest extends IntegrationTestCase
         self::assertSame($first->getId(), $job->getId());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsTheJobReferenceCatalog(): void
     {
         $reference = $this->callApi(fn () => $this->client->workers->getJobsReferenceApi());

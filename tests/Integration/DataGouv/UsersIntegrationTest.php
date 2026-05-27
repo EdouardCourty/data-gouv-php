@@ -12,6 +12,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\UserSuggestion;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class UsersIntegrationTest extends IntegrationTestCase
@@ -23,7 +24,7 @@ final class UsersIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsUserRolesAndSuggestsUsers(): void
     {
         $roles = $this->callApi(fn () => $this->client->users->userRoles());
@@ -39,7 +40,7 @@ final class UsersIntegrationTest extends IntegrationTestCase
         self::assertNotEmpty($suggestions[0]->getId());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsUsersAndFetchesOneWhenTheDirectoryIsPubliclyAvailable(): void
     {
         $page = $this->callApi(fn () => $this->client->users->listUsers(['q' => 'data', 'page_size' => 5]));

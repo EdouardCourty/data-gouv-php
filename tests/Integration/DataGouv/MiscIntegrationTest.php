@@ -17,6 +17,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\Transfer;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class MiscIntegrationTest extends IntegrationTestCase
@@ -28,7 +29,7 @@ final class MiscIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsDatasetReferenceMetadata(): void
     {
         $licenses = $this->callApi(fn () => $this->client->datasets->listLicenses());
@@ -58,7 +59,7 @@ final class MiscIntegrationTest extends IntegrationTestCase
         self::assertInstanceOf(ResourceType::class, $resourceTypes[0]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itCallsMiscNullReturningEndpoints(): void
     {
         $recentDatasets = $this->callApi(fn () => $this->client->datasets->recentDatasetsAtomFeed(['page_size' => 1]));
@@ -70,15 +71,19 @@ final class MiscIntegrationTest extends IntegrationTestCase
         self::assertNull($suggestedTags);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
-    public function itLoadsContactRolesAndAContactPointFromAPublicDataset(): void
+    #[Test]
+    public function itListsContactPointRoles(): void
     {
         $roles = $this->callApi(fn () => $this->client->contacts->contactPointRoles());
 
         self::assertIsArray($roles);
         self::assertNotEmpty($roles);
         self::assertInstanceOf(ContactPointRoles::class, $roles[0]);
+    }
 
+    #[Test]
+    public function itGetsContactPointByIdFromAPublicDataset(): void
+    {
         $page = $this->callApi(fn () => $this->client->datasets->listDatasets(['q' => 'budget', 'page_size' => 10]));
 
         self::assertInstanceOf(DatasetPage::class, $page);
@@ -110,31 +115,28 @@ final class MiscIntegrationTest extends IntegrationTestCase
         self::assertNotEmpty($fullContactPoint->getName());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsTransfersAndFetchesOneWhenPublicTransfersAreAvailable(): void
     {
         $transfers = $this->callApi(fn () => $this->client->transfer->listTransfers());
 
-        if ($transfers === null) {
-            self::markTestSkipped('The transfer listing is not publicly available without authentication.');
-        }
-
-        if ($transfers === []) {
-            self::markTestSkipped('No public transfer available to fetch by id.');
+        if ($transfers === null || $transfers === []) {
+            self::markTestSkipped('No public transfers are available (endpoint may require authentication or list is empty).');
         }
 
         self::assertInstanceOf(Transfer::class, $transfers[0]);
 
         /** @var Transfer $first */
         $first = $transfers[0];
+        $id = $first->getId();
 
-        if ($first->getId() === null) {
+        if ($id === null) {
             self::markTestSkipped('The first transfer has no identifier.');
         }
 
-        $transfer = $this->callApi(fn () => $this->client->transfer->getTransfer($first->getId()));
+        $transfer = $this->callApi(fn () => $this->client->transfer->getTransfer($id));
 
         self::assertInstanceOf(Transfer::class, $transfer);
-        self::assertSame($first->getId(), $transfer->getId());
+        self::assertSame($id, $transfer->getId());
     }
 }

@@ -6,13 +6,13 @@ namespace Ecourty\DataGouv\Tests\Integration\CalendrierScolaire;
 
 use Ecourty\DataGouv\DataServices\CalendrierScolaire\CalendrierScolaireClient;
 use Ecourty\DataGouv\DataServices\CalendrierScolaire\Client\Client as CalendrierJaneClient;
-use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
+use Ecourty\DataGouv\Tests\Integration\AbstractOdsIntegrationTest;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\Http\Message\ResponseInterface;
 
 #[Group('integration')]
-final class CalendrierScolaireIntegrationTest extends IntegrationTestCase
+final class CalendrierScolaireIntegrationTest extends AbstractOdsIntegrationTest
 {
     private const int LIMIT = 3;
     private const string PREFERRED_DATASET_ID = 'fr-en-calendrier-scolaire';
@@ -32,11 +32,7 @@ final class CalendrierScolaireIntegrationTest extends IntegrationTestCase
     private const string KEY_FACETS = 'facets';
     private const string KEY_ATTACHMENTS = 'attachments';
     private const string REL_JSON = 'json';
-    private const string HEADER_CONTENT_TYPE = 'content-type';
-    private const string CSV_CONTENT_TYPE = 'text/csv';
-    private const string RDF_CONTENT_TYPE = 'application/rdf+xml';
     private const string CSV_DATASET_ID_HEADER = 'datasetid';
-    private const int BODY_SNIPPET_BYTES = 2048;
 
     private CalendrierScolaireClient $client;
     private ?string $datasetId = null;
@@ -471,30 +467,5 @@ final class CalendrierScolaireIntegrationTest extends IntegrationTestCase
         self::assertNotEmpty($rels);
 
         return $rels;
-    }
-
-    private function assertCsvResponse(ResponseInterface $response, string $expectedFragment): void
-    {
-        self::assertStringContainsString(self::CSV_CONTENT_TYPE, $response->getHeaderLine(self::HEADER_CONTENT_TYPE));
-
-        $body = $this->readBodySnippet($response);
-        self::assertNotSame('', $body);
-        self::assertStringContainsString($expectedFragment, $body);
-    }
-
-    private function assertRdfResponse(ResponseInterface $response): void
-    {
-        self::assertStringContainsString(self::RDF_CONTENT_TYPE, $response->getHeaderLine(self::HEADER_CONTENT_TYPE));
-        self::assertNotSame('', $this->readBodySnippet($response));
-    }
-
-    private function readBodySnippet(ResponseInterface $response): string
-    {
-        $body = $response->getBody();
-        if ($body->isSeekable()) {
-            $body->rewind();
-        }
-
-        return $body->read(self::BODY_SNIPPET_BYTES);
     }
 }

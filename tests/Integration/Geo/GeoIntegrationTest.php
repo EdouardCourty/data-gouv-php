@@ -53,13 +53,16 @@ final class GeoIntegrationTest extends IntegrationTestCase
     {
         $listedCommune = $this->fetchFirstCommune();
 
+        $code = $listedCommune->getCode();
+        \assert($code !== null);
+
         $commune = $this->callApi(fn () => $this->client->communes->getCommunesByCode(
-            $listedCommune->getCode(),
+            $code,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
         self::assertInstanceOf(Commune::class, $commune);
-        self::assertSame($listedCommune->getCode(), $commune->getCode());
+        self::assertSame($code, $commune->getCode());
     }
 
     #[Test]
@@ -80,10 +83,8 @@ final class GeoIntegrationTest extends IntegrationTestCase
     #[Test]
     public function itGetsDepartementByCode(): void
     {
-        $listedDepartement = $this->fetchDepartementByCodeFromList(self::RHONE_DEPARTMENT_CODE);
-
         $departement = $this->callApi(fn () => $this->client->departements->getDepartementsByCode(
-            $listedDepartement->getCode(),
+            self::RHONE_DEPARTMENT_CODE,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
@@ -95,10 +96,8 @@ final class GeoIntegrationTest extends IntegrationTestCase
     #[Test]
     public function itGetsCommunesInDepartement(): void
     {
-        $listedDepartement = $this->fetchDepartementByCodeFromList(self::PARIS_DEPARTMENT_CODE);
-
         $communes = $this->callApi(fn () => $this->client->departements->getDepartementsByCodeCommunes(
-            $listedDepartement->getCode(),
+            self::PARIS_DEPARTMENT_CODE,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
@@ -128,10 +127,8 @@ final class GeoIntegrationTest extends IntegrationTestCase
     #[Test]
     public function itGetsRegionByCode(): void
     {
-        $listedRegion = $this->fetchRegionByCodeFromList(self::ILE_DE_FRANCE_REGION_CODE);
-
         $region = $this->callApi(fn () => $this->client->regions->getRegionsByCode(
-            $listedRegion->getCode(),
+            self::ILE_DE_FRANCE_REGION_CODE,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
@@ -142,10 +139,8 @@ final class GeoIntegrationTest extends IntegrationTestCase
     #[Test]
     public function itGetsDepartementsInRegion(): void
     {
-        $listedRegion = $this->fetchRegionByCodeFromList(self::ILE_DE_FRANCE_REGION_CODE);
-
         $departements = $this->callApi(fn () => $this->client->regions->getRegionsByCodeDepartements(
-            $listedRegion->getCode(),
+            self::ILE_DE_FRANCE_REGION_CODE,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
@@ -177,13 +172,16 @@ final class GeoIntegrationTest extends IntegrationTestCase
     {
         $listedEpci = $this->fetchFirstEpci();
 
+        $code = $listedEpci->getCode();
+        \assert($code !== null);
+
         $epci = $this->callApi(fn () => $this->client->ePCI->getEpcisByCode(
-            $listedEpci->getCode(),
+            $code,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
         self::assertInstanceOf(Epci::class, $epci);
-        self::assertSame($listedEpci->getCode(), $epci->getCode());
+        self::assertSame($code, $epci->getCode());
     }
 
     #[Test]
@@ -191,8 +189,11 @@ final class GeoIntegrationTest extends IntegrationTestCase
     {
         $listedEpci = $this->fetchFirstEpci();
 
+        $code = $listedEpci->getCode();
+        \assert($code !== null);
+
         $communes = $this->callApi(fn () => $this->client->ePCI->getEpcisByCodeCommunes(
-            $listedEpci->getCode(),
+            $code,
             ['fields' => self::IDENTIFIER_FIELDS],
         ));
 
@@ -238,40 +239,6 @@ final class GeoIntegrationTest extends IntegrationTestCase
         self::assertInstanceOf(Commune::class, $firstCommune);
 
         return $firstCommune;
-    }
-
-    private function fetchDepartementByCodeFromList(string $code): Departement
-    {
-        $departements = $this->callApi(fn () => $this->client->departements->getDepartements([
-            'code' => $code,
-            'fields' => self::IDENTIFIER_FIELDS,
-        ]));
-
-        self::assertIsArray($departements);
-        self::assertNotEmpty($departements);
-
-        /** @var Departement $firstDepartement */
-        $firstDepartement = $departements[0];
-        self::assertInstanceOf(Departement::class, $firstDepartement);
-
-        return $firstDepartement;
-    }
-
-    private function fetchRegionByCodeFromList(string $code): Region
-    {
-        $regions = $this->callApi(fn () => $this->client->regions->getRegions([
-            'code' => $code,
-            'fields' => self::IDENTIFIER_FIELDS,
-        ]));
-
-        self::assertIsArray($regions);
-        self::assertNotEmpty($regions);
-
-        /** @var Region $firstRegion */
-        $firstRegion = $regions[0];
-        self::assertInstanceOf(Region::class, $firstRegion);
-
-        return $firstRegion;
     }
 
     private function fetchFirstEpci(): Epci

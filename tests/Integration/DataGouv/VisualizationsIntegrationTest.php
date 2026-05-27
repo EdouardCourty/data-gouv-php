@@ -9,6 +9,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\ChartRead;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class VisualizationsIntegrationTest extends IntegrationTestCase
@@ -20,7 +21,7 @@ final class VisualizationsIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsPublicVisualizations(): void
     {
         $page = $this->callApi(fn () => $this->client->visualizations->listVisualizations(['page_size' => 5]));
@@ -29,7 +30,7 @@ final class VisualizationsIntegrationTest extends IntegrationTestCase
         self::assertGreaterThanOrEqual(0, $page->getTotal());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itFetchesAVisualizationWhenAPublicOneExists(): void
     {
         $page = $this->callApi(fn () => $this->client->visualizations->listVisualizations(['page_size' => 5]));

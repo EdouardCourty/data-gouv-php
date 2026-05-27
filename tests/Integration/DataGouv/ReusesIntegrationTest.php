@@ -13,6 +13,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\ReuseType;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class ReusesIntegrationTest extends IntegrationTestCase
@@ -24,7 +25,7 @@ final class ReusesIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsReusesAndFetchesOneById(): void
     {
         $page = $this->callApi(fn () => $this->client->reuses->listReuses(['q' => 'data', 'page_size' => 5]));
@@ -46,7 +47,7 @@ final class ReusesIntegrationTest extends IntegrationTestCase
         self::assertSame($first->getTitle(), $reuse->getTitle());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsReuseFollowers(): void
     {
         $reuse = $this->fetchFirstReuse();
@@ -57,7 +58,7 @@ final class ReusesIntegrationTest extends IntegrationTestCase
         self::assertGreaterThanOrEqual(0, $followers->getTotal());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsReuseMetadata(): void
     {
         $topics = $this->callApi(fn () => $this->client->reuses->reuseTopics());
@@ -75,7 +76,7 @@ final class ReusesIntegrationTest extends IntegrationTestCase
         self::assertNull($badges);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itSuggestsReuses(): void
     {
         $suggestions = $this->callApi(fn () => $this->client->reuses->suggestReuses(['q' => 'data', 'size' => 5]));
@@ -86,7 +87,7 @@ final class ReusesIntegrationTest extends IntegrationTestCase
         self::assertNotEmpty($suggestions[0]->getId() ?? $suggestions[0]->getSlug());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itCallsTheRecentReusesAtomFeedEndpoint(): void
     {
         $feed = $this->callApi(fn () => $this->client->reuses->recentReusesAtomFeed());

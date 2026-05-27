@@ -9,6 +9,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\ReportRead;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class ReportsIntegrationTest extends IntegrationTestCase
@@ -20,7 +21,7 @@ final class ReportsIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsReportReasons(): void
     {
         $reasons = $this->callApi(fn () => $this->client->reports->listReportsReasons());
@@ -32,7 +33,7 @@ final class ReportsIntegrationTest extends IntegrationTestCase
         self::assertTrue(property_exists($reasons[0], 'value'));
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsReportsAndFetchesOneWhenPublicReportsAreAvailable(): void
     {
         $page = $this->callApi(fn () => $this->client->reports->listReports(['page_size' => 5]));

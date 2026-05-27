@@ -6,12 +6,14 @@ namespace Ecourty\DataGouv\Tests\Integration\DataGouv;
 
 use Ecourty\DataGouv\DataGouv\Client\Model\DatasetReference;
 use Ecourty\DataGouv\DataGouv\Client\Model\GeoGranularity;
+use Ecourty\DataGouv\DataGouv\Client\Model\GeoJSONFeature;
 use Ecourty\DataGouv\DataGouv\Client\Model\GeoJSONFeatureCollection;
 use Ecourty\DataGouv\DataGouv\Client\Model\GeoLevel;
 use Ecourty\DataGouv\DataGouv\Client\Model\TerritorySuggestion;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class SpatialIntegrationTest extends IntegrationTestCase
@@ -23,7 +25,7 @@ final class SpatialIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsSpatialLevelsAndGranularities(): void
     {
         $levels = $this->callApi(fn () => $this->client->spatial->spatialLevels());
@@ -39,7 +41,7 @@ final class SpatialIntegrationTest extends IntegrationTestCase
         self::assertInstanceOf(GeoGranularity::class, $granularities[0]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itGetsSpatialCoverageForALevel(): void
     {
         $levels = $this->callApi(fn () => $this->client->spatial->spatialLevels());
@@ -54,11 +56,13 @@ final class SpatialIntegrationTest extends IntegrationTestCase
         self::assertIsArray($coverage);
         self::assertArrayHasKey('features', $coverage);
         self::assertArrayHasKey('type', $coverage);
-        self::assertInstanceOf(GeoJSONFeatureCollection::class, $coverage['features']);
-        self::assertInstanceOf(GeoJSONFeatureCollection::class, $coverage['type']);
+        self::assertIsArray($coverage['features']);
+        self::assertNotEmpty($coverage['features']);
+        self::assertInstanceOf(GeoJSONFeature::class, $coverage['features'][0]);
+        self::assertSame('FeatureCollection', $coverage['type']);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itSuggestsZonesAndCallsZoneEndpoints(): void
     {
         $suggestions = $this->callApi(fn () => $this->client->spatial->suggestZones(['q' => 'Paris', 'size' => 2]));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\Tests\Integration\Sirene;
 
+use Ecourty\DataGouv\DataServices\Sirene\Client\Client as SireneJaneClient;
 use Ecourty\DataGouv\DataServices\Sirene\Client\Model\ReponseUniteLegale;
 use Ecourty\DataGouv\DataServices\Sirene\SireneClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
@@ -56,10 +57,22 @@ final class SireneIntegrationTest extends IntegrationTestCase
     #[Test]
     public function itSearchesUnitesLegales(): void
     {
-        $result = $this->callApi(
-            fn () => $this->client->uniteLegale->findByGetUniteLegale(['nombre' => 3, 'q' => 'La Poste']),
+        // The SIRENE search (GET /siren) returns a 200 response whose body Jane does not
+        // deserialize (empty 200 handler in generated code). Use FETCH_RESPONSE to validate
+        // the HTTP status and that the JSON body contains the expected "unitesLegales" key.
+        $response = $this->callApi(
+            fn () => $this->client->getClient()->findByGetUniteLegale(
+                ['nombre' => 3, 'q' => 'La Poste'],
+                SireneJaneClient::FETCH_RESPONSE,
+                [],
+            ),
         );
 
-        self::assertNotNull($result);
+        $this->assertSuccessfulResponse($response);
+
+        $body = $this->decodeResponse($response);
+        self::assertArrayHasKey('unitesLegales', $body);
+        self::assertIsArray($body['unitesLegales']);
+        self::assertNotEmpty($body['unitesLegales']);
     }
 }

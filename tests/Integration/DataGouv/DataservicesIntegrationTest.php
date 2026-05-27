@@ -10,6 +10,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\FollowPage;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class DataservicesIntegrationTest extends IntegrationTestCase
@@ -21,7 +22,7 @@ final class DataservicesIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsDataservicesAndFetchesOneById(): void
     {
         $page = $this->callApi(fn () => $this->client->dataservices->listDataservices(['q' => 'api', 'page_size' => 5]));
@@ -43,7 +44,7 @@ final class DataservicesIntegrationTest extends IntegrationTestCase
         self::assertSame($first->getTitle(), $dataservice->getTitle());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsDataserviceFollowers(): void
     {
         $dataservice = $this->fetchFirstDataservice();
@@ -56,7 +57,7 @@ final class DataservicesIntegrationTest extends IntegrationTestCase
         self::assertGreaterThanOrEqual(0, $followers->getTotal());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itCallsTheRecentDataservicesAtomFeedEndpoint(): void
     {
         $feed = $this->callApi(fn () => $this->client->dataservices->recentDataservicesAtomFeed());

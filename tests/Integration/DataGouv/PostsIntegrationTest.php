@@ -9,6 +9,7 @@ use Ecourty\DataGouv\DataGouv\Client\Model\PostRead;
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 use Ecourty\DataGouv\Tests\Integration\IntegrationTestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('integration')]
 final class PostsIntegrationTest extends IntegrationTestCase
@@ -20,7 +21,7 @@ final class PostsIntegrationTest extends IntegrationTestCase
         $this->client = new DataGouvClient();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itListsPostsAndFetchesOneById(): void
     {
         $page = $this->callApi(fn () => $this->client->posts->listPosts(['page_size' => 5]));
@@ -42,7 +43,7 @@ final class PostsIntegrationTest extends IntegrationTestCase
         self::assertSame($first->getSlug(), $post->getSlug());
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function itCallsTheRecentPostsAtomFeedEndpoint(): void
     {
         $feed = $this->callApi(fn () => $this->client->posts->recentPostsAtomFeed());

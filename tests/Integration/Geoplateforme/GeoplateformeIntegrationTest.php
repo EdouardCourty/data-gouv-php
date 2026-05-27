@@ -36,13 +36,18 @@ final class GeoplateformeIntegrationTest extends IntegrationTestCase
         ]));
 
         self::assertIsObject($result);
+        self::assertObjectHasProperty('features', $result);
+        self::assertObjectHasProperty('type', $result);
 
-        /** @var array<int, object> $features */
-        $features = $result->features ?? [];
+        /** @var \stdClass $result */
+        $features = $result->features;
+        self::assertIsArray($features);
         self::assertNotEmpty($features);
 
-        /** @var object $properties */
-        $properties = $features[0]->properties ?? new \stdClass();
+        /** @var \stdClass $firstFeature */
+        $firstFeature = $features[0];
+        /** @var \stdClass $properties */
+        $properties = $firstFeature->properties ?? new \stdClass();
         /** @var string|null $label */
         $label = $properties->label ?? null;
         self::assertNotEmpty($label);
@@ -58,9 +63,11 @@ final class GeoplateformeIntegrationTest extends IntegrationTestCase
         ]));
 
         self::assertIsObject($result);
+        self::assertObjectHasProperty('features', $result);
 
-        /** @var array<int, object> $features */
-        $features = $result->features ?? [];
+        /** @var \stdClass $result */
+        $features = $result->features;
+        self::assertIsArray($features);
         self::assertNotEmpty($features);
     }
 
@@ -73,9 +80,11 @@ final class GeoplateformeIntegrationTest extends IntegrationTestCase
         ]));
 
         self::assertIsObject($result);
+        self::assertObjectHasProperty('features', $result);
 
-        /** @var array<int, object> $features */
-        $features = $result->features ?? [];
+        /** @var \stdClass $result */
+        $features = $result->features;
+        self::assertIsArray($features);
         self::assertNotEmpty($features);
     }
 
