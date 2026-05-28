@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class JobNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\Job::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Job::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Job::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\Job();
@@ -58,17 +52,20 @@ class JobNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
         }
         if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        }
+        elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
         if (\array_key_exists('enabled', $data) && $data['enabled'] !== null) {
             $object->setEnabled($data['enabled']);
-        } elseif (\array_key_exists('enabled', $data) && $data['enabled'] === null) {
+        }
+        elseif (\array_key_exists('enabled', $data) && $data['enabled'] === null) {
             $object->setEnabled(null);
         }
         if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        }
+        elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
         if (\array_key_exists('interval', $data)) {
@@ -78,13 +75,15 @@ class JobNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
             $object->setKwargs($data['kwargs']);
         }
         if (\array_key_exists('last_run_at', $data) && $data['last_run_at'] !== null) {
-            $object->setLastRunAt(new \DateTime($data['last_run_at']));
-        } elseif (\array_key_exists('last_run_at', $data) && $data['last_run_at'] === null) {
+            $object->setLastRunAt((new \DateTime($data['last_run_at'])));
+        }
+        elseif (\array_key_exists('last_run_at', $data) && $data['last_run_at'] === null) {
             $object->setLastRunAt(null);
         }
         if (\array_key_exists('last_run_id', $data) && $data['last_run_id'] !== null) {
             $object->setLastRunId($data['last_run_id']);
-        } elseif (\array_key_exists('last_run_id', $data) && $data['last_run_id'] === null) {
+        }
+        elseif (\array_key_exists('last_run_id', $data) && $data['last_run_id'] === null) {
             $object->setLastRunId(null);
         }
         if (\array_key_exists('name', $data)) {
@@ -92,16 +91,15 @@ class JobNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
         }
         if (\array_key_exists('schedule', $data) && $data['schedule'] !== null) {
             $object->setSchedule($data['schedule']);
-        } elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
+        }
+        elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
             $object->setSchedule(null);
         }
         if (\array_key_exists('task', $data)) {
             $object->setTask($data['task']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -129,10 +127,8 @@ class JobNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
         }
         $dataArray['name'] = $data->getName();
         $dataArray['task'] = $data->getTask();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\Job::class => false];

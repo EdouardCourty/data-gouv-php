@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "avatars" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "avatars" tag.
  */
 final class AvatarsApi
 {
@@ -23,11 +21,16 @@ final class AvatarsApi
     {
     }
 
-    public function avatars(string $identifier, int $size): null
+    /**
+     * @param string $identifier
+     * @param int $size
+     *
+     */
+        public function avatars(string $identifier, int $size): mixed
     {
         try {
-            return $this->client->avatars($identifier, $size, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->avatars($identifier, $size, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

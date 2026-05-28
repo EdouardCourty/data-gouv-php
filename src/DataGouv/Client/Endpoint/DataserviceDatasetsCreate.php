@@ -1,21 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class DataserviceDatasetsCreate extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataservice;
-
     /**
-     * @param string                                                           $dataservice      The dataservice ID or slug
+     * @param string $dataservice The dataservice ID or slug
      * @param \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceDatasetsAdd[] $payload
-     * @param array                                                            $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $dataservice, array $payload, array $headerParameters = [])
     {
@@ -23,27 +18,23 @@ class DataserviceDatasetsCreate extends \Ecourty\DataGouv\DataGouv\Client\Runtim
         $this->body = $payload;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataservice}'], [$this->dataservice], '/dataservices/{dataservice}/datasets/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getSerializedBody($serializer);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -51,10 +42,8 @@ class DataserviceDatasetsCreate extends \Ecourty\DataGouv\DataGouv\Client\Runtim
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -85,7 +74,6 @@ class DataserviceDatasetsCreate extends \Ecourty\DataGouv\DataGouv\Client\Runtim
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\DataserviceDatasetsCreateGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

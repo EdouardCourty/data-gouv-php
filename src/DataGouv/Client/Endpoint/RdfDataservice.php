@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class RdfDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataservice;
-
     /**
      * @param string $dataservice The dataservice ID or slug
      */
@@ -16,27 +12,23 @@ class RdfDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Ba
     {
         $this->dataservice = $dataservice;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataservice}'], [$this->dataservice], '/dataservices/{dataservice}/rdf');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -56,7 +48,6 @@ class RdfDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Ba
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDataserviceGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

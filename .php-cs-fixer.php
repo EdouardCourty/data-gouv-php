@@ -2,8 +2,8 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
-    ->exclude('DataGouv/Client')
-    ->exclude('DataGouv/Api')
+    ->exclude('Client')
+    ->exclude('Api')
     ->in(__DIR__ . '/src')
     ->in(__DIR__ . '/tests');
 

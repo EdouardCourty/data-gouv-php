@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource();
@@ -62,21 +56,24 @@ class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterf
             $object->setConfig($data['config']);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(new \DateTime($data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(new \DateTime($data['deleted']));
-        } elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
+            $object->setDeleted((new \DateTime($data['deleted'])));
+        }
+        elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
         }
         if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        }
+        elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
         if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        }
+        elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
         if (\array_key_exists('last_job', $data)) {
@@ -96,7 +93,8 @@ class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterf
         }
         if (\array_key_exists('schedule', $data) && $data['schedule'] !== null) {
             $object->setSchedule($data['schedule']);
-        } elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
+        }
+        elseif (\array_key_exists('schedule', $data) && $data['schedule'] === null) {
             $object->setSchedule(null);
         }
         if (\array_key_exists('url', $data)) {
@@ -105,10 +103,8 @@ class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterf
         if (\array_key_exists('validation', $data)) {
             $object->setValidation($this->denormalizer->denormalize($data['validation'], \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSourceValidation::class, 'json', $context));
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -129,10 +125,8 @@ class HarvestSourceNormalizer implements DenormalizerInterface, NormalizerInterf
             $dataArray['owner'] = $data->getOwner();
         }
         $dataArray['url'] = $data->getUrl();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource::class => false];

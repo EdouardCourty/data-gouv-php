@@ -1,31 +1,24 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UploadNewCommunityResource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataset;
-
     /**
-     * @param string $dataset        The dataset ID or slug
-     * @param array  $formParameters {
-     *
-     * @var string|resource|\Psr\Http\Message\StreamInterface $file
-     * @var string                                            $uuid
-     * @var string                                            $filename
-     * @var int                                               $partindex
-     * @var int                                               $partbyteoffset
-     * @var int                                               $totalparts
-     * @var int                                               $chunksize
-     *                                                        }
-     *
+     * @param string $dataset The dataset ID or slug
+     * @param array $formParameters {
+     *     @var string|resource|\Psr\Http\Message\StreamInterface $file
+     *     @var string $uuid
+     *     @var string $filename
+     *     @var int $partindex
+     *     @var int $partbyteoffset
+     *     @var int $totalparts
+     *     @var int $chunksize
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $dataset, array $formParameters = [], array $headerParameters = [])
     {
@@ -33,27 +26,23 @@ class UploadNewCommunityResource extends \Ecourty\DataGouv\DataGouv\Client\Runti
         $this->formParameters = $formParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataset}'], [$this->dataset], '/datasets/{dataset}/upload/community/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getMultipartBody($streamFactory);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getFormOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getFormOptionsResolver();
@@ -67,10 +56,8 @@ class UploadNewCommunityResource extends \Ecourty\DataGouv\DataGouv\Client\Runti
         $optionsResolver->addAllowedTypes('partbyteoffset', ['int']);
         $optionsResolver->addAllowedTypes('totalparts', ['int']);
         $optionsResolver->addAllowedTypes('chunksize', ['int']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -78,10 +65,8 @@ class UploadNewCommunityResource extends \Ecourty\DataGouv\DataGouv\Client\Runti
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -104,7 +89,6 @@ class UploadNewCommunityResource extends \Ecourty\DataGouv\DataGouv\Client\Runti
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\UploadNewCommunityResourceUnsupportedMediaTypeException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

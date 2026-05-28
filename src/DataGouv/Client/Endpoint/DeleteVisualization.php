@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class DeleteVisualization extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $visualization;
-
     /**
      * @param string $visualization The visualization ID or slug
      */
@@ -16,29 +12,26 @@ class DeleteVisualization extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
     {
         $this->visualization = $visualization;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'DELETE';
     }
-
     public function getUri(): string
     {
         return str_replace(['{visualization}'], [$this->visualization], '/visualizations/{visualization}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null
      */
@@ -50,7 +43,6 @@ class DeleteVisualization extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
             return null;
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

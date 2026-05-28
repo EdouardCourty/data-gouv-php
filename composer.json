@@ -2,7 +2,13 @@
     "name": "ecourty/data-gouv-client",
     "description": "A PHP client library for the data.gouv.fr API.",
     "type": "library",
-    "keywords": ["data.gouv.fr", "api", "client", "php", "data-gouv"],
+    "keywords": [
+        "data.gouv.fr",
+        "api",
+        "client",
+        "php",
+        "data-gouv"
+    ],
     "require": {
         "php": ">=8.4",
         "jane-php/open-api-runtime": "^7.0",
@@ -12,8 +18,11 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.71",
         "jane-php/open-api-2": "^7.0",
+        "jane-php/open-api-3": "^7.0",
+        "jane-php/open-api-3-1": "^7.0",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^13.0"
+        "phpunit/phpunit": "^13.0",
+        "symfony/console": "^8.0"
     },
     "license": "MIT",
     "autoload": {
@@ -34,25 +43,20 @@
         }
     ],
     "scripts": {
-        "generate:patch-spec": "php bin/patch-spec.php",
-        "generate:client": "php vendor/bin/jane-openapi generate",
-        "generate:patch-generated": "php bin/patch-generated.php",
-        "generate:facade": "php bin/generate-facade.php",
         "generate": [
-            "@generate:patch-spec",
-            "@generate:client",
-            "@generate:patch-generated",
-            "@generate:facade",
+            "php bin/console generate",
             "@cs-fix"
         ],
+        "add-api": "php bin/console add-api",
+        "validate-registry": "php bin/console validate-registry",
+        "validate-integration-coverage": "php bin/console validate-integration-coverage",
         "test": "phpunit tests",
         "test-unit": "phpunit tests/Unit/",
-        "test-functional": "phpunit tests/Functional/",
         "test-integration": "phpunit tests/Integration/",
         "test-fast": "@test-unit",
         "phpstan": "phpstan analyse --memory-limit=-1",
-        "cs-fix": "php-cs-fixer fix . --config .php-cs-fixer.php",
-        "cs-check": "php-cs-fixer fix . --config .php-cs-fixer.php --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --config .php-cs-fixer.php",
+        "cs-check": "php-cs-fixer fix --config .php-cs-fixer.php --dry-run --diff",
         "qa": [
             "@phpstan",
             "@cs-check",

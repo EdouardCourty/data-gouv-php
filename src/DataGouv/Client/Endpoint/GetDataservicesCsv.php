@@ -1,39 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class GetDataservicesCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $org;
-
+    /**
+     * @param string $org
+     */
     public function __construct(string $org)
     {
         $this->org = $org;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{org}'], [$this->org], '/organizations/{org}/dataservices.csv');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -53,7 +48,6 @@ class GetDataservicesCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clien
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\GetDataservicesCsvGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

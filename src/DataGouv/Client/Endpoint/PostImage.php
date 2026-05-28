@@ -1,25 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class PostImage extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $post;
-
     /**
+     * @param string $post
      * @param array $formParameters {
-     *
-     * @var string|resource|\Psr\Http\Message\StreamInterface $file
-     * @var string                                            $bbox
-     *                                                        }
-     *
+     *     @var string|resource|\Psr\Http\Message\StreamInterface $file
+     *     @var string $bbox
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $post, array $formParameters = [], array $headerParameters = [])
     {
@@ -27,27 +21,23 @@ class PostImage extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEnd
         $this->formParameters = $formParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{post}'], [$this->post], '/posts/{post}/image/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getMultipartBody($streamFactory);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getFormOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getFormOptionsResolver();
@@ -56,10 +46,8 @@ class PostImage extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEnd
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('file', ['string', 'resource', '\Psr\Http\Message\StreamInterface']);
         $optionsResolver->addAllowedTypes('bbox', ['string']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -67,12 +55,11 @@ class PostImage extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEnd
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\UploadedImage
      */
@@ -84,7 +71,6 @@ class PostImage extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEnd
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\UploadedImage', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

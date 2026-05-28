@@ -1,19 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UpdateDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataservice;
-
     /**
+     * @param string $dataservice
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $dataservice, \Ecourty\DataGouv\DataGouv\Client\Model\DataserviceWrite $payload, array $headerParameters = [])
     {
@@ -21,27 +18,23 @@ class UpdateDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client
         $this->body = $payload;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'PATCH';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataservice}'], [$this->dataservice], '/dataservices/{dataservice}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getSerializedBody($serializer);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -49,10 +42,8 @@ class UpdateDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -71,7 +62,6 @@ class UpdateDataservice extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateDataserviceBadRequestException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

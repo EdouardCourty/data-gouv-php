@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class CatalogSchemaExampleNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchemaExample::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchemaExample::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchemaExample::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchemaExample();
@@ -45,18 +39,18 @@ class CatalogSchemaExampleNormalizer implements DenormalizerInterface, Normalize
         }
         if (\array_key_exists('path', $data) && $data['path'] !== null) {
             $object->setPath($data['path']);
-        } elseif (\array_key_exists('path', $data) && $data['path'] === null) {
+        }
+        elseif (\array_key_exists('path', $data) && $data['path'] === null) {
             $object->setPath(null);
         }
         if (\array_key_exists('title', $data) && $data['title'] !== null) {
             $object->setTitle($data['title']);
-        } elseif (\array_key_exists('title', $data) && $data['title'] === null) {
+        }
+        elseif (\array_key_exists('title', $data) && $data['title'] === null) {
             $object->setTitle(null);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -66,10 +60,8 @@ class CatalogSchemaExampleNormalizer implements DenormalizerInterface, Normalize
         if ($data->isInitialized('title')) {
             $dataArray['title'] = $data->getTitle();
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\CatalogSchemaExample::class => false];

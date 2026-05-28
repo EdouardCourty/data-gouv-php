@@ -72,7 +72,7 @@ jobs:
             if [ -n "$COMMITS" ]; then
               echo "$COMMITS"
             else
-              echo "- Automated spec update from data.gouv.fr API"
+              echo "- Automated spec update from French government APIs"
             fi
             echo ""
           } > /tmp/new_entry.md

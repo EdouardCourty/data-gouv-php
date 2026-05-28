@@ -4,6 +4,9 @@ parameters:
 		- src
 		- tests
 	excludePaths:
-		- src/DataGouv/Client
-		- src/DataGouv/Api
-		- src/Generator
+		- src/DataGouv/Client/**
+		- src/DataGouv/Api/**
+		- src/DataGouv/Exception/**
+		- src/DataServices/*/Client/**
+		- src/DataServices/*/Api/**
+		- src/DataServices/*/Exception/**

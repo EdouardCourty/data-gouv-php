@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class SiteWrite
@@ -10,10 +8,9 @@ class SiteWrite
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * @var list<mixed>
@@ -41,7 +38,6 @@ class SiteWrite
      * @var string
      */
     protected $title;
-
     /**
      * @return list<mixed>
      */
@@ -49,18 +45,17 @@ class SiteWrite
     {
         return $this->dataservicesBlocs;
     }
-
     /**
      * @param list<mixed> $dataservicesBlocs
+     *
+     * @return self
      */
     public function setDataservicesBlocs(array $dataservicesBlocs): self
     {
         $this->initialized['dataservicesBlocs'] = true;
         $this->dataservicesBlocs = $dataservicesBlocs;
-
         return $this;
     }
-
     /**
      * @return list<mixed>
      */
@@ -68,31 +63,35 @@ class SiteWrite
     {
         return $this->datasetsBlocs;
     }
-
     /**
      * @param list<mixed> $datasetsBlocs
+     *
+     * @return self
      */
     public function setDatasetsBlocs(array $datasetsBlocs): self
     {
         $this->initialized['datasetsBlocs'] = true;
         $this->datasetsBlocs = $datasetsBlocs;
-
         return $this;
     }
-
+    /**
+     * @return int
+     */
     public function getFeedSize(): int
     {
         return $this->feedSize;
     }
-
+    /**
+     * @param int $feedSize
+     *
+     * @return self
+     */
     public function setFeedSize(int $feedSize): self
     {
         $this->initialized['feedSize'] = true;
         $this->feedSize = $feedSize;
-
         return $this;
     }
-
     /**
      * @return list<string>
      */
@@ -100,18 +99,17 @@ class SiteWrite
     {
         return $this->keywords;
     }
-
     /**
      * @param list<string> $keywords
+     *
+     * @return self
      */
     public function setKeywords(array $keywords): self
     {
         $this->initialized['keywords'] = true;
         $this->keywords = $keywords;
-
         return $this;
     }
-
     /**
      * @return list<mixed>
      */
@@ -119,34 +117,37 @@ class SiteWrite
     {
         return $this->reusesBlocs;
     }
-
     /**
      * @param list<mixed> $reusesBlocs
+     *
+     * @return self
      */
     public function setReusesBlocs(array $reusesBlocs): self
     {
         $this->initialized['reusesBlocs'] = true;
         $this->reusesBlocs = $reusesBlocs;
-
         return $this;
     }
-
     /**
      * The site display title
+     *
+     * @return string
      */
     public function getTitle(): string
     {
         return $this->title;
     }
-
     /**
      * The site display title
+     *
+     * @param string $title
+     *
+     * @return self
      */
     public function setTitle(string $title): self
     {
         $this->initialized['title'] = true;
         $this->title = $title;
-
         return $this;
     }
 }

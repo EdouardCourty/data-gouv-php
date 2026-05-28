@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class RdfDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $dataset;
-
     /**
      * @param string $dataset The dataset ID or slug
      */
@@ -16,27 +12,23 @@ class RdfDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEn
     {
         $this->dataset = $dataset;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{dataset}'], [$this->dataset], '/datasets/{dataset}/rdf');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -56,7 +48,6 @@ class RdfDataset extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEn
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\RdfDatasetGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

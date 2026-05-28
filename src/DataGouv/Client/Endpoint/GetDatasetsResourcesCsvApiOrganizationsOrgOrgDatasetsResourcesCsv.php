@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class GetDatasetsResourcesCsvApiOrganizationsOrgOrgDatasetsResourcesCsv extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $org;
-
     /**
      * @param string $org The organization ID or slug
      */
@@ -16,27 +12,23 @@ class GetDatasetsResourcesCsvApiOrganizationsOrgOrgDatasetsResourcesCsv extends 
     {
         $this->org = $org;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{org}'], [$this->org], '/organizations/{org}/datasets-resources.csv');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -56,7 +48,6 @@ class GetDatasetsResourcesCsvApiOrganizationsOrgOrgDatasetsResourcesCsv extends 
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\GetDatasetsResourcesCsvApiOrganizationsOrgOrgDatasetsResourcesCsvGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

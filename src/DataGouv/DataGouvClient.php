@@ -35,18 +35,12 @@ use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * Main entry point for the data.gouv.fr API client.
- *
- * Usage:
- *   $client = new DataGouvClient();                      // anonymous (read-only)
- *   $client = new DataGouvClient(apiKey: 'your-key');    // authenticated
- *
- * @see https://doc.data.gouv.fr/api/intro/
+ * @see https://www.data.gouv.fr/api/1
  */
 final class DataGouvClient
 {
     public const string BASE_URL = 'https://www.data.gouv.fr/api/1';
-    public const string API_KEY_HEADER = 'X-API-KEY';
+    public const string AUTH_HEADER = 'X-API-KEY';
 
     private readonly Client $janeClient;
 
@@ -145,15 +139,25 @@ final class DataGouvClient
 
         $plugins = [
             new AddHostPlugin($uri),
-            new AddPathPlugin($uri),
         ];
 
-        if ($apiKey !== null) {
-            $plugins[] = new HeaderSetPlugin([self::API_KEY_HEADER => $apiKey]);
+        if ($uri->getPath() !== '' && $uri->getPath() !== '/') {
+            $plugins[] = new AddPathPlugin($uri);
         }
 
+        if ($apiKey !== null) {
+            $plugins[] = new HeaderSetPlugin([self::AUTH_HEADER => $apiKey]);
+        }
         /** @var Client $janeClient */
         $janeClient = Client::create(new PluginClient($httpClient, $plugins));
         $this->janeClient = $janeClient;
+    }
+
+    /**
+     * Returns the underlying Jane-generated client for advanced usage (e.g. FETCH_RESPONSE).
+     */
+    public function getClient(): Client
+    {
+        return $this->janeClient;
     }
 }

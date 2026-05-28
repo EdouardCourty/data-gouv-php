@@ -1,39 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class RotateUserPassword extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $user;
-
+    /**
+     * @param string $user
+     */
     public function __construct(string $user)
     {
         $this->user = $user;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'POST';
     }
-
     public function getUri(): string
     {
         return str_replace(['{user}'], [$this->user], '/users/{user}/rotate_password/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
      *
@@ -52,7 +47,6 @@ class RotateUserPassword extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clien
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\RotateUserPasswordNotFoundException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

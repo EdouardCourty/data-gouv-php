@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Ecourty\DataGouv\Generator\Renderer;
 
-use Ecourty\DataGouv\Generator\Config;
+use Ecourty\DataGouv\Generator\ApiConfig;
 use Ecourty\DataGouv\Generator\MethodInfo;
 
 final class ApiClassRenderer
 {
-    public function render(string $className, string $tag, array $methods): string
+    /** @param list<MethodInfo> $methods */
+    public function render(ApiConfig $config, string $className, string $tag, array $methods): string
     {
-        $ns = Config::LIB_NAMESPACE;
-        $janeNs = Config::JANE_NAMESPACE;
-        $exNs = Config::LIB_NAMESPACE . '\\Exception';
+        $ns = $config->libNamespace;
+        $janeNs = $config->janeNamespace;
+        $exNs = $config->exceptionNamespace;
+        $exBase = $config->exceptionBaseClass;
 
         $methodBlocks = array_map(
             fn (MethodInfo $info) => $this->renderMethod($info, $janeNs),
@@ -33,14 +35,12 @@ final class ApiClassRenderer
         use {$janeNs}\\Exception\\ClientException;
         use {$exNs}\\ApiException;
         use {$exNs}\\AuthenticationException;
-        use {$exNs}\\DataGouvException;
+        use {$exNs}\\{$exBase};
         use {$exNs}\\ForbiddenException;
         use {$exNs}\\NotFoundException;
 
         /**
-         * Sub-client for the "{$tag}" tag of the data.gouv.fr API.
-         *
-         * @see https://www.data.gouv.fr/api/1/swagger.json
+         * Sub-client for the "{$tag}" tag.
          */
         final class {$className}
         {
@@ -49,7 +49,7 @@ final class ApiClassRenderer
             }
         {$methodsCode}
 
-            private function convertException(ClientException \$e): DataGouvException
+            private function convertException(ClientException \$e): {$exBase}
             {
                 return match (\$e->getCode()) {
                     401 => new AuthenticationException(\$e->getMessage(), \$e),
@@ -65,9 +65,14 @@ final class ApiClassRenderer
     private function renderMethod(MethodInfo $info, string $janeNs): string
     {
         $fetchConst = '\\' . $janeNs . '\\Client::FETCH_OBJECT';
-        $callArgs = $info->callArgs !== ''
-            ? $info->callArgs . ', ' . $fetchConst
-            : $fetchConst;
+
+        $parts = array_filter([
+            $info->callArgsBefore,
+            $fetchConst,
+            $info->callArgsAfter,
+        ], static fn (string $s): bool => $s !== '');
+
+        $callArgs = implode(', ', $parts);
 
         $doc = $info->docblock !== '' ? $info->docblock . "\n        " : '';
 

@@ -13,9 +13,6 @@
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="Functional">
-            <directory>tests/Functional</directory>
-        </testsuite>
         <testsuite name="Integration">
             <directory>tests/Integration</directory>
         </testsuite>
@@ -26,8 +23,12 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
+            <!-- DataGouv generated code -->
             <directory>src/DataGouv/Client</directory>
             <directory>src/DataGouv/Api</directory>
+            <directory>src/DataGouv/Exception</directory>
+            <!-- DataServices generated code (all APIs) -->
+            <directory>src/DataServices</directory>
         </exclude>
     </source>
 </phpunit>

@@ -1,20 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UpdatePost extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $post;
-
     /**
-     * @param string $post             The post ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param string $post The post ID or slug
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $post, \Ecourty\DataGouv\DataGouv\Client\Model\PostWrite $payload, array $headerParameters = [])
     {
@@ -22,27 +18,23 @@ class UpdatePost extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEn
         $this->body = $payload;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'PUT';
     }
-
     public function getUri(): string
     {
         return str_replace(['{post}'], [$this->post], '/posts/{post}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getSerializedBody($serializer);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -50,10 +42,8 @@ class UpdatePost extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEn
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -76,7 +66,6 @@ class UpdatePost extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEn
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\UpdatePostNotFoundException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

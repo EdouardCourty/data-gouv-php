@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "me" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "me" tag.
  */
 final class MeApi
 {
@@ -23,275 +21,274 @@ final class MeApi
     {
     }
 
-    public function deleteMe(): null
-    {
-        try {
-            return $this->client->deleteMe(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
     /**
-     * @param array $headerParameters {
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getMe(array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\User
+        public function deleteMe(): mixed
     {
         try {
-            return $this->client->getMe($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->deleteMe(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     */
+        public function getMe(array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\User
+    {
+        try {
+            return $this->client->getMe($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\User $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateMeBadRequestException
+     *
      */
-    public function updateMe(\Ecourty\DataGouv\DataGouv\Client\Model\User $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\User
+        public function updateMe(\Ecourty\DataGouv\DataGouv\Client\Model\User $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\User
     {
         try {
-            return $this->client->updateMe($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->updateMe($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listApiTokens(array $headerParameters = []): ?array
+        public function listApiTokens(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->listApiTokens($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listApiTokens($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * The plaintext token is returned only once.
-     *
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenWrite $payload
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function createApiToken(\Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated
+        public function createApiToken(\Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated
     {
         try {
-            return $this->client->createApiToken($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createApiToken($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $apiToken
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RevokeApiTokenNotFoundException
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RevokeApiTokenGoneException
+     *
      */
-    public function revokeApiToken(string $apiToken): null
+        public function revokeApiToken(string $apiToken): mixed
     {
         try {
-            return $this->client->revokeApiToken($apiToken, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->revokeApiToken($apiToken, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $formParameters {
-     *
-     * @var string|resource|\Psr\Http\Message\StreamInterface $file
-     * @var string                                            $bbox
-     *                                                        }
-     *
+     *     @var string|resource|\Psr\Http\Message\StreamInterface $file
+     *     @var string $bbox
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myAvatar(array $formParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\UploadedImage
+        public function myAvatar(array $formParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\UploadedImage
     {
         try {
-            return $this->client->myAvatar($formParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myAvatar($formParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myDatasets(array $headerParameters = []): ?array
+        public function myDatasets(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myDatasets($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myDatasets($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myMetrics(array $headerParameters = []): ?array
+        public function myMetrics(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myMetrics($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    /**
-     * @param array $queryParameters {
-     *
-     * @var string $q The string to filter items
-     *             }
-     *
-     * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     */
-    public function myOrgCommunityResources(array $queryParameters = [], array $headerParameters = []): ?array
-    {
-        try {
-            return $this->client->myOrgCommunityResources($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myMetrics($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The string to filter items
-     *             }
-     *
+     *     @var string $q The string to filter items
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myOrgDatasets(array $queryParameters = [], array $headerParameters = []): ?array
+        public function myOrgCommunityResources(array $queryParameters = [], array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myOrgDatasets($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myOrgCommunityResources($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The string to filter items
-     *             }
-     *
+     *     @var string $q The string to filter items
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myOrgDiscussions(array $queryParameters = [], array $headerParameters = []): ?array
+        public function myOrgDatasets(array $queryParameters = [], array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myOrgDiscussions($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myOrgDatasets($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param array $queryParameters {
+     *     @var string $q The string to filter items
+     * }
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
+     *
+     */
+        public function myOrgDiscussions(array $queryParameters = [], array $headerParameters = []): null|array
+    {
+        try {
+            return $this->client->myOrgDiscussions($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listOrgInvitations(array $headerParameters = []): ?array
+        public function listOrgInvitations(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->listOrgInvitations($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listOrgInvitations($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\AcceptOrgInvitationBadRequestException
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\AcceptOrgInvitationNotFoundException
+     *
      */
-    public function acceptOrgInvitation(string $id): null
+        public function acceptOrgInvitation(string $id): mixed
     {
         try {
-            return $this->client->acceptOrgInvitation($id, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->acceptOrgInvitation($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RefuseOrgInvitationBadRequestException
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\RefuseOrgInvitationNotFoundException
+     *
      */
-    public function refuseOrgInvitation(string $id): null
+        public function refuseOrgInvitation(string $id): mixed
     {
         try {
-            return $this->client->refuseOrgInvitation($id, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->refuseOrgInvitation($id, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The string to filter items
-     *             }
-     *
+     *     @var string $q The string to filter items
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myOrgReuses(array $queryParameters = [], array $headerParameters = []): ?array
+        public function myOrgReuses(array $queryParameters = [], array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myOrgReuses($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myOrgReuses($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function myReuses(array $headerParameters = []): ?array
+        public function myReuses(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->myReuses($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->myReuses($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

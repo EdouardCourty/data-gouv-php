@@ -1,75 +1,64 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class ListDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The search query
-     * @var string $sort The field (and direction) on which sorting apply
-     * @var int    $page The page to display
-     * @var int    $page_size The page size
-     * @var array  $tag
-     * @var string $license
-     * @var bool   $featured If set to true, it will filter on featured datasets only. If set to false, it will exclude featured datasets.
-     * @var string $geozone
-     * @var string $granularity
-     * @var string $temporal_coverage
-     * @var string $access_type
-     * @var string $organization
-     * @var string $badge
-     * @var string $organization_badge
-     * @var string $owner
-     * @var string $followed_by (beta, subject to change/be removed)
-     * @var string $format
-     * @var string $schema
-     * @var string $schema_version
-     * @var string $topic
-     * @var string $credit
-     * @var string $dataservice
-     * @var string $reuse
-     * @var bool   $archived If set to true, it will filter on archived datasets only. If set to false, it will exclude archived datasets. User must be authenticated and results are limited to user visibility
-     * @var bool   $deleted If set to true, it will filter on deleted datasets only. If set to false, it will exclude deleted datasets. User must be authenticated and results are limited to user visibility
-     * @var bool   $private If set to true, it will filter on private datasets only. If set to false, it will exclude private datasets. User must be authenticated and results are limited to user visibility
-     *             }
-     *
+     *     @var string $q The search query
+     *     @var string $sort The field (and direction) on which sorting apply
+     *     @var int $page The page to display
+     *     @var int $page_size The page size
+     *     @var array $tag
+     *     @var string $license
+     *     @var bool $featured If set to true, it will filter on featured datasets only. If set to false, it will exclude featured datasets.
+     *     @var string $geozone
+     *     @var string $granularity
+     *     @var string $temporal_coverage
+     *     @var string $access_type
+     *     @var string $organization
+     *     @var string $badge
+     *     @var string $organization_badge
+     *     @var string $owner
+     *     @var string $followed_by (beta, subject to change/be removed)
+     *     @var string $format
+     *     @var string $schema
+     *     @var string $schema_version
+     *     @var string $topic
+     *     @var string $credit
+     *     @var string $dataservice
+     *     @var string $reuse
+     *     @var bool $archived If set to true, it will filter on archived datasets only. If set to false, it will exclude archived datasets. User must be authenticated and results are limited to user visibility
+     *     @var bool $deleted If set to true, it will filter on deleted datasets only. If set to false, it will exclude deleted datasets. User must be authenticated and results are limited to user visibility
+     *     @var bool $private If set to true, it will filter on private datasets only. If set to false, it will exclude private datasets. User must be authenticated and results are limited to user visibility
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(array $queryParameters = [], array $headerParameters = [])
     {
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return '/datasets/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -102,10 +91,8 @@ class ListDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Base
         $optionsResolver->addAllowedTypes('archived', ['bool']);
         $optionsResolver->addAllowedTypes('deleted', ['bool']);
         $optionsResolver->addAllowedTypes('private', ['bool']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -113,12 +100,11 @@ class ListDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Base
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\DatasetPage
      */
@@ -130,7 +116,6 @@ class ListDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Base
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\DatasetPage', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

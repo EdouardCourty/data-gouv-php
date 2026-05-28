@@ -1,35 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class DeleteMe extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
     use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
-
     public function getMethod(): string
     {
         return 'DELETE';
     }
-
     public function getUri(): string
     {
         return '/me/';
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null
      */
@@ -41,7 +35,6 @@ class DeleteMe extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
             return null;
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

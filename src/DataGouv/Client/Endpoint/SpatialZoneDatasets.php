@@ -1,26 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class SpatialZoneDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $id;
-
     /**
-     * @param string $id              A zone identifier
-     * @param array  $queryParameters {
-     *
-     * @var bool $dynamic Append dynamic datasets
-     * @var int  $size The amount of datasets to fetch
-     *           }
-     *
+     * @param string $id A zone identifier
+     * @param array $queryParameters {
+     *     @var bool $dynamic Append dynamic datasets
+     *     @var int $size The amount of datasets to fetch
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $id, array $queryParameters = [], array $headerParameters = [])
     {
@@ -28,27 +21,23 @@ class SpatialZoneDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{id}'], [$this->id], '/spatial/zone/{id}/datasets/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -57,10 +46,8 @@ class SpatialZoneDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
         $optionsResolver->setDefaults(['size' => 25]);
         $optionsResolver->addAllowedTypes('dynamic', ['bool']);
         $optionsResolver->addAllowedTypes('size', ['int']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -68,12 +55,11 @@ class SpatialZoneDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\DatasetReference
      */
@@ -85,7 +71,6 @@ class SpatialZoneDatasets extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\DatasetReference', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

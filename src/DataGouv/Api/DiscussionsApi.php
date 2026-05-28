@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "discussions" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "discussions" tag.
  */
 final class DiscussionsApi
 {
@@ -25,142 +23,147 @@ final class DiscussionsApi
 
     /**
      * @param array $queryParameters {
-     *
-     * @var string $q The search query
-     * @var string $sort The field (and direction) on which sorting apply
-     * @var bool   $closed Filters discussions on their closed status if specified
-     * @var array  $for Filter discussions for a given subject
-     * @var string $org Filter discussions for a given organization
-     * @var string $user Filter discussions created by a user
-     * @var int    $page The page to fetch
-     * @var int    $page_size The page size to fetch
-     *             }
-     *
+     *     @var string $q The search query
+     *     @var string $sort The field (and direction) on which sorting apply
+     *     @var bool $closed Filters discussions on their closed status if specified
+     *     @var array $for Filter discussions for a given subject
+     *     @var string $org Filter discussions for a given organization
+     *     @var string $user Filter discussions created by a user
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listDiscussions(array $queryParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\DiscussionPage
+        public function listDiscussions(array $queryParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\DiscussionPage
     {
         try {
-            return $this->client->listDiscussions($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listDiscussions($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionStart $payload
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function createDiscussion(\Ecourty\DataGouv\DataGouv\Client\Model\DiscussionStart $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
+        public function createDiscussion(\Ecourty\DataGouv\DataGouv\Client\Model\DiscussionStart $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
     {
         try {
-            return $this->client->createDiscussion($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createDiscussion($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
      * @param array $queryParameters {
-     *
-     * @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
-     *           }
-     *
+     *     @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDiscussionForbiddenException
+     *
      */
-    public function deleteDiscussion(string $id, array $queryParameters = []): null
+        public function deleteDiscussion(string $id, array $queryParameters = []): mixed
     {
         try {
-            return $this->client->deleteDiscussion($id, $queryParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->deleteDiscussion($id, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getDiscussion(string $id, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
+        public function getDiscussion(string $id, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
     {
         try {
-            return $this->client->getDiscussion($id, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getDiscussion($id, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionResponse $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\CommentDiscussionForbiddenException
+     *
      */
-    public function commentDiscussion(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionResponse $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
+        public function commentDiscussion(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionResponse $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
     {
         try {
-            return $this->client->commentDiscussion($id, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->commentDiscussion($id, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateDiscussionForbiddenException
+     *
      */
-    public function updateDiscussion(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
+        public function updateDiscussion(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
     {
         try {
-            return $this->client->updateDiscussion($id, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->updateDiscussion($id, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
+     * @param string $cidx
      * @param array $queryParameters {
-     *
-     * @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
-     *           }
-     *
+     *     @var bool $send_legal_notice Send formal legal notice with appeal information to owner (admin only)
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\DeleteDiscussionCommentForbiddenException
+     *
      */
-    public function deleteDiscussionComment(string $id, string $cidx, array $queryParameters = []): null
+        public function deleteDiscussionComment(string $id, string $cidx, array $queryParameters = []): mixed
     {
         try {
-            return $this->client->deleteDiscussionComment($id, $cidx, $queryParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->deleteDiscussionComment($id, $cidx, $queryParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
+     * @param string $cidx
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\EditDiscussionCommentForbiddenException
+     *
      */
-    public function editDiscussionComment(string $id, string $cidx, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
+        public function editDiscussionComment(string $id, string $cidx, \Ecourty\DataGouv\DataGouv\Client\Model\DiscussionEditComment $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Discussion
     {
         try {
-            return $this->client->editDiscussionComment($id, $cidx, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->editDiscussionComment($id, $cidx, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

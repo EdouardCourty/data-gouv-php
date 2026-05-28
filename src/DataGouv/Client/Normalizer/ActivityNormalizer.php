@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ActivityNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\Activity::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Activity::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Activity::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\Activity();
@@ -54,8 +48,9 @@ class ActivityNormalizer implements DenormalizerInterface, NormalizerInterface, 
             $object->setChanges($values);
         }
         if (\array_key_exists('created_at', $data) && $data['created_at'] !== null) {
-            $object->setCreatedAt(new \DateTime($data['created_at']));
-        } elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
+        }
+        elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
             $object->setCreatedAt(null);
         }
         if (\array_key_exists('extras', $data)) {
@@ -85,10 +80,8 @@ class ActivityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         if (\array_key_exists('related_to_url', $data)) {
             $object->setRelatedToUrl($data['related_to_url']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -109,10 +102,8 @@ class ActivityNormalizer implements DenormalizerInterface, NormalizerInterface, 
         $dataArray['related_to_id'] = $data->getRelatedToId();
         $dataArray['related_to_kind'] = $data->getRelatedToKind();
         $dataArray['related_to_url'] = $data->getRelatedToUrl();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\Activity::class => false];

@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\DatasetRead::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\DatasetRead::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\DatasetRead::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\DatasetRead();
@@ -58,32 +52,38 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('access_type', $data) && $data['access_type'] !== null) {
             $object->setAccessType($data['access_type']);
-        } elseif (\array_key_exists('access_type', $data) && $data['access_type'] === null) {
+        }
+        elseif (\array_key_exists('access_type', $data) && $data['access_type'] === null) {
             $object->setAccessType(null);
         }
         if (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] !== null) {
             $object->setAccessTypeReason($data['access_type_reason']);
-        } elseif (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] === null) {
+        }
+        elseif (\array_key_exists('access_type_reason', $data) && $data['access_type_reason'] === null) {
             $object->setAccessTypeReason(null);
         }
         if (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] !== null) {
             $object->setAccessTypeReasonCategory($data['access_type_reason_category']);
-        } elseif (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] === null) {
+        }
+        elseif (\array_key_exists('access_type_reason_category', $data) && $data['access_type_reason_category'] === null) {
             $object->setAccessTypeReasonCategory(null);
         }
         if (\array_key_exists('acronym', $data) && $data['acronym'] !== null) {
             $object->setAcronym($data['acronym']);
-        } elseif (\array_key_exists('acronym', $data) && $data['acronym'] === null) {
+        }
+        elseif (\array_key_exists('acronym', $data) && $data['acronym'] === null) {
             $object->setAcronym(null);
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(new \DateTime($data['archived']));
-        } elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
+            $object->setArchived((new \DateTime($data['archived'])));
+        }
+        elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
         }
         if (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] !== null) {
             $object->setAuthorizationRequestUrl($data['authorization_request_url']);
-        } elseif (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] === null) {
+        }
+        elseif (\array_key_exists('authorization_request_url', $data) && $data['authorization_request_url'] === null) {
             $object->setAuthorizationRequestUrl(null);
         }
         if (\array_key_exists('badges', $data)) {
@@ -101,11 +101,12 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setContactPoints($values_2);
         }
         if (\array_key_exists('created_at_internal', $data)) {
-            $object->setCreatedAtInternal(new \DateTime($data['created_at_internal']));
+            $object->setCreatedAtInternal((new \DateTime($data['created_at_internal'])));
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(new \DateTime($data['deleted']));
-        } elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
+            $object->setDeleted((new \DateTime($data['deleted'])));
+        }
+        elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
         }
         if (\array_key_exists('description', $data)) {
@@ -113,7 +114,8 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('description_short', $data) && $data['description_short'] !== null) {
             $object->setDescriptionShort($data['description_short']);
-        } elseif (\array_key_exists('description_short', $data) && $data['description_short'] === null) {
+        }
+        elseif (\array_key_exists('description_short', $data) && $data['description_short'] === null) {
             $object->setDescriptionShort(null);
         }
         if (\array_key_exists('ext', $data)) {
@@ -127,12 +129,14 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('frequency', $data) && $data['frequency'] !== null) {
             $object->setFrequency($data['frequency']);
-        } elseif (\array_key_exists('frequency', $data) && $data['frequency'] === null) {
+        }
+        elseif (\array_key_exists('frequency', $data) && $data['frequency'] === null) {
             $object->setFrequency(null);
         }
         if (\array_key_exists('frequency_date', $data) && $data['frequency_date'] !== null) {
-            $object->setFrequencyDate(new \DateTime($data['frequency_date']));
-        } elseif (\array_key_exists('frequency_date', $data) && $data['frequency_date'] === null) {
+            $object->setFrequencyDate((new \DateTime($data['frequency_date'])));
+        }
+        elseif (\array_key_exists('frequency_date', $data) && $data['frequency_date'] === null) {
             $object->setFrequencyDate(null);
         }
         if (\array_key_exists('harvest', $data)) {
@@ -142,14 +146,15 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $object->setId($data['id']);
         }
         if (\array_key_exists('last_modified_internal', $data)) {
-            $object->setLastModifiedInternal(new \DateTime($data['last_modified_internal']));
+            $object->setLastModifiedInternal((new \DateTime($data['last_modified_internal'])));
         }
         if (\array_key_exists('last_update', $data)) {
-            $object->setLastUpdate(new \DateTime($data['last_update']));
+            $object->setLastUpdate((new \DateTime($data['last_update'])));
         }
         if (\array_key_exists('license', $data) && $data['license'] !== null) {
             $object->setLicense($data['license']);
-        } elseif (\array_key_exists('license', $data) && $data['license'] === null) {
+        }
+        elseif (\array_key_exists('license', $data) && $data['license'] === null) {
             $object->setLicense(null);
         }
         if (\array_key_exists('metrics', $data)) {
@@ -163,7 +168,8 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
         }
         if (\array_key_exists('private', $data) && $data['private'] !== null) {
             $object->setPrivate($data['private']);
-        } elseif (\array_key_exists('private', $data) && $data['private'] === null) {
+        }
+        elseif (\array_key_exists('private', $data) && $data['private'] === null) {
             $object->setPrivate(null);
         }
         if (\array_key_exists('quality_cached', $data)) {
@@ -198,10 +204,8 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
         if (\array_key_exists('title', $data)) {
             $object->setTitle($data['title']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -303,10 +307,8 @@ class DatasetReadNormalizer implements DenormalizerInterface, NormalizerInterfac
             $dataArray['temporal_coverage'] = $this->normalizer->normalize($data->getTemporalCoverage(), 'json', $context);
         }
         $dataArray['title'] = $data->getTitle();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\DatasetRead::class => false];

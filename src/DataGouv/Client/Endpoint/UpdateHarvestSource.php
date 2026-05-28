@@ -1,19 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class UpdateHarvestSource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $source;
-
     /**
+     * @param string $source
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $source, \Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource $payload, array $headerParameters = [])
     {
@@ -21,27 +18,23 @@ class UpdateHarvestSource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
         $this->body = $payload;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'PUT';
     }
-
     public function getUri(): string
     {
         return str_replace(['{source}'], [$this->source], '/harvest/source/{source}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return $this->getSerializedBody($serializer);
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -49,12 +42,11 @@ class UpdateHarvestSource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource
      */
@@ -66,7 +58,6 @@ class UpdateHarvestSource extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Clie
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\HarvestSource', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

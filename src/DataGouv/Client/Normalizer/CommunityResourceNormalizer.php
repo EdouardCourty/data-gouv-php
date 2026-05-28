@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\CommunityResource::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CommunityResource::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\CommunityResource::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\CommunityResource();
@@ -47,13 +41,15 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
             $object->setChecksum($this->denormalizer->denormalize($data['checksum'], \Ecourty\DataGouv\DataGouv\Client\Model\ResourceChecksum::class, 'json', $context));
         }
         if (\array_key_exists('created_at', $data) && $data['created_at'] !== null) {
-            $object->setCreatedAt(new \DateTime($data['created_at']));
-        } elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
+        }
+        elseif (\array_key_exists('created_at', $data) && $data['created_at'] === null) {
             $object->setCreatedAt(null);
         }
         if (\array_key_exists('description', $data) && $data['description'] !== null) {
             $object->setDescription($data['description']);
-        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
+        }
+        elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
         if (\array_key_exists('extras', $data)) {
@@ -61,7 +57,8 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
         }
         if (\array_key_exists('filesize', $data) && $data['filesize'] !== null) {
             $object->setFilesize($data['filesize']);
-        } elseif (\array_key_exists('filesize', $data) && $data['filesize'] === null) {
+        }
+        elseif (\array_key_exists('filesize', $data) && $data['filesize'] === null) {
             $object->setFilesize(null);
         }
         if (\array_key_exists('filetype', $data)) {
@@ -75,20 +72,23 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
         }
         if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        }
+        elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
         if (\array_key_exists('internal', $data)) {
             $object->setInternal($this->denormalizer->denormalize($data['internal'], \Ecourty\DataGouv\DataGouv\Client\Model\ResourceInternal::class, 'json', $context));
         }
         if (\array_key_exists('last_modified', $data) && $data['last_modified'] !== null) {
-            $object->setLastModified(new \DateTime($data['last_modified']));
-        } elseif (\array_key_exists('last_modified', $data) && $data['last_modified'] === null) {
+            $object->setLastModified((new \DateTime($data['last_modified'])));
+        }
+        elseif (\array_key_exists('last_modified', $data) && $data['last_modified'] === null) {
             $object->setLastModified(null);
         }
         if (\array_key_exists('latest', $data) && $data['latest'] !== null) {
             $object->setLatest($data['latest']);
-        } elseif (\array_key_exists('latest', $data) && $data['latest'] === null) {
+        }
+        elseif (\array_key_exists('latest', $data) && $data['latest'] === null) {
             $object->setLatest(null);
         }
         if (\array_key_exists('metrics', $data)) {
@@ -96,12 +96,14 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
         }
         if (\array_key_exists('mime', $data) && $data['mime'] !== null) {
             $object->setMime($data['mime']);
-        } elseif (\array_key_exists('mime', $data) && $data['mime'] === null) {
+        }
+        elseif (\array_key_exists('mime', $data) && $data['mime'] === null) {
             $object->setMime(null);
         }
         if (\array_key_exists('preview_url', $data) && $data['preview_url'] !== null) {
             $object->setPreviewUrl($data['preview_url']);
-        } elseif (\array_key_exists('preview_url', $data) && $data['preview_url'] === null) {
+        }
+        elseif (\array_key_exists('preview_url', $data) && $data['preview_url'] === null) {
             $object->setPreviewUrl(null);
         }
         if (\array_key_exists('schema', $data)) {
@@ -128,10 +130,8 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
         if (\array_key_exists('permissions', $data)) {
             $object->setPermissions($this->denormalizer->denormalize($data['permissions'], \Ecourty\DataGouv\DataGouv\Client\Model\DatasetPermissions::class, 'json', $context));
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -170,10 +170,8 @@ class CommunityResourceNormalizer implements DenormalizerInterface, NormalizerIn
         if ($data->isInitialized('permissions') && null !== $data->getPermissions()) {
             $dataArray['permissions'] = $this->normalizer->normalize($data->getPermissions(), 'json', $context);
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\CommunityResource::class => false];

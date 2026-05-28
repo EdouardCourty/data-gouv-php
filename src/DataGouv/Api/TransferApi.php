@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "transfer" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "transfer" tag.
  */
 final class TransferApi
 {
@@ -25,60 +23,64 @@ final class TransferApi
 
     /**
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listTransfers(array $headerParameters = []): ?array
+        public function listTransfers(array $headerParameters = []): null|array
     {
         try {
-            return $this->client->listTransfers($headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listTransfers($headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\TransferRequest $payload
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function requestTransfer(\Ecourty\DataGouv\DataGouv\Client\Model\TransferRequest $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
+        public function requestTransfer(\Ecourty\DataGouv\DataGouv\Client\Model\TransferRequest $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
     {
         try {
-            return $this->client->requestTransfer($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->requestTransfer($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getTransfer(string $id, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
+        public function getTransfer(string $id, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
     {
         try {
-            return $this->client->getTransfer($id, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->getTransfer($id, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $id
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\TransferResponse $payload
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function respondToTransfer(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\TransferResponse $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
+        public function respondToTransfer(string $id, \Ecourty\DataGouv\DataGouv\Client\Model\TransferResponse $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\Transfer
     {
         try {
-            return $this->client->respondToTransfer($id, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->respondToTransfer($id, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

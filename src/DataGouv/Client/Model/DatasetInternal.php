@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class DatasetInternal
@@ -10,10 +8,9 @@ class DatasetInternal
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * The dataset's internal creation date on the site
@@ -27,42 +24,48 @@ class DatasetInternal
      * @var \DateTime
      */
     protected $lastModifiedInternal;
-
     /**
      * The dataset's internal creation date on the site
+     *
+     * @return \DateTime
      */
     public function getCreatedAtInternal(): \DateTime
     {
         return $this->createdAtInternal;
     }
-
     /**
      * The dataset's internal creation date on the site
+     *
+     * @param \DateTime $createdAtInternal
+     *
+     * @return self
      */
     public function setCreatedAtInternal(\DateTime $createdAtInternal): self
     {
         $this->initialized['createdAtInternal'] = true;
         $this->createdAtInternal = $createdAtInternal;
-
         return $this;
     }
-
     /**
      * The dataset's internal last modification date
+     *
+     * @return \DateTime
      */
     public function getLastModifiedInternal(): \DateTime
     {
         return $this->lastModifiedInternal;
     }
-
     /**
      * The dataset's internal last modification date
+     *
+     * @param \DateTime $lastModifiedInternal
+     *
+     * @return self
      */
     public function setLastModifiedInternal(\DateTime $lastModifiedInternal): self
     {
         $this->initialized['lastModifiedInternal'] = true;
         $this->lastModifiedInternal = $lastModifiedInternal;
-
         return $this;
     }
 }

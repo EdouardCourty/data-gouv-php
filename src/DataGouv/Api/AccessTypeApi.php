@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "access_type" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "access_type" tag.
  */
 final class AccessTypeApi
 {
@@ -23,11 +21,14 @@ final class AccessTypeApi
     {
     }
 
-    public function reasonCategories(): null
+    /**
+     *
+     */
+        public function reasonCategories(): mixed
     {
         try {
-            return $this->client->reasonCategories(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->reasonCategories(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

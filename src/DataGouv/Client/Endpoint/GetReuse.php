@@ -1,47 +1,38 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class GetReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $reuse;
-
     /**
-     * @param string $reuse            The reuse ID or slug
-     * @param array  $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     * @param string $reuse The reuse ID or slug
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $reuse, array $headerParameters = [])
     {
         $this->reuse = $reuse;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{reuse}'], [$this->reuse], '/reuses/{reuse}/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -49,10 +40,8 @@ class GetReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -75,7 +64,6 @@ class GetReuse extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndp
             throw new \Ecourty\DataGouv\DataGouv\Client\Exception\GetReuseGoneException($response);
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

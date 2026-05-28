@@ -1,25 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Endpoint;
 
 class ListHarvestJobs extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\BaseEndpoint implements \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\Endpoint
 {
-    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     protected $source;
-
     /**
+     * @param string $source
      * @param array $queryParameters {
-     *
-     * @var int $page The page to fetch
-     * @var int $page_size The page size to fetch
-     *          }
-     *
+     *     @var int $page The page to fetch
+     *     @var int $page_size The page size to fetch
+     * }
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
+     *     @var string $X-Fields An optional fields mask
+     * }
      */
     public function __construct(string $source, array $queryParameters = [], array $headerParameters = [])
     {
@@ -27,27 +21,23 @@ class ListHarvestJobs extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\B
         $this->queryParameters = $queryParameters;
         $this->headerParameters = $headerParameters;
     }
-
+    use \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\EndpointTrait;
     public function getMethod(): string
     {
         return 'GET';
     }
-
     public function getUri(): string
     {
         return str_replace(['{source}'], [$this->source], '/harvest/source/{source}/jobs/');
     }
-
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         return [[], null];
     }
-
     public function getExtraHeaders(): array
     {
         return ['Accept' => ['application/json']];
     }
-
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
@@ -56,10 +46,8 @@ class ListHarvestJobs extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\B
         $optionsResolver->setDefaults(['page' => 1, 'page_size' => 20]);
         $optionsResolver->addAllowedTypes('page', ['int']);
         $optionsResolver->addAllowedTypes('page_size', ['int']);
-
         return $optionsResolver;
     }
-
     protected function getHeadersOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getHeadersOptionsResolver();
@@ -67,12 +55,11 @@ class ListHarvestJobs extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\B
         $optionsResolver->setRequired([]);
         $optionsResolver->setDefaults([]);
         $optionsResolver->addAllowedTypes('X-Fields', ['string']);
-
         return $optionsResolver;
     }
-
     /**
      * {@inheritdoc}
+     *
      *
      * @return null|\Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPage
      */
@@ -84,7 +71,6 @@ class ListHarvestJobs extends \Ecourty\DataGouv\DataGouv\Client\Runtime\Client\B
             return $serializer->deserialize($body, 'Ecourty\DataGouv\DataGouv\Client\Model\HarvestJobPage', 'json');
         }
     }
-
     public function getAuthenticationScopes(): array
     {
         return [];

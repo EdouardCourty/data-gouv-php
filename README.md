@@ -2,17 +2,14 @@
 
 [![CI](https://github.com/EdouardCourty/data-gouv-client/actions/workflows/ci.yml/badge.svg)](https://github.com/EdouardCourty/data-gouv-client/actions/workflows/ci.yml)
 
-A typed PHP 8.4 client for the [data.gouv.fr](https://www.data.gouv.fr) API, auto-generated from the official Swagger specification.
+A typed PHP 8.4 client for French government APIs, auto-generated from their official OpenAPI specifications.
 
 ## Table of Contents
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Supported APIs](#supported-apis)
 - [Quick Start](#quick-start)
-- [Authentication](#authentication)
-- [Sub-clients](#sub-clients)
-- [Configuration](#configuration)
-- [Examples](#examples)
 - [Development & Contribution](#development--contribution)
 
 ---
@@ -32,110 +29,40 @@ composer require ecourty/data-gouv-client
 
 ---
 
+## Supported APIs
+
+| API | Client class | Auth | Documentation |
+|-----|-------------|------|---------------|
+| [data.gouv.fr](https://www.data.gouv.fr/api/1/) | `DataGouvClient` | Optional API key | [docs/datagouv.md](docs/datagouv.md) |
+| [SIRENE (INSEE)](https://api.insee.fr/api-sirene/3.11) | `SireneClient` | API key required | [docs/sirene.md](docs/sirene.md) |
+| [Recherche d'entreprises](https://recherche-entreprises.api.gouv.fr) | `EntrepriseClient` | None | [docs/entreprise.md](docs/entreprise.md) |
+| [Géoplateforme Géocodage](https://data.geopf.fr/geocodage) | `GeoplatformeClient` | Optional Bearer token | [docs/geoplateforme.md](docs/geoplateforme.md) |
+| [API Géo](https://geo.api.gouv.fr) | `GeoClient` | None | [docs/geo.md](docs/geo.md) |
+| [Info Financière](https://www.info-financiere.gouv.fr) | `InfoFinanciereClient` | Optional API key | [docs/infofinanciere.md](docs/infofinanciere.md) |
+| [Éducation Nationale](https://data.education.gouv.fr/api/v2) | `EducationClient` | None | [docs/education.md](docs/education.md) |
+| [Annuaire des services publics](https://api-lannuaire.service-public.gouv.fr) | `AnnuaireServicePublicClient` | None | [docs/annuaire-service-public.md](docs/annuaire-service-public.md) |
+| [Calendrier Scolaire](https://data.education.gouv.fr/api/v2) | `CalendrierScolaireClient` | None | [docs/calendrierscolaire.md](docs/calendrierscolaire.md) |
+| [Jours Fériés](https://calendrier.api.gouv.fr/jours-feries/) | `JoursFeriesClient` | None | [docs/joursferies.md](docs/joursferies.md) |
+
+Sub-clients are exposed as **PHP 8.4 virtual property hooks** — access them directly, no method call needed.
+
+---
+
 ## Quick Start
 
 ```php
 use Ecourty\DataGouv\DataGouv\DataGouvClient;
 
+// Anonymous read-only access
 $client = new DataGouvClient();
+$datasets = $client->datasets->listDatasets(['q' => 'budget', 'page_size' => 10]);
 
-// Access sub-clients via PHP 8.4 property hooks — no parentheses needed
-$page = $client->datasets->listDatasets(['q' => 'budget', 'page_size' => 10]);
-
-foreach ($page->getData() as $dataset) {
-    echo $dataset->getTitle() . "\n";
-}
-```
-
----
-
-## Authentication
-
-An API key is **optional for read operations** and **required for write operations**.
-
-Get your key from your [data.gouv.fr profile](https://www.data.gouv.fr/fr/admin/me/).
-
-```php
-$client = new DataGouvClient(apiKey: 'your-api-key');
-
+// Authenticated access (required for write operations)
+$client = new DataGouvClient(apiKey: 'your-key');
 $me = $client->me->getMe();
-echo $me->getFirstName() . ' ' . $me->getLastName();
 ```
 
----
-
-## Sub-clients
-
-Each API category is exposed as a typed property on `DataGouvClient` using **PHP 8.4 virtual property hooks** — access them directly, no method call needed.
-
-| Property | Description |
-|---|---|
-| `$client->datasets` | Datasets |
-| `$client->organizations` | Organizations |
-| `$client->reuses` | Reuses |
-| `$client->dataservices` | Dataservices (APIs) |
-| `$client->users` | Users |
-| `$client->me` | Authenticated user profile |
-| `$client->discussions` | Discussions |
-| `$client->harvest` | Harvest sources |
-| `$client->tags` | Tags |
-| `$client->posts` | Blog posts |
-| `$client->site` | Site-level info |
-| `$client->spatial` | Spatial / geographic data |
-| `$client->notifications` | Notifications |
-| `$client->transfer` | Transfers |
-| `$client->reports` | Reports |
-| `$client->contacts` | Contacts |
-| `$client->visualizations` | Visualizations |
-| `$client->accessType` | Access types |
-| `$client->avatars` | Avatars |
-| `$client->proconnect` | ProConnect |
-| `$client->workers` | Background workers |
-
----
-
-## Configuration
-
-```php
-use Ecourty\DataGouv\DataGouv\DataGouvClient;
-use Symfony\Component\HttpClient\Psr18Client;
-
-$client = new DataGouvClient(
-    apiKey: 'your-api-key',      // optional — required for write operations
-    httpClient: new Psr18Client(), // optional — defaults to auto-discovered PSR-18 client
-);
-```
-
-The base URL and API key header name are available as typed constants:
-
-```php
-DataGouvClient::BASE_URL;       // 'https://www.data.gouv.fr/api/1'
-DataGouvClient::API_KEY_HEADER; // 'X-API-KEY'
-```
-
----
-
-## Examples
-
-Runnable examples are in the `examples/` directory:
-
-```bash
-# List datasets
-php examples/list-datasets.php
-php examples/list-datasets.php "budget"
-
-# List organizations
-php examples/list-organizations.php "ministère"
-
-# Fetch a dataset and its resources by ID
-php examples/dataset-resources.php 5906c1ed88ee386cdb3873a4
-
-# List dataservices (APIs)
-php examples/list-dataservices.php "statistiques"
-
-# Authenticated user profile (requires API key)
-DATA_GOUV_API_KEY=your-key php examples/authenticated-user.php
-```
+See each API's documentation in [`docs/`](docs/) for details on authentication, sub-clients, and examples.
 
 ---
 
@@ -149,20 +76,25 @@ cd data-gouv-client
 composer install
 ```
 
-### Regenerate from the API spec
+### Regenerate from the API specs
 
-The library is generated from the live Swagger spec. To regenerate:
+The library is fully generated from live OpenAPI specs. To regenerate:
 
 ```bash
-composer generate           # full pipeline (patch spec → Jane → patch normalizers → facade → cs-fix)
-composer generate:patch-spec      # download & patch the Swagger spec (fixes nullable fields)
-composer generate:client          # run Jane PHP (generates models + raw HTTP client)
-composer generate:patch-generated # fix DateTime parsing in generated normalizers
-composer generate:facade          # generate sub-clients + DataGouvClient facade
+composer generate                                    # all APIs (download → Jane → patch → facade → cs-fix)
+php bin/console generate --api=datagouv             # data.gouv.fr only
+php bin/console generate --api=sirene               # INSEE SIRENE only
+php bin/console generate --api=entreprise           # Recherche d'entreprises only
+php bin/console generate --api=geoplateforme        # Géoplateforme Géocodage only
+php bin/console generate --api=geo                  # API Géo only
+php bin/console generate --api=infofinanciere       # Info Financière only
+php bin/console generate --api=education            # Éducation Nationale only
+php bin/console generate --api=annuaireservicepublic # Annuaire des services publics only
+php bin/console generate --api=calendrierscolaire   # Calendrier Scolaire only
+php bin/console generate --api=joursferies          # Jours Fériés only
 ```
 
-> **Do not manually edit** `src/DataGouv/Client/`, `src/DataGouv/Api/`, or `src/DataGouv/DataGouvClient.php`.  
-> These files are fully generated. To change their output, edit the scripts in `bin/` and re-run `composer generate`.
+> **Do not manually edit** anything under `src/*/Client/`, `src/*/Api/`, `src/*/Exception/`, or the `*Client.php` facades — these files are fully generated. To change their output, edit the scripts in `bin/` or `src/Generator/` and re-run `composer generate`.
 
 ### QA
 
@@ -176,14 +108,42 @@ composer cs-fix            # auto-fix code style
 composer qa                # phpstan + cs-check + all tests
 ```
 
+### Adding a new API
+
+Use the provided CLI command:
+
+```bash
+php bin/console add-api \
+  --name=myapi \
+  --spec-url=https://api.example.com/openapi.json \
+  --namespace="Ecourty\DataGouv\DataServices\MyApi" \
+  --base-url=https://api.example.com \
+  --auth=none \
+  --generate
+```
+
+See [`.github/skills/support-new-api/SKILL.md`](.github/skills/support-new-api/SKILL.md) for the full guide.
+
 ### Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes (update `AGENTS.md` and `README.md` if needed)
+3. Make your changes (update `AGENTS.md`, `README.md`, and `docs/` as needed)
 4. Ensure `composer qa` passes
 5. Open a pull request
 
----
+#### Writing integration tests
 
-*This client is auto-generated from the [data.gouv.fr Swagger spec](https://www.data.gouv.fr/api/1/swagger.json).*
+Every API domain has integration tests in `tests/Integration/{Domain}/`. When adding a new API or a new endpoint, add the corresponding integration test:
+
+- Extend `IntegrationTestCase` and annotate with `#[Group('integration')]`
+- Wrap all API calls with `$this->callApi(fn () => ...)` — it auto-skips on network errors and rate limits
+- For "get by ID" endpoints, derive the ID from the list endpoint first
+- For ODS-platform APIs (OpenDataSoft), use `$client->getClient()->method(FETCH_RESPONSE)` and `$this->decodeResponse($response)` since their Jane-generated typed methods return `null`
+
+Run integration tests with:
+```bash
+composer test-integration                               # all domains
+composer validate-integration-coverage                  # verify every domain has ≥1 test
+./vendor/bin/phpunit tests/Integration/{Domain}/        # one domain only
+```

@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\Discussion::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Discussion::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\Discussion::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\Discussion();
@@ -47,8 +41,9 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setClass($data['class']);
         }
         if (\array_key_exists('closed', $data) && $data['closed'] !== null) {
-            $object->setClosed(new \DateTime($data['closed']));
-        } elseif (\array_key_exists('closed', $data) && $data['closed'] === null) {
+            $object->setClosed((new \DateTime($data['closed'])));
+        }
+        elseif (\array_key_exists('closed', $data) && $data['closed'] === null) {
             $object->setClosed(null);
         }
         if (\array_key_exists('closed_by', $data)) {
@@ -58,8 +53,9 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setClosedByOrganization($data['closed_by_organization']);
         }
         if (\array_key_exists('created', $data) && $data['created'] !== null) {
-            $object->setCreated(new \DateTime($data['created']));
-        } elseif (\array_key_exists('created', $data) && $data['created'] === null) {
+            $object->setCreated((new \DateTime($data['created'])));
+        }
+        elseif (\array_key_exists('created', $data) && $data['created'] === null) {
             $object->setCreated(null);
         }
         if (\array_key_exists('discussion', $data)) {
@@ -70,7 +66,8 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (\array_key_exists('id', $data) && $data['id'] !== null) {
             $object->setId($data['id']);
-        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
+        }
+        elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
         if (\array_key_exists('organization', $data)) {
@@ -81,7 +78,8 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (\array_key_exists('self_web_url', $data) && $data['self_web_url'] !== null) {
             $object->setSelfWebUrl($data['self_web_url']);
-        } elseif (\array_key_exists('self_web_url', $data) && $data['self_web_url'] === null) {
+        }
+        elseif (\array_key_exists('self_web_url', $data) && $data['self_web_url'] === null) {
             $object->setSelfWebUrl(null);
         }
         if (\array_key_exists('subject', $data)) {
@@ -89,21 +87,21 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (\array_key_exists('title', $data) && $data['title'] !== null) {
             $object->setTitle($data['title']);
-        } elseif (\array_key_exists('title', $data) && $data['title'] === null) {
+        }
+        elseif (\array_key_exists('title', $data) && $data['title'] === null) {
             $object->setTitle(null);
         }
         if (\array_key_exists('url', $data) && $data['url'] !== null) {
             $object->setUrl($data['url']);
-        } elseif (\array_key_exists('url', $data) && $data['url'] === null) {
+        }
+        elseif (\array_key_exists('url', $data) && $data['url'] === null) {
             $object->setUrl(null);
         }
         if (\array_key_exists('user', $data)) {
             $object->setUser($data['user']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -150,10 +148,8 @@ class DiscussionNormalizer implements DenormalizerInterface, NormalizerInterface
         if ($data->isInitialized('user') && null !== $data->getUser()) {
             $dataArray['user'] = $data->getUser();
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\Discussion::class => false];

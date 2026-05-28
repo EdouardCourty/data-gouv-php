@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated();
@@ -44,11 +38,12 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         if (\array_key_exists('created_at', $data)) {
-            $object->setCreatedAt(new \DateTime($data['created_at']));
+            $object->setCreatedAt((new \DateTime($data['created_at'])));
         }
         if (\array_key_exists('expires_at', $data) && $data['expires_at'] !== null) {
-            $object->setExpiresAt(new \DateTime($data['expires_at']));
-        } elseif (\array_key_exists('expires_at', $data) && $data['expires_at'] === null) {
+            $object->setExpiresAt((new \DateTime($data['expires_at'])));
+        }
+        elseif (\array_key_exists('expires_at', $data) && $data['expires_at'] === null) {
             $object->setExpiresAt(null);
         }
         if (\array_key_exists('id', $data)) {
@@ -56,22 +51,26 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
         }
         if (\array_key_exists('kind', $data) && $data['kind'] !== null) {
             $object->setKind($data['kind']);
-        } elseif (\array_key_exists('kind', $data) && $data['kind'] === null) {
+        }
+        elseif (\array_key_exists('kind', $data) && $data['kind'] === null) {
             $object->setKind(null);
         }
         if (\array_key_exists('last_used_at', $data) && $data['last_used_at'] !== null) {
-            $object->setLastUsedAt(new \DateTime($data['last_used_at']));
-        } elseif (\array_key_exists('last_used_at', $data) && $data['last_used_at'] === null) {
+            $object->setLastUsedAt((new \DateTime($data['last_used_at'])));
+        }
+        elseif (\array_key_exists('last_used_at', $data) && $data['last_used_at'] === null) {
             $object->setLastUsedAt(null);
         }
         if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
-        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+        }
+        elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
         if (\array_key_exists('revoked_at', $data) && $data['revoked_at'] !== null) {
-            $object->setRevokedAt(new \DateTime($data['revoked_at']));
-        } elseif (\array_key_exists('revoked_at', $data) && $data['revoked_at'] === null) {
+            $object->setRevokedAt((new \DateTime($data['revoked_at'])));
+        }
+        elseif (\array_key_exists('revoked_at', $data) && $data['revoked_at'] === null) {
             $object->setRevokedAt(null);
         }
         if (\array_key_exists('scopes', $data)) {
@@ -94,10 +93,8 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
         if (\array_key_exists('token', $data)) {
             $object->setToken($data['token']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -114,10 +111,8 @@ class ApiTokenCreatedNormalizer implements DenormalizerInterface, NormalizerInte
             }
             $dataArray['scopes'] = $values;
         }
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\ApiTokenCreated::class => false];

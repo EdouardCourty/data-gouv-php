@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class HarvestExtraConfig
@@ -10,10 +8,9 @@ class HarvestExtraConfig
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * The config default value
@@ -39,80 +36,92 @@ class HarvestExtraConfig
      * @var string|null
      */
     protected $label;
-
     /**
      * The config default value
+     *
+     * @return string|null
      */
     public function getDefault(): ?string
     {
         return $this->default;
     }
-
     /**
      * The config default value
+     *
+     * @param string|null $default
+     *
+     * @return self
      */
     public function setDefault(?string $default): self
     {
         $this->initialized['default'] = true;
         $this->default = $default;
-
         return $this;
     }
-
     /**
      * Some details about the behavior
+     *
+     * @return string|null
      */
     public function getDescription(): ?string
     {
         return $this->description;
     }
-
     /**
      * Some details about the behavior
+     *
+     * @param string|null $description
+     *
+     * @return self
      */
     public function setDescription(?string $description): self
     {
         $this->initialized['description'] = true;
         $this->description = $description;
-
         return $this;
     }
-
     /**
      * The config key
+     *
+     * @return string|null
      */
     public function getKey(): ?string
     {
         return $this->key;
     }
-
     /**
      * The config key
+     *
+     * @param string|null $key
+     *
+     * @return self
      */
     public function setKey(?string $key): self
     {
         $this->initialized['key'] = true;
         $this->key = $key;
-
         return $this;
     }
-
     /**
      * A localized human-readable and descriptive label
+     *
+     * @return string|null
      */
     public function getLabel(): ?string
     {
         return $this->label;
     }
-
     /**
      * A localized human-readable and descriptive label
+     *
+     * @param string|null $label
+     *
+     * @return self
      */
     public function setLabel(?string $label): self
     {
         $this->initialized['label'] = true;
         $this->label = $label;
-
         return $this;
     }
 }

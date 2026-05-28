@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Model;
 
 class ApiTokenWrite
@@ -10,10 +8,9 @@ class ApiTokenWrite
      * @var array
      */
     protected $initialized = [];
-
     public function isInitialized($property): bool
     {
-        return \array_key_exists($property, $this->initialized);
+        return array_key_exists($property, $this->initialized);
     }
     /**
      * When this token expires
@@ -33,45 +30,50 @@ class ApiTokenWrite
      * @var list<string>
      */
     protected $scopes;
-
     /**
      * When this token expires
+     *
+     * @return \DateTime|null
      */
     public function getExpiresAt(): ?\DateTime
     {
         return $this->expiresAt;
     }
-
     /**
      * When this token expires
+     *
+     * @param \DateTime|null $expiresAt
+     *
+     * @return self
      */
     public function setExpiresAt(?\DateTime $expiresAt): self
     {
         $this->initialized['expiresAt'] = true;
         $this->expiresAt = $expiresAt;
-
         return $this;
     }
-
     /**
      * User-given label for this token
+     *
+     * @return string|null
      */
     public function getName(): ?string
     {
         return $this->name;
     }
-
     /**
      * User-given label for this token
+     *
+     * @param string|null $name
+     *
+     * @return self
      */
     public function setName(?string $name): self
     {
         $this->initialized['name'] = true;
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Token scopes
      *
@@ -81,17 +83,17 @@ class ApiTokenWrite
     {
         return $this->scopes;
     }
-
     /**
      * Token scopes
      *
      * @param list<string> $scopes
+     *
+     * @return self
      */
     public function setScopes(array $scopes): self
     {
         $this->initialized['scopes'] = true;
         $this->scopes = $scopes;
-
         return $this;
     }
 }

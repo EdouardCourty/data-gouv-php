@@ -47,14 +47,24 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Validate ApiConfigRegistry
+        run: composer validate-registry
+
+      - name: Validate integration test coverage
+        run: composer validate-integration-coverage
+
       - name: Regenerate client from spec
         run: composer generate
 
       - name: Assert generated code is up-to-date
         run: |
-          if ! git diff --quiet src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php; then
+          if ! git diff --quiet \
+            src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+            src/DataServices; then
             echo "❌ Generated code is out of date. Run 'composer generate' locally and commit the result."
-            git diff --stat src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php
+            git diff --stat \
+              src/DataGouv/Client src/DataGouv/Api src/DataGouv/DataGouvClient.php \
+              src/DataServices
             exit 1
           fi
           echo "✅ Generated code is up-to-date."

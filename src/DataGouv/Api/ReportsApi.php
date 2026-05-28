@@ -13,9 +13,7 @@ use Ecourty\DataGouv\DataGouv\Exception\ForbiddenException;
 use Ecourty\DataGouv\DataGouv\Exception\NotFoundException;
 
 /**
- * Sub-client for the "reports" tag of the data.gouv.fr API.
- *
- * @see https://www.data.gouv.fr/api/1/swagger.json
+ * Sub-client for the "reports" tag.
  */
 final class ReportsApi
 {
@@ -25,82 +23,85 @@ final class ReportsApi
 
     /**
      * @param array $queryParameters {
-     *
-     * @var int    $page The page to display
-     * @var int    $page_size The page size
-     * @var string $sort The field (and direction) on which sorting apply
-     * @var bool   $handled
-     * @var string $subject_type
-     *             }
-     *
+     *     @var int $page The page to display
+     *     @var int $page_size The page size
+     *     @var string $sort The field (and direction) on which sorting apply
+     *     @var bool $handled
+     *     @var string $subject_type
+     * }
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function listReports(array $queryParameters = [], array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ReportPage
+        public function listReports(array $queryParameters = [], array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ReportPage
     {
         try {
-            return $this->client->listReports($queryParameters, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listReports($queryParameters, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload
      * @param array $headerParameters {
-     *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\CreateReportBadRequestException
+     *
      */
-    public function createReport(\Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
+        public function createReport(\Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
     {
         try {
-            return $this->client->createReport($payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
-            throw $this->convertException($e);
-        }
-    }
-
-    public function listReportsReasons(): null
-    {
-        try {
-            return $this->client->listReportsReasons(Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->createReport($payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
-     * @param array $headerParameters {
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
      */
-    public function getReport(string $report, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
+        public function listReportsReasons(): mixed
     {
         try {
-            return $this->client->getReport($report, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->listReportsReasons(\Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }
 
     /**
+     * @param string $report
      * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      *
-     * @var string $X-Fields An optional fields mask
-     *             }
-     *
+     */
+        public function getReport(string $report, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
+    {
+        try {
+            return $this->client->getReport($report, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
+            throw $this->convertException($e);
+        }
+    }
+
+    /**
+     * @param string $report
+     * @param \Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload
+     * @param array $headerParameters {
+     *     @var string $X-Fields An optional fields mask
+     * }
      * @throws \Ecourty\DataGouv\DataGouv\Client\Exception\UpdateReportBadRequestException
+     *
      */
-    public function updateReport(string $report, \Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload, array $headerParameters = []): ?\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
+        public function updateReport(string $report, \Ecourty\DataGouv\DataGouv\Client\Model\ReportWrite $payload, array $headerParameters = []): null|\Ecourty\DataGouv\DataGouv\Client\Model\ReportRead
     {
         try {
-            return $this->client->updateReport($report, $payload, $headerParameters, Client::FETCH_OBJECT);
-        } catch (ClientException $e) {
+            return $this->client->updateReport($report, $payload, $headerParameters, \Ecourty\DataGouv\DataGouv\Client\Client::FETCH_OBJECT);
+        } catch (\Ecourty\DataGouv\DataGouv\Client\Exception\ClientException $e) {
             throw $this->convertException($e);
         }
     }

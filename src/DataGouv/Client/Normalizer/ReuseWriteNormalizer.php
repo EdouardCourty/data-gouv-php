@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Ecourty\DataGouv\DataGouv\Client\Normalizer;
 
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\CheckArray;
 use Ecourty\DataGouv\DataGouv\Client\Runtime\Normalizer\ValidatorTrait;
-use Jane\Component\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     use ValidatorTrait;
-
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite::class;
     }
-
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return \is_object($data) && \get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite::class;
+        return is_object($data) && get_class($data) === \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite::class;
     }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $object = new \Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite();
@@ -47,8 +41,9 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
             $data['private'] = (bool) $data['private'];
         }
         if (\array_key_exists('archived', $data) && $data['archived'] !== null) {
-            $object->setArchived(new \DateTime($data['archived']));
-        } elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
+            $object->setArchived((new \DateTime($data['archived'])));
+        }
+        elseif (\array_key_exists('archived', $data) && $data['archived'] === null) {
             $object->setArchived(null);
         }
         if (\array_key_exists('dataservices', $data)) {
@@ -66,8 +61,9 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
             $object->setDatasets($values_1);
         }
         if (\array_key_exists('deleted', $data) && $data['deleted'] !== null) {
-            $object->setDeleted(new \DateTime($data['deleted']));
-        } elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
+            $object->setDeleted((new \DateTime($data['deleted'])));
+        }
+        elseif (\array_key_exists('deleted', $data) && $data['deleted'] === null) {
             $object->setDeleted(null);
         }
         if (\array_key_exists('description', $data)) {
@@ -78,17 +74,20 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
         }
         if (\array_key_exists('organization', $data) && $data['organization'] !== null) {
             $object->setOrganization($data['organization']);
-        } elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
+        }
+        elseif (\array_key_exists('organization', $data) && $data['organization'] === null) {
             $object->setOrganization(null);
         }
         if (\array_key_exists('owner', $data) && $data['owner'] !== null) {
             $object->setOwner($data['owner']);
-        } elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
+        }
+        elseif (\array_key_exists('owner', $data) && $data['owner'] === null) {
             $object->setOwner(null);
         }
         if (\array_key_exists('private', $data) && $data['private'] !== null) {
             $object->setPrivate($data['private']);
-        } elseif (\array_key_exists('private', $data) && $data['private'] === null) {
+        }
+        elseif (\array_key_exists('private', $data) && $data['private'] === null) {
             $object->setPrivate(null);
         }
         if (\array_key_exists('tags', $data)) {
@@ -110,10 +109,8 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
         if (\array_key_exists('url', $data)) {
             $object->setUrl($data['url']);
         }
-
         return $object;
     }
-
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         $dataArray = [];
@@ -161,10 +158,8 @@ class ReuseWriteNormalizer implements DenormalizerInterface, NormalizerInterface
         $dataArray['topic'] = $data->getTopic();
         $dataArray['type'] = $data->getType();
         $dataArray['url'] = $data->getUrl();
-
         return $dataArray;
     }
-
     public function getSupportedTypes(?string $format = null): array
     {
         return [\Ecourty\DataGouv\DataGouv\Client\Model\ReuseWrite::class => false];
